@@ -42,7 +42,8 @@ class Test extends CI_Controller {
         $this->load->library("maps");
         $post = $this->input->post(null, TRUE);
         $this->maps->saveMapsImg($post['lat-input'],$post['lng-input']);
-        
+       
+        redirect("test/coba");
     }
 
 }
