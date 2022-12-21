@@ -23,6 +23,7 @@ class Pendaftaran extends CI_Controller
 	{
 		$previllage = 3;
 		check_super_user($this->session->tipe_user, $previllage);
+
 		$data['menu'] = "Data Pendaftar";
 		$data['row'] = $this->pendaftaran_m->getNonActive();
 		$this->templateadmin->load('template/detail', 'pendaftaran/data', $data);
@@ -32,6 +33,7 @@ class Pendaftaran extends CI_Controller
 	{
 		$previllage = 3;
 		check_super_user($this->session->tipe_user, $previllage);
+
 		$data['menu'] = "Data Pengguna";
 		$data['row'] = $this->pendaftaran_m->get();
 		$this->templateadmin->load('template/detail', 'pendaftaran/dataAll', $data);
@@ -41,6 +43,7 @@ class Pendaftaran extends CI_Controller
 	{
 		$previllage = 3;
 		check_super_user($this->session->tipe_user, $previllage);
+		
 		$id = $this->uri->segment(3);
 		$data['menu'] = "Detail Pendaftar";
 		$data['row'] = $this->pendaftaran_m->get($id)->row();
