@@ -36,40 +36,24 @@
             </div>
             <div class="section mt-1">
                 <h3>Kinerja Tenaga Pendamping Koperasi dan UKM</h3>
-                <h4>LOGIN</h4>
+                <h4>Login Menggunakan WhatsApp</h4>
             </div>
             <div class="section mt-1 mb-5">
-                <form action="<?=site_url('auth/process')?>" method="post" id="FormLogin">
+                <form action="<?=site_url('auth/processotp')?>" method="post" id="FormLogin">
                     <div class="form-group boxed">
                         <div class="input-wrapper">
-                            <input type="email" class="form-control" id="email1" placeholder="Masukkan Email">
+                            <input type="number" class="form-control" name="hp" placeholder="Masukkan nomor WhatsApp">
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
                         </div>
-                    </div>
-
-                    <div class="form-group boxed">
-                        <div class="input-wrapper">
-                            <input type="password" class="form-control" id="password1" placeholder="Masukkan Password">
-                            <i class="clear-input">
-                                <ion-icon name="close-circle"></ion-icon>
-                            </i>
-                        </div>
-                    </div>
-
-                    <!-- <div class="form-links mt-2">
-                        <div>
-                            <a href="page-register.html">Register Now</a>
-                        </div>
-                        <div><a href="page-forgot-password.html" class="text-muted">Forgot Password?</a></div>
-                    </div> -->
+                    </div>                    
 
                     <div class="row">          
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary btn-block btn-lg">LOGIN <i class="fa fa-forward"></i></button>
+                        <button type="submit" class="btn btn-success btn-block btn-lg">Kirim Kode Verifikasi <i class="fa fa-whatsapp"></i></button>
                         <hr>
-                        <a href="<?=base_url("auth/loginOTP")?>" class="btn btn-success btn-block btn-lg"><i class="fa fa-whatsapp"></i> Login via WA</a>
+                        <a href="<?=base_url("auth/login")?>" class="btn btn-primary btn-block btn-lg"><i class="fa fa-envelope"></i> Login Via Email</a>
                     </div>
                     </div>
                     

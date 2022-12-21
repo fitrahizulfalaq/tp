@@ -10,6 +10,12 @@ class Auth extends CI_Controller {
 		check_already_login();
 		$this->load->view('page/login');
 	}
+	
+	public function loginOTP()
+	{
+		check_already_login();
+		$this->load->view('page/loginOTP');
+	}
 
 	public function logout()
 	{
