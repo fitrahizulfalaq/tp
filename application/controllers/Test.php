@@ -32,7 +32,21 @@ class Test extends CI_Controller {
 		$data['img'] = "https://maps.googleapis.com/maps/api/staticmap?markers=color:red%7Clabel:LOKASI%7C".$result['lat']."," .$result['lng']."&zoom=18&size=400x400&maptype=roadmap&key=AIzaSyBulTatyUv6oR6ykvWU-QDzp-wYQXNWV7A";
         $data['lat'] = $result['lat'];
         $data['lng'] = $result['lng'];
-        $this->load->view('page/login',$data);
+        $this->load->view('page/coba',$data);
+    }
+
+    public function simpan()
+    {
+        $post = $this->input->post(null, TRUE);
+        // test($post);
+
+        //Simpan gambar ke directory
+        $url = "https://maps.googleapis.com/maps/api/staticmap?markers=color:red%7Clabel:LOKASI%7C".$post['lat-input']."," .$post['lng-input']."&zoom=18&size=400x400&maptype=roadmap&key=AIzaSyBulTatyUv6oR6ykvWU-QDzp-wYQXNWV7A";
+        // test($url);
+        $img = FCPATH . 'assets/files/maps/'.date("Ymd")."nama".rand(1,10).".jpg";
+        // test($img);
+        file_put_contents($img, file_get_contents($url));
+        
     }
 
 }
