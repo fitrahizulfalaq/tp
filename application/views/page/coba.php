@@ -10,8 +10,8 @@
   <h3 id="lat-location"></h3>
   <h3 id="lng-location"></h3>
   <form action="<?= base_url("test/simpan")?>" method="post">
-  <input type="text" id="lat-input" name="lat-input" readonly>
-  <input type="text" id="lng-input" name="lng-input" readonly>
+  <input type="hidden" id="lat-input" name="lat-input" readonly>
+  <input type="hidden" id="lng-input" name="lng-input" readonly>
   <button>Kirim</button>
   </form>
   

@@ -4,8 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 use GuzzleHttp\Client;
 
 class Test extends CI_Controller {
+    public $key = "AIzaSyBulTatyUv6oR6ykvWU-QDzp-wYQXNWV7A";
 
-	public function login()
+    public function login()
 	{
 		check_already_login();
 		$this->load->view('page/login');
@@ -37,15 +38,10 @@ class Test extends CI_Controller {
 
     public function simpan()
     {
+        // Load library yang dibutuhkan
+        $this->load->library("maps");
         $post = $this->input->post(null, TRUE);
-        // test($post);
-
-        //Simpan gambar ke directory
-        $url = "https://maps.googleapis.com/maps/api/staticmap?markers=color:red%7Clabel:LOKASI%7C".$post['lat-input']."," .$post['lng-input']."&zoom=18&size=400x400&maptype=roadmap&key=AIzaSyBulTatyUv6oR6ykvWU-QDzp-wYQXNWV7A";
-        // test($url);
-        $img = FCPATH . 'assets/files/maps/'.date("Ymd")."nama".rand(1,10).".jpg";
-        // test($img);
-        file_put_contents($img, file_get_contents($url));
+        $this->maps->saveMapsImg($post['lat-input'],$post['lng-input']);
         
     }
 
