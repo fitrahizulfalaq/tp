@@ -40,7 +40,6 @@ class Auth extends CI_Controller {
 					'tempat_lahir' => $row->tempat_lahir,
 					'tanggal_lahir' => $row->tanggal_lahir,
 					'tipe_user' => $row->tipe_user,
-					'date_now' => date('Y:m:d H:i:s'),
 				);				
 				$this->session->set_userdata($params);
 				redirect('dashboard');
