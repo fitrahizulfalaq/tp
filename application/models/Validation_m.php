@@ -34,8 +34,8 @@ class Validation_m extends CI_Model
 		$this->db->like('hp', substr($post['hp'], "3", "15"));
 		$this->db->where('status', '1');
 		$query = $this->db->get();
-    }
-
+    
+	}
     function insertOTP()
     {
        $params['id'] =  $post['id'];

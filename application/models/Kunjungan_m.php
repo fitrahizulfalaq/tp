@@ -131,7 +131,6 @@ class Kunjungan_m extends CI_Model
         $this->db->from('tb_kunjungan');
         $this->db->where('id', $id);
         $query = $this->db->get()->row();
-
         // Hapus Gambar yang diinput
         $this->maps->deleteMapsImg($query->loc_img);
         // Hapus Data
