@@ -33,37 +33,25 @@
         <div class="login-form mt-1">
             <div class="section">
                 <img src="<?=base_url()?>/assets/img/icon/logo-kitapku.png" alt="image" class="form-image">
-                         
             </div>
             <div class="section mt-1">
                 <h3>Kinerja Tenaga Pendamping Koperasi dan UKM</h3>
-                <h4>LOGIN</h4>
+                <h4>Kode OTP (Dikirim Melalui WA)</h4>
             </div>
             <div class="section mt-1 mb-5">
-                <form action="<?=site_url('auth/process')?>" method="post" id="FormLogin">
+                <form action="<?=site_url('auth/validationotp')?>" method="post" id="FormLogin">
                     <div class="form-group boxed">
                         <div class="input-wrapper">
-                            <input type="email" name="username" class="form-control" placeholder="Masukkan Email" required>
+                            <input type="number" class="form-control" name="otp" placeholder="Masukkan kode OTP" required>
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
                         </div>
-                    </div>
-
-                    <div class="form-group boxed">
-                        <div class="input-wrapper">
-                            <input type="password" name="password" class="form-control" id="password" placeholder="Masukkan Password">
-                            <i class="clear-input">
-                                <ion-icon name="close-circle"></ion-icon>
-                            </i>
-                        </div>
-                    </div>
+                    </div>                    
 
                     <div class="row">          
                     <div class="col-12">
-                        <button type="submit" name="login" class="btn btn-primary btn-block btn-lg">LOGIN <i class="fa fa-forward"></i></button>
-                        <hr>
-                        <a href="<?=base_url("auth/loginOTP")?>" class="btn btn-success btn-block btn-lg"><i class="fa fa-whatsapp"></i> Login via WA</a>
+                        <button type="submit" name="login" class="btn btn-success btn-block btn-lg">VALIDASI <i class="fa fa-key"></i></button>                        
                     </div>
                     </div>
                     
@@ -93,55 +81,6 @@
     <!-- Base Js File -->
     <script src="<?=base_url()?>/assets/js/base.js"></script>
 
-    <script type="text/javascript">
-    function showPassword() {
-    var x = document.getElementById("password");
-    if (x.type === "password") {
-        x.type = "text";
-    } else {
-        x.type = "password";
-    }
-    }
-    </script>
-
-    <script type="text/javascript">
-    $(document).ready(function () { 
-    $('#FormLogin').validate({
-        rules: {
-        email: {
-            required: true,
-            email: true,
-        },
-        password: {
-            required: true,
-            minlength: 8
-        },      
-        },
-        messages: {
-        email: {
-            required: "Masukkan Email dengan benar",
-            email: "Masukkan Email dengan benar"
-        },
-        password: {
-            required: "Masukkan Password",
-            minlength: "Password Setidaknya 8 karakter"
-        },      
-        },
-        errorElement: 'span',
-        errorPlacement: function (error, element) {
-        error.addClass('invalid-feedback');
-        element.closest('.form-group').append(error);
-        },
-        highlight: function (element, errorClass, validClass) {
-        $(element).addClass('is-invalid');
-        },
-        unhighlight: function (element, errorClass, validClass) {
-        $(element).removeClass('is-invalid');
-        }
-    });
-    });
-    </script>
-    
 
 </body>
 

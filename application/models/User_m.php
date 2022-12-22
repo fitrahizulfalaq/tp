@@ -7,11 +7,41 @@ class User_m extends CI_Model {
 	{
 		$this->db->select('*');
 		$this->db->from('tb_user');
-		$this->db->where('username',$post['username']);
-		$this->db->where('status','1');
-		$this->db->where('password',sha1($post['password']));
+		$this->db->where('email', $post['username']);
+		$this->db->where('status', '1');
+		$this->db->where('password', sha1($post['password']));
 		$query = $this->db->get();
-		return $query; 
+		return $query;
+	}
+
+	public function getOtp($post)
+	{
+		$this->db->select('*');
+		$this->db->from('tb_user');
+		$this->db->like('hp', substr($post['hp'], "3", "15"));
+		$this->db->where('status', '1');
+		$query = $this->db->get();
+		return $query;
+	}
+
+	public function validationOtp($post)
+	{
+		$this->db->select('*');
+		$this->db->from('tb_user');
+		$this->db->like('hp', substr($this->session->hp, "3", "15"));
+		$this->db->where('status', '1');
+		$this->db->where('otp',$post['otp']);
+		$query = $this->db->get();
+		return $query;
+	}
+
+	function insertOTP($post)
+	{
+		$params['id'] =  $post['id'];
+		$params['otp'] =  $post['otp'];
+
+		$this->db->where('id', $params['id']);
+		$this->db->update('tb_user', $params);
 	}
 
 	public function get($id = null)

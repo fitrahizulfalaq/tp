@@ -12,6 +12,9 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 		$data['menu'] = "Menu Utama";
-		$this->templateadmin->load('template/dashboard','page/beranda',$data);
+		// $this->templateadmin->load('template/dashboard','page/beranda',$data);
+		$this->load->view('template/dashboard');
+
+
 	}
 }

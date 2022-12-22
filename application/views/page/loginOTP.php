@@ -42,7 +42,7 @@
                 <form action="<?=site_url('auth/processotp')?>" method="post" id="FormLogin">
                     <div class="form-group boxed">
                         <div class="input-wrapper">
-                            <input type="number" class="form-control" name="hp" placeholder="Masukkan nomor WhatsApp">
+                            <input type="number" class="form-control" name="hp" placeholder="Masukkan nomor WhatsApp" required>
                             <i class="clear-input">
                                 <ion-icon name="close-circle"></ion-icon>
                             </i>
@@ -51,7 +51,7 @@
 
                     <div class="row">          
                     <div class="col-12">
-                        <button type="submit" class="btn btn-success btn-block btn-lg">Kirim Kode Verifikasi <i class="fa fa-whatsapp"></i></button>
+                        <button type="submit" name="login" class="btn btn-success btn-block btn-lg">Kirim Kode Verifikasi <i class="fa fa-whatsapp"></i></button>
                         <hr>
                         <a href="<?=base_url("auth/login")?>" class="btn btn-primary btn-block btn-lg"><i class="fa fa-envelope"></i> Login Via Email</a>
                     </div>
