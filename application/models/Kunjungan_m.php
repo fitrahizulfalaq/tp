@@ -8,17 +8,71 @@
 class Kunjungan_m extends CI_Model
 {
 
-    public function get($id = null)
+    /* 
+        Ambil Data Kunjungan berdasarkan Tabel dan Variable Tabel
+        $this->kunjungan_m->getAllBy("nama tabel","variable tabel");
+        $this->kunjungan_m->getAllBy("id","user_id");
+    */
+    function getAllBy($kolom = null, $id = null)
     {
-        $this->db->from('tb_user');
-        if ($id != null) {
-            $this->db->where('id', $id);
+        $this->db->from('tb_kunjungan');
+        if ($kolom != null && $id != null) {
+            $this->db->where($kolom, $id);
         }
         $query = $this->db->get();
         return $query;
     }
 
-    function saveKunjungan($post)
+    /* 
+        Ambil data berdasarkan Tahun Bulan dan Tanggal, kondisi tambahan bisa untuk masing-masing TP (User_id)
+            1. getByDate (Tanggal) - ("tahun","bulan","tanggal","user_id | opsional")
+            2. getByMonth (bulan) - ("tahun","bulan","user_id | opsional")
+            3. getByYear (tahun) - ("tahun","user_id | opsional")
+        Example :
+        $this->kunjungan_m->getByDate("tahun","bulan","tanggal");
+    */
+    function getByDate($tahun = null, $bulan = null, $tanggal = null, $user_id = null)
+    {
+        $this->db->from('tb_kunjungan');
+        if ($user_id != null) {
+            $this->db->where('user_id', $user_id);
+        }
+        $this->db->like('created', $tahun . "-" . $bulan . "-" . $tanggal);
+        $this->db->order_by('created', "asc");
+        $query = $this->db->get();
+        return $query;
+    }
+    function getByMonth($tahun = null, $bulan = null, $user_id = null)
+    {
+        $this->db->from('tb_kunjungan');
+        if ($user_id != null) {
+            $this->db->where('user_id', $user_id);
+        }
+        $this->db->like('created', $tahun . "-" . $bulan);
+        $this->db->order_by('created', "asc");
+        $query = $this->db->get();
+        return $query;
+    }
+    function getByYear($tahun = null, $user_id = null)
+    {
+        $this->db->from('tb_kunjungan');
+        if ($user_id != null) {
+            $this->db->where('user_id', $user_id);
+        }
+        $this->db->like('created', $tahun);
+        $this->db->order_by('created', "asc");
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function hapus($id)
+    {
+
+        $this->db->where('id', $id);
+        $this->db->delete('tb_log_book');
+    }
+
+    function addKunjungan($post)
     {
         $params['id'] =  "";
         $params['user_id'] =  $this->session->id;
@@ -31,43 +85,31 @@ class Kunjungan_m extends CI_Model
         $params['foto_lokasi'] =  $post['foto_lokasi'];
         $params['lat'] =  $post['lat'];
         $params['lng'] =  $post['lng'];
-        $params['loc_img'] =  $post['loc_img'];
+        //Migrasi dari TMP ke Storage Utama
+        $params['loc_img'] =  $this->maps->saveMapsImg(FCPATH . $post['loc_img']);
         $params['created'] =  date("Ymdhmsi");
         $this->db->insert('tb_kunjungan', $params);
     }
-    
+
     function updateKunjungan($post)
     {
         //Id	  
         $params['id'] =  $post['id'];
-        
         // Kebutuhan User
         $params['resume'] =  $post['resume'];
         $params['detail'] =  $post['detail'];
         $params['identifikasi'] =  $post['identifikasi'];
         $params['kegiatan'] =  $post['kegiatan'];
         $params['lokasi'] =  $post['lokasi'];
-        
         //Cek foto
-        if ($post['foto_selfie'] != null) {
-            $params['foto_selfie'] =  $post['foto_selfie'];
-        } else {
-            $params['foto_selfie'] =  "";
-        }
-
-        if ($post['foto_lokasi'] != null) {
-            $params['foto_lokasi'] =  $post['foto_lokasi'];
-        } else {
-            $params['foto_lokasi'] =  "";
-        }
+        if ($post['foto_selfie'] != null) { $params['foto_selfie'] =  $post['foto_selfie']; } else { $params['foto_selfie'] =  ""; }
+        if ($post['foto_lokasi'] != null) { $params['foto_lokasi'] =  $post['foto_lokasi']; } else { $params['foto_lokasi'] =  ""; }
         //End Cek foto
-        
         $params['modified'] =  date("Ymdhmsi");
-        
         $this->db->where('id', $params['id']);
         $this->db->update('tb_kunjungan', $params);
     }
-    
+
     function addSPPD($post)
     {
         $params['id'] = "";
@@ -80,15 +122,9 @@ class Kunjungan_m extends CI_Model
     function updateSPPD($post)
     {
         $params['id'] =  $post['id'];
-        if ($post['sppd'] != null) {
-            $params['file'] =  $post['sppd'];
-        } else {
-            $params['file'] =  "";
-        }
+        if ($post['sppd'] != null) { $params['file'] =  $post['sppd']; } else { $params['file'] =  ""; }
         $params['modified'] =  date("Ymdhmsi");
-        
         $this->db->where('id', $params['id']);
         $this->db->update('tb_sppd', $params);
     }
-    
 }

@@ -1,9 +1,13 @@
 <?php
 ob_start();
-
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth extends CI_Controller {
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('validation_m');
+	}
 
 	public function login()
 	{
@@ -28,17 +32,20 @@ class Auth extends CI_Controller {
 	{
 		$post = $this->input->post(null, TRUE);
 		if(isset($post['login'])) {
-			$this->load->model('user_m');
-			$query = $this->user_m->login($post);
+			$query = $this->validation_m->login($post);
 			if($query->num_rows() > 0) {
 				$row = $query->row();
 				$params = array (
 					'id' => $row->id,					
 					'username' => $row->username,					
 					'nama' => $row->nama,					
+					'hp' => $row->hp,
 					'email' => $row->email,
 					'tempat_lahir' => $row->tempat_lahir,
-					'tanggal_lahir' => $row->tanggal_lahir,
+					'tgl_lahir' => $row->tgl_lahir,
+					'domisili' => $row->domisili,
+					'nik' => $row->nik,
+					'wilayah_kerja' => $row->wilayah_kerja,
 					'tipe_user' => $row->tipe_user,
 				);				
 				$this->session->set_userdata($params);

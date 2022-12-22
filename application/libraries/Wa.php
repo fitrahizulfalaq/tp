@@ -10,7 +10,7 @@ class WA
 		$this->ci = &get_instance();
 	}
 
-	function waWhacenter($hp = null, $pesan = null)
+	function send($hp = null, $pesan = null)
 	{
 		//API dari Whacenter
 		$device_id = 'f75a80b9d2b38921c6134f029d3e8c71'; // Token dari Whacenter
@@ -35,10 +35,6 @@ class WA
 		echo $response;
 
 		$data = json_decode($response);
-		if ($data->kode == 200) {
-			// $this->ci->session->set_flashdata('success', 'Pesan Terkirim');
-		} else {
-			// $this->ci->session->set_flashdata('warning', $data->message);
-		}
+		return $data;
 	}
 }
