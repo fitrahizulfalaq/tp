@@ -3,6 +3,7 @@
 class User_m extends CI_Model {
 	
 	//Kode akses
+<<<<<<< HEAD
 	public function login($post)
 	{
 		$this->db->select('*');
@@ -44,6 +45,8 @@ class User_m extends CI_Model {
 		$this->db->update('tb_user', $params);
 	}
 
+=======
+>>>>>>> 425dcc9a172b54041d3c3a169ba5a67346e5fb32
 	public function get($id = null)
 	{
 		$this->db->from('tb_user');

@@ -7,9 +7,9 @@
   <button onclick="getLocation()" id="btn-getlocation">Tentukan Lokasi</button>
   <a id="btn-ulangi" onclick="window.location.reload()" style="visibility: hidden;">ulangi</a>
   <p id="lokasi"></p>
-  <form action="<?= base_url("test/simpan")?>" method="post">
-  <input type="text" id="lat-input" name="lat-input" readonly>
-  <input type="text" id="lng-input" name="lng-input" readonly>
+  <form action="<?= base_url("test/kunjungan")?>" method="post">
+  <input type="hidden" id="lat-input" name="lat-input" readonly>
+  <input type="hidden" id="lng-input" name="lng-input" readonly>
   <button id="btn-kirim" style="visibility: hidden;">Selanjutnya</button>
   </form>
   

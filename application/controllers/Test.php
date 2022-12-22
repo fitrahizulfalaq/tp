@@ -1,49 +1,64 @@
 <?php
 ob_start();
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
+
 use GuzzleHttp\Client;
 
-class Test extends CI_Controller {
+class Test extends CI_Controller
+{
     public $key = "AIzaSyBulTatyUv6oR6ykvWU-QDzp-wYQXNWV7A";
 
     public function login()
-	{
-		check_already_login();
-		$this->load->view('page/login');
-	}
+    {
+        check_already_login();
+        $this->load->view('test/login');
+    }
 
-	public function getLocation()
-	{
+    public function getLocation()
+    {
         $this->load->model("location_m");
         $lokasi = $this->location_m->get();
         test($lokasi);
-        
-	}
-
-    public function coba()
-    {
-        $client = new Client();
-
-        $response = $client->request("POST","https://www.googleapis.com/geolocation/v1/geolocate",[
-            'query' => [
-                'key' => 'AIzaSyBulTatyUv6oR6ykvWU-QDzp-wYQXNWV7A'
-            ]
-        ]);
-        $result = json_decode($response->getbody()->getcontents(),true)['location'];
-		$data['img'] = "https://maps.googleapis.com/maps/api/staticmap?markers=color:red%7Clabel:LOKASI%7C".$result['lat']."," .$result['lng']."&zoom=18&size=400x400&maptype=roadmap&key=AIzaSyBulTatyUv6oR6ykvWU-QDzp-wYQXNWV7A";
-        $data['lat'] = $result['lat'];
-        $data['lng'] = $result['lng'];
-        $this->load->view('page/coba',$data);
     }
 
-    public function simpan()
+    public function lokasi()
     {
-        // Load library yang dibutuhkan
+        $this->load->view('test/kunjungan/lokasi');
+    }
+
+    public function kunjungan()
+    {
         $this->load->library("maps");
         $post = $this->input->post(null, TRUE);
-        $this->maps->saveMapsImg($post['lat-input'],$post['lng-input']);
-       
-        redirect("test/coba");
+
+        $data['lat'] = $post['lat-input'];
+        $data['lng'] = $post['lng-input'];
+        $data['loc_img'] = $this->maps->saveMapsTmp($post['lat-input'], $post['lng-input']);
+        $this->load->view('test/kunjungan/kunjungan', $data);
     }
 
+    public function addkunjungan()
+    {
+        $this->load->library("maps");
+        $this->load->model("kunjungan_m");
+        $post = $this->input->post(null, TRUE);
+
+        $test = $this->maps->saveMapsImg(FCPATH . $post['loc_img']);
+        $inputan = $this->kunjungan_m->addkunjungan($post);
+        $this->load->view('test/kunjungan/sukses', $data);
+    }
+
+    public function get()
+    {
+        $this->load->model("validation_m");
+        $inputan = $this->validation_m->verifyOTP()->result();
+        test($inputan);
+    }
+
+    public function wa()
+    {
+        $hp = "081231390340";
+        $wa = $this->wa->send($hp,"Testing");
+        test($wa);
+    }
 }
