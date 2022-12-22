@@ -31,20 +31,13 @@
     <div id="appCapsule" class="pt-0">
 
         <div class="login-form mt-1">
-        <iframe 
-  width="500" 
-  height="500" 
-  frameborder="0" 
-  scrolling="no" 
-  marginheight="0" 
-  marginwidth="0" 
-  src="https://maps.google.com/maps?q=<?=$lat?>,+<?=$lng?>&z=18&amp;output=embed"
- >
- </iframe>
- 
             <div class="section">
+<<<<<<< HEAD
+                <img src="<?=base_url()?>/assets/img/icon/logo-kitapku.png" alt="image" class="form-image">
+=======
                 <img src="<?=base_url()?>/assets/img/sample/photo/vector4.png" alt="image" class="form-image">
-                <img src="<?= $img ?>" alt="image" class="form-image">
+                
+>>>>>>> 5a398928f5758de08380e66024e80a7c20362ef5
             </div>
             <div class="section mt-1">
                 <h3>Kinerja Tenaga Pendamping Koperasi dan UKM</h3>
