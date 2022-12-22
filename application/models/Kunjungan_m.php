@@ -65,15 +65,11 @@ class Kunjungan_m extends CI_Model
         return $query;
     }
 
-    function hapus($id)
-    {
-
-        $this->db->where('id', $id);
-        $this->db->delete('tb_log_book');
-    }
-
     function addKunjungan($post)
     {
+        //Migrasi Gambar Peta dari TMP ke Storage Utama
+        $params['loc_img'] =  $this->maps->saveMapsImg(FCPATH . $post['loc_img'],$this->session->nik);
+        //Input Data
         $params['id'] =  "";
         $params['user_id'] =  $this->session->id;
         $params['tipe'] =  $post['tipe'];
@@ -85,8 +81,6 @@ class Kunjungan_m extends CI_Model
         $params['foto_lokasi'] =  $post['foto_lokasi'];
         $params['lat'] =  $post['lat'];
         $params['lng'] =  $post['lng'];
-        //Migrasi dari TMP ke Storage Utama
-        $params['loc_img'] =  $this->maps->saveMapsImg(FCPATH . $post['loc_img']);
         $params['created'] =  date("Ymdhmsi");
         $this->db->insert('tb_kunjungan', $params);
     }
@@ -126,5 +120,22 @@ class Kunjungan_m extends CI_Model
         $params['modified'] =  date("Ymdhmsi");
         $this->db->where('id', $params['id']);
         $this->db->update('tb_sppd', $params);
+    }
+
+    /*
+        Hapus Kunjungan Menggunakan ID
+    */
+    function delete($id)
+    {
+        // Ambil Data ID
+        $this->db->from('tb_kunjungan');
+        $this->db->where('id', $id);
+        $query = $this->db->get()->row();
+
+        // Hapus Gambar yang diinput
+        $this->maps->deleteMapsImg($query->loc_img);
+        // Hapus Data
+        $this->db->where('id', $id);
+        $this->db->delete('tb_kunjungan');
     }
 }

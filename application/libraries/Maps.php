@@ -28,13 +28,19 @@ class Maps
                 return $fix;
         }
 
-        function saveMapsImg($url)
+        function saveMapsImg($url,$nik)
         {
                 // test($url);
-                $img = FCPATH . $this->storage . date("Ymdh") . "fix.jpg";
-                $name = date("Ymdh") . "-fix.jpg";
+                $img = FCPATH . $this->storage . date("Ymdh") . "FIX".$nik.".jpg";
+                $name = date("Ymdh") . "FIX".$nik.".jpg";
                 // test($img);
                 file_put_contents($img, file_get_contents($url));
                 return $name;       
+        }
+
+        function deleteMapsImg($file)
+        {
+                $url = FCPATH . $this->storage . $file;
+                unlink($url);
         }
 }

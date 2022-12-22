@@ -25,7 +25,7 @@ class Test extends CI_Controller
     {
         $this->load->view('test/kunjungan/lokasi');
     }
-
+    
     public function kunjungan()
     {
         $this->load->library("maps");
@@ -43,16 +43,56 @@ class Test extends CI_Controller
         $this->load->model("kunjungan_m");
         $post = $this->input->post(null, TRUE);
 
-        $test = $this->maps->saveMapsImg(FCPATH . $post['loc_img']);
         $inputan = $this->kunjungan_m->addkunjungan($post);
-        $this->load->view('test/kunjungan/sukses', $data);
+        redirect("test/sukses");
+    }
+    
+    public function sukses()
+    {
+        $this->load->view('test/kunjungan/sukses');        
+    }
+
+    public function turus()
+    {
+        $this->load->view('test/kunjungan/turus');        
+    }
+
+    public function addTurus()
+    {
+        $this->load->model("approval_m");
+        $post = $this->input->post(null, TRUE);
+        $cek = $this->approval_m->getByDate(date("Y",strtotime($post['tgl'])),date("m",strtotime($post['tgl'])),date("d",strtotime($post['tgl'])));
+        // test(date("d",strtotime($post['tgl'])));
+        // test($cek->num_rows());
+        if ($cek->num_rows() == null)
+        {
+            $this->approval_m->addTurus($post);
+            redirect("test/sukses");
+        } else {
+            echo "sudah ada";
+        }
+
     }
 
     public function get()
     {
-        $this->load->model("validation_m");
-        $inputan = $this->validation_m->verifyOTP()->result();
+        $this->load->model("approval_m");
+        $inputan = $this->approval_m->getByMonth("2022","11")->result();
         test($inputan);
+    }
+
+    public function hapus()
+    {
+        $id = $_GET['id'];
+        $this->load->model("kunjungan_m");
+        $inputan = $this->kunjungan_m->delete($id)->result();
+    }
+
+    public function acc()
+    {
+        $id = $_GET['id'];
+        $this->load->model("approval_m");
+        $inputan = $this->approval_m->accTurus($id);
     }
 
     public function wa()

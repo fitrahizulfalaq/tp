@@ -45,10 +45,6 @@ class Auth extends CI_Controller {
 					'id' => $row->id,					
 					'username' => $row->username,					
 					'nama' => $row->nama,					
-<<<<<<< HEAD
-					'email' => $row->email,					
-					'hp' => $row->hp,					
-=======
 					'hp' => $row->hp,
 					'email' => $row->email,
 					'tempat_lahir' => $row->tempat_lahir,
@@ -56,7 +52,6 @@ class Auth extends CI_Controller {
 					'domisili' => $row->domisili,
 					'nik' => $row->nik,
 					'wilayah_kerja' => $row->wilayah_kerja,
->>>>>>> 425dcc9a172b54041d3c3a169ba5a67346e5fb32
 					'tipe_user' => $row->tipe_user,
 					'date_now' => date('Y:m:d H:i:s'),
 				);
