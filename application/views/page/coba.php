@@ -4,14 +4,13 @@
 <body>
 
   <p>Klik Untuk menentukan titik lokasi yang kamu inginkan</p>
-
-  <button onclick="getLocation()">Tentukan Lokasi</button>
+  <button onclick="getLocation()" id="btn-getlocation">Tentukan Lokasi</button>
+  <a id="btn-ulangi" onclick="window.location.reload()" style="visibility: hidden;">ulangi</a>
   <p id="lokasi"></p>
   <form action="<?= base_url("test/simpan")?>" method="post">
-  <input type="hidden" id="lat-input" name="lat-input" readonly>
-  <input type="hidden" id="lng-input" name="lng-input" readonly>
-  <button id="btn-kirim" style="visibility: hidden;">Kirim</button>
-  <a id="btn-ulangi" onclick="window.location.reload()" style="visibility: hidden;">ulangi</a>
+  <input type="text" id="lat-input" name="lat-input" readonly>
+  <input type="text" id="lng-input" name="lng-input" readonly>
+  <button id="btn-kirim" style="visibility: hidden;">Selanjutnya</button>
   </form>
   
   <script>
@@ -39,6 +38,7 @@
       document.getElementById("lng-input").value = position.coords.longitude;
       document.getElementById("btn-kirim").style.visibility = 'visible';
       document.getElementById("btn-ulangi").style.visibility = 'visible';
+      document.getElementById("btn-getlocation").style.visibility = 'hidden';
 
     }
   </script>

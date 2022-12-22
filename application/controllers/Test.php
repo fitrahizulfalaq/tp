@@ -41,9 +41,8 @@ class Test extends CI_Controller {
         // Load library yang dibutuhkan
         $this->load->library("maps");
         $post = $this->input->post(null, TRUE);
-        $this->maps->saveMapsImg($post['lat-input'],$post['lng-input']);
-       
-        redirect("test/coba");
+        $data['imgurl'] = $this->maps->saveMapsImg($post['lat-input'],$post['lng-input']);
+        $this->load->view('test/fix',$data);
     }
 
 }
