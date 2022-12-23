@@ -1,59 +1,140 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
+/*
+    Made with love by Fitrah Izul Falaq
+    https://ceo.bikinkarya.com
+    081231390340
+*/
+class User_m extends CI_Model
+{
 
-class User_m extends CI_Model {
-	
 	//Kode akses
-	public function get($id = null)
+	function get($id = null)
 	{
 		$this->db->from('tb_user');
 		if ($id != null) {
-			$this->db->where('id',$id);
+			$this->db->where('id', $id);
 		}
 		$query = $this->db->get();
 		return $query;
 	}
 
-	//////////////////////
-	/////////////////////
-	/// PROFIL
-	///////////////////	
-	///////////////////
-	function update_profil($post)
-	{
-	  //Id	  
-	  $params['id'] =  $post['id'];
-	  // Kebutuhan User
-	  $params['username'] =  $post['username'];
-	  if ($post['password'] != null) {
-		  $params['password'] =  sha1($post['password']);	  	
-	  }
-	  $params['nama'] =  $post['nama'];
-	  $params['tempat_lahir'] =  $post['tempat_lahir'];
-	  $tanggal =  $post['tanggal'];
-	  $bulan =  $post['bulan'];
-	  $tahun =  $post['tahun'];
-	  $params['tgl_lahir'] =  date("Y:m:d", strtotime($tahun."-".$bulan."-".$tanggal));
-	  $params['hp'] =  $post['hp'];
-	  $params['kelamin'] =  $post['kelamin'];
-	  $params['provinsi'] =  $post['provinsi'];
-	  $params['kota'] =  $post['kota'];
-	  $params['kecamatan'] =  $post['kecamatan'];
-	  $params['kelurahan'] =  $post['kelurahan'];
-	  $params['domisili'] =  $post['domisili'];
-	  $params['pernikahan'] =  $post['pernikahan'];
-	  $params['pendidikan_terakhir'] =  $post['pendidikan_terakhir'];
-	  $params['pekerjaan_utama'] =  $post['pekerjaan_utama'];
-	  $params['angkatan'] =  $post['angkatan'];
-	  $params['tahun_bergabung'] =  $post['tahun_bergabung'];
-	  $params['status'] =  "1";
-	  if ($post['foto'] != null) {
-  	  $params['foto'] =  $post['foto'];
-  	} else {
-  	  $params['foto'] =  "";
-  	}
+	/*
+		Modul untuk menyingkat pengambilan data berdasarkan kolom dan variabel kolom tertentu.
 
-	  $this->db->where('id',$params['id']);
-	  $this->db->update('tb_user',$params);
+		Misal, ingin mendapatkan nomor HP maka penulisannya
+		$this->user_m->getAllBy("hp","no_hp");
+		$this->user_m->getAllBy("wilayah_kerja","id_lembaga");
+
+		$this->user_m->getAllBy("nama kolom","isi variabel kolom");
+	*/
+	function getAllBy($kolom = null, $id = null)
+	{
+		$this->db->from('tb_user');
+		if ($kolom != null && $id != null) {
+			$this->db->where($kolom, $id);
+		}
+		$query = $this->db->get();
+		return $query;
 	}
+
+	/*
+		Fungsi menambahkan data pengguna
+		1. TP harus mengisi lengkap dan terbuka untuk umum
+		2. Koordinator mengisi untuk keperluan akun saja, selanjutnya bisa dilengkapi di edit profil
+		3. Admin mengisi untuk keperluan akun saja, selanjutnya dilengkapi di menu profil
+
+		Note: Untuk keamanan data, jangan menambahkan input tipe_user pada tampilan. Begitupula untuk update profile.
+
+	*/
+	function addTP($post)
+	{
+		//Input Data
+		$params['id'] =  "";
+		$params['username'] =  $post['username'];
+		$params['password'] =  $post['password'];
+		$params['email'] =  $post['email'];
+		$params['nama'] =  $post['nama'];
+		$params['nik'] =  $post['nik'];
+		$params['tempat_lahir'] =  $post['tempat_lahir'];
+		$params['tgl_lahir'] =  $post['tgl_lahir'];
+		$params['wilayah_kerja'] =  $post['wilayah_kerja'];
+		$params['kelamin'] =  $post['kelamin'];
+		$params['hp'] =  $post['hp'];
+		$params['agama'] =  $post['agama'];
+		$params['domisili'] =  $post['domisili'];
+		$params['pernikahan'] =  $post['pernikahan'];
+		$params['pendidikan_terakhir'] =  $post['pendidikan_terakhir'];
+		$params['tahun_bergabung'] =  $post['tahun_bergabung'];
+		$params['created'] =  date("Ymdhmsi");
+		$this->db->insert('tb_user', $params);
+	}
+
+	function addKoordinator($post)
+	{
+		//Input Data
+		$params['id'] =  "";
+		$params['username'] =  $post['username'];
+		$params['password'] =  $post['password'];
+		$params['email'] =  $post['email'];
+		$params['nama'] =  $post['nama'];
+		$params['nik'] =  $post['nik'];
+		$params['wilayah_kerja'] =  $post['wilayah_kerja'];
+		$params['tipe_user'] =  '2';
+		$params['created'] =  date("Ymdhmsi");
+		$this->db->insert('tb_user', $params);
+	}
+
+	function addAdmin($post)
+	{
+		//Input Data
+		$params['id'] =  "";
+		$params['username'] =  $post['username'];
+		$params['password'] =  $post['password'];
+		$params['email'] =  $post['email'];
+		$params['nama'] =  $post['nama'];
+		$params['nik'] =  $post['nik'];
+		$params['tipe_user'] =  '3';
+		$params['created'] =  date("Ymdhmsi");
+		$this->db->insert('tb_user', $params);
+	}
+
+	/*
+		Menu update profil untuk seluruh user
+	*/
+	function updateProfil($post)
+	{
+		//Id	  
+		$params['id'] =  $post['id'];
+		// Kebutuhan User
+		$params['username'] =  $post['username'];
+		if ($post['password'] != null) { $params['password'] =  sha1($post['password']);}
+		$params['nama'] =  $post['nama'];
+		$params['tempat_lahir'] =  $post['tempat_lahir'];
+		$params['tgl_lahir'] =  $post['tgl_lahir'];
+		$params['kelamin'] =  $post['kelamin'];
+		$params['hp'] =  $post['hp'];
+		$params['agama'] =  $post['agama'];
+		$params['domisili'] =  $post['domisili'];
+		$params['pernikahan'] =  $post['pernikahan'];
+		$params['pendidikan_terakhir'] =  $post['pendidikan_terakhir'];
+		$params['tahun_bergabung'] =  $post['tahun_bergabung'];
+		if ($post['foto'] != null) { $params['foto'] =  $post['foto']; } else { $params['foto'] =  ""; }
+
+		$this->db->where('id', $params['id']);
+		$this->db->update('tb_user', $params);
+	}
+
+	/* 
+		Aktivasi akun dengan menghit user_id
+	*/
+	function accUser($user_id)
+	{
+		$params['id'] =  $user_id;
+		$params['status'] =  "1";
+
+		$this->db->where('id', $params['id']);
+		$this->db->update('tb_user', $params);
+	}
+
 
 }
