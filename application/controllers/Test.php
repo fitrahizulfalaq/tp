@@ -101,4 +101,10 @@ class Test extends CI_Controller
         $wa = $this->wa->send($hp,"Testing");
         test($wa);
     }
+
+    public function time()
+    {
+        timevalidation("20221220","20221227");
+    }
+    
 }

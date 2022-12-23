@@ -136,5 +136,14 @@ class User_m extends CI_Model
 		$this->db->update('tb_user', $params);
 	}
 
+	function deactiveUser($user_id)
+	{
+		$params['id'] =  $user_id;
+		$params['status'] =  "2";
+
+		$this->db->where('id', $params['id']);
+		$this->db->update('tb_user', $params);
+	}
+
 
 }

@@ -82,6 +82,7 @@ class Kunjungan_m extends CI_Model
         $params['lat'] =  $post['lat'];
         $params['lng'] =  $post['lng'];
         $params['created'] =  date("Ymdhmsi");
+        $parms['ip_address'] = $this->input->ip_address();
         $this->db->insert('tb_kunjungan', $params);
     }
 
@@ -137,4 +138,29 @@ class Kunjungan_m extends CI_Model
         $this->db->where('id', $id);
         $this->db->delete('tb_kunjungan');
     }
+
+    /////// TAMBAH TARGET ///////
+    function addTargetTahunan($post)
+    {
+        $params['id'] = "";
+        $params['tahun'] =  date("Y");
+        $params['user_id'] =  $this->session->id;
+        $params['target'] =  $post['target'];
+        $params['realisasi'] =  $post['realisasi'];
+        $params['created'] =  date("Ymdhmsi");
+        $this->db->insert('tb_target', $params);
+    }
+
+    function addRealisasiTahunan($post)
+    {
+        $params['id'] =  $post['id'];
+        $params['target'] =  $post['target'];
+        $params['realisasi'] =  $post['realisasi'];
+        $params['modified'] =  date("Ymdhmsi");
+        $this->db->where('id', $params['id']);
+        $this->db->update('tb_target', $params);
+    }
+
+
+
 }

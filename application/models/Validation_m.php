@@ -7,7 +7,6 @@
 
 class Validation_m extends CI_Model
 {
-
     /*
 		Untuk halaman login
 		Login Biasa menggunakan login
@@ -34,8 +33,10 @@ class Validation_m extends CI_Model
 		$this->db->like('hp', substr($post['hp'], "3", "15"));
 		$this->db->where('status', '1');
 		$query = $this->db->get();
+		return $query
     
 	}
+
     function insertOTP()
     {
        $params['id'] =  $post['id'];
