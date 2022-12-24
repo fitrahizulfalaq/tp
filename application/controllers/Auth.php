@@ -100,7 +100,7 @@ class Auth extends CI_Controller {
 			redirect('auth/login');
 		}
 	}
-	
+
 	/*
 		Perintah login by Google.
 		Cukup arahkan ke url base_url(auth/google);
@@ -136,8 +136,13 @@ class Auth extends CI_Controller {
 					'id' => $row->id,					
 					'username' => $row->username,					
 					'nama' => $row->nama,					
-					'email' => $row->email,					
-					'hp' => $row->hp,					
+					'hp' => $row->hp,
+					'email' => $row->email,
+					'tempat_lahir' => $row->tempat_lahir,
+					'tgl_lahir' => $row->tgl_lahir,
+					'domisili' => $row->domisili,
+					'nik' => $row->nik,
+					'wilayah_kerja' => $row->wilayah_kerja,
 					'tipe_user' => $row->tipe_user,
 					'date_now' => date('Y:m:d H:i:s'),
 				);
