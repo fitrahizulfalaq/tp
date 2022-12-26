@@ -7,7 +7,6 @@
 
 class Validation_m extends CI_Model
 {
-
     /*
 		Untuk halaman login
 		Login Biasa menggunakan login
@@ -34,7 +33,9 @@ class Validation_m extends CI_Model
 		$this->db->like('hp', substr($post['hp'], "3", "15"));
 		$this->db->where('status', '1');
 		$query = $this->db->get();
-    }
+		return $query;
+    
+	}
 
     function insertOTP()
     {
@@ -52,6 +53,21 @@ class Validation_m extends CI_Model
 		$this->db->like('hp', substr($this->session->hp, "3", "15"));
 		$this->db->where('status', '1');
 		$this->db->where('otp',$post['otp']);
+		$query = $this->db->get();
+		return $query;
+	}
+
+	/*
+		Login with google
+		Memeriksa kredensial google dengan email yang telah terdaftar di Database
+		Jika kredensial sama, maka lanjut login. Jika Tidak, maka gagal
+	*/
+	function loginGoogle($email)
+	{
+		$this->db->select('*');
+		$this->db->from('tb_user');
+		$this->db->where('email', $email);
+		$this->db->where('status', '1');
 		$query = $this->db->get();
 		return $query;
 	}

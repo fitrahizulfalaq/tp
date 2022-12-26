@@ -25,7 +25,7 @@ class Test extends CI_Controller
     {
         $this->load->view('test/kunjungan/lokasi');
     }
-    
+
     public function kunjungan()
     {
         $this->load->library("maps");
@@ -46,38 +46,36 @@ class Test extends CI_Controller
         $inputan = $this->kunjungan_m->addkunjungan($post);
         redirect("test/sukses");
     }
-    
+
     public function sukses()
     {
-        $this->load->view('test/kunjungan/sukses');        
+        $this->load->view('test/kunjungan/sukses');
     }
 
     public function turus()
     {
-        $this->load->view('test/kunjungan/turus');        
+        $this->load->view('test/kunjungan/turus');
     }
 
     public function addTurus()
     {
         $this->load->model("approval_m");
         $post = $this->input->post(null, TRUE);
-        $cek = $this->approval_m->getByDate(date("Y",strtotime($post['tgl'])),date("m",strtotime($post['tgl'])),date("d",strtotime($post['tgl'])));
+        $cek = $this->approval_m->getByDate(date("Y", strtotime($post['tgl'])), date("m", strtotime($post['tgl'])), date("d", strtotime($post['tgl'])));
         // test(date("d",strtotime($post['tgl'])));
         // test($cek->num_rows());
-        if ($cek->num_rows() == null)
-        {
+        if ($cek->num_rows() == null) {
             $this->approval_m->addTurus($post);
             redirect("test/sukses");
         } else {
             echo "sudah ada";
         }
-
     }
 
     public function get()
     {
         $this->load->model("approval_m");
-        $inputan = $this->approval_m->getByMonth("2022","11")->result();
+        $inputan = $this->approval_m->getByMonth("2022", "11")->result();
         test($inputan);
     }
 
@@ -98,7 +96,50 @@ class Test extends CI_Controller
     public function wa()
     {
         $hp = "081231390340";
-        $wa = $this->wa->send($hp,"Testing");
+        $wa = $this->wa->send($hp, "Testing");
         test($wa);
+    }
+
+    public function time()
+    {
+        timevalidation("20221220", "20221227");
+    }
+
+    public function google()
+    {
+        // init configuration
+        $clientID = '916270909408-5ebl637cbekthhqkpva05cbbdv1tj7o6.apps.googleusercontent.com';
+        $clientSecret = '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';
+        $redirectUri = 'https://uptmentoring.me/test/google';
+
+        // create Client Request to access Google API
+        $client = new Google_Client();
+        $client->setClientId($clientID);
+        $client->setClientSecret($clientSecret);
+        $client->setRedirectUri($redirectUri);
+        $client->addScope("email");
+        $client->addScope("profile");
+
+        // authenticate code from Google OAuth Flow
+        if (isset($_GET['code'])) {
+            $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+            $client->setAccessToken($token['access_token']);
+
+            // get profile info
+            $google_oauth = new Google_Service_Oauth2($client);
+            $google_account_info = $google_oauth->userinfo->get();
+            $data['email'] =  $google_account_info->email;
+            $data['name'] =  $google_account_info->name;
+            test($data);
+
+            // now you can use this profile info to create account in your website and make user logged in.
+        } else {
+            echo "<a href='" . $client->createAuthUrl() . "'>Google Login</a>";
+        }
+    }
+
+    public function drive()
+    {
+        $this->load->view('test/drive');
     }
 }

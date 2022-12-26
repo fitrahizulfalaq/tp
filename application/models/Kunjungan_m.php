@@ -82,6 +82,7 @@ class Kunjungan_m extends CI_Model
         $params['lat'] =  $post['lat'];
         $params['lng'] =  $post['lng'];
         $params['created'] =  date("Ymdhmsi");
+        $parms['ip_address'] = $this->input->ip_address();
         $this->db->insert('tb_kunjungan', $params);
     }
 
@@ -131,11 +132,69 @@ class Kunjungan_m extends CI_Model
         $this->db->from('tb_kunjungan');
         $this->db->where('id', $id);
         $query = $this->db->get()->row();
-
         // Hapus Gambar yang diinput
         $this->maps->deleteMapsImg($query->loc_img);
         // Hapus Data
         $this->db->where('id', $id);
         $this->db->delete('tb_kunjungan');
     }
+
+    /////// TARGET KUNJUNGAN TAHUNAN ///////
+    /*
+        Secara default akan mengambil seluruh data di tabel target
+        Gunakan variabel tahun dan user_id untuk memilah
+        $this->kunjungan_m->getTarget("2022","user_id")
+    */
+    function getTarget($tahun = null, $id = null, $kondisi = null)
+    {
+        $this->db->from('tb_kunjungan');
+        if ($tahun != null && $id != null) { $this->db->where($kolom, $id); }
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function addTargetTahunan($post)
+    {
+        $params['id'] = "";
+        $params['tahun'] =  date("Y");
+        $params['user_id'] =  $this->session->id;
+        $params['target'] =  $post['target'];
+        $params['created'] =  date("Ymdhmsi");
+        $this->db->insert('tb_target', $params);
+    }
+
+    function editTargetTahunan($post)
+    {
+        $params['id'] =  $post['id'];
+        $params['target'] =  $post['target'];
+        $this->db->where('id', $params['id']);
+        $this->db->update('tb_target', $params);
+    }
+
+    function addRealisasiTahunan($post)
+    {
+        $params['id'] =  $post['id'];
+        $params['realisasi'] =  $post['realisasi'];
+        $params['modified'] =  date("Ymdhmsi");
+        $this->db->where('id', $params['id']);
+        $this->db->update('tb_target', $params);
+    }
+
+    function editRealisasiTahunan($post)
+    {
+        $params['id'] =  $post['id'];
+        $params['realisasi'] =  $post['realisasi'];
+        $this->db->where('id', $params['id']);
+        $this->db->update('tb_target', $params);
+    }
+
+    /////// LIST LEMBAGA ///////
+    function getLembaga($id = null)
+    {
+        $this->db->from('tb_lembaga');
+        if ($id != null) { $this->db->where("id", $id); }
+        $query = $this->db->get();
+        return $query;
+    }    
+
 }

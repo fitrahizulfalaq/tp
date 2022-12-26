@@ -51,6 +51,7 @@ class Approval_m extends CI_Model
         $params['id'] = "";
         $params['tp'] =  $this->session->id;
         $params['tgl'] =  $post['tgl'];
+        $params['wilayah_kerja'] =  $this->session->wilayah_kerja;
         $params['created'] =  date("Ymdhmsi");
         $this->db->insert('tb_turus', $params);
     }
