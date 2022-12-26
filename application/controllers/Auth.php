@@ -101,4 +101,35 @@ class Auth extends CI_Controller {
 		}
 	}
 
+	public function validationOTP()
+	{
+		$post = $this->input->post(null, TRUE);
+		if(isset($post['login'])) {
+			$this->load->model('validation_m');
+			$query = $this->validation_m->validationOtp($post);
+			if($query->num_rows() > 0) {
+				$row = $query->row();
+				$params = array (
+					'id' => $row->id,					
+					'username' => $row->username,					
+					'nama' => $row->nama,					
+					'email' => $row->email,					
+					'hp' => $row->hp,					
+					'tipe_user' => $row->tipe_user,
+					'date_now' => date('Y:m:d H:i:s'),
+				);
+				$this->session->set_userdata($params);
+				// $kalimat = "Terima kasih telah membuka logbook UPTKUKM Jatim, *".$row->nama."*\n\nSelamat Berkerja Penuh Khidmat untuk Lembaga, Bangsa, dan Negara";
+				// $this->fungsi->sendWA("0".$row->hp,$kalimat);
+				redirect('dashboard');
+			} else {
+				$this->session->set_flashdata('danger','Login Gagal');
+				redirect("auth/login");
+			}
+		} else {
+			echo "Mau Main2 ya";
+			redirect('auth/login');
+		}
+	}
+
 }
