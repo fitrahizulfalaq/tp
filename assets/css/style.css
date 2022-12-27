@@ -945,6 +945,7 @@ button:hover, button:active, button:focus {
 .col-xl-12 {
   padding-left: 8px;
   padding-right: 8px;
+  padding-top: 8px;
 }
 
 .m-0 {

@@ -107,6 +107,37 @@ class Auth extends CI_Controller {
 		if(isset($post['login'])) {
 			$this->load->model('validation_m');
 			$query = $this->validation_m->validationOtp($post);
+		}
+	}
+	/*
+		Perintah login by Google.
+		Cukup arahkan ke url base_url(auth/google);
+	*/
+	function google()
+	{
+		// Konfigurasi kredensial google
+        $clientID = '916270909408-c3pap08k09p2bnsdd0bp6ga6bb4evio4.apps.googleusercontent.com';
+        $clientSecret = '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';
+        $redirectUri = base_url().'auth/google';
+
+        // Buat Perintah Request ke API Google
+        $client = new Google_Client();
+        $client->setClientId($clientID);
+        $client->setClientSecret($clientSecret);
+        $client->setRedirectUri($redirectUri);
+        $client->addScope("email");
+
+        // Koneksikan sesuai alur kredensial google
+        if (isset($_GET['code'])) {
+            $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+            $client->setAccessToken($token['access_token']);
+
+            // dapatkan info google
+            $google_oauth = new Google_Service_Oauth2($client);
+            $data = $google_oauth->userinfo->get();
+            $email=  $data->email;
+			$this->load->model("validation_m");
+            $query = $this->validation_m->loginGoogle($email);			
 			if($query->num_rows() > 0) {
 				$row = $query->row();
 				$params = array (

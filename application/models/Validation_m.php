@@ -19,7 +19,7 @@ class Validation_m extends CI_Model
 	{
 		$this->db->select('*');
 		$this->db->from('tb_user');
-		$this->db->where('username',$post['username']);
+		$this->db->where('email',$post['username']);
 		$this->db->where('password',sha1($post['password']));
 		$this->db->where('status','1');
 		$query = $this->db->get();

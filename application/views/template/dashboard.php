@@ -17,6 +17,15 @@
     <link rel="manifest" href="__manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <!-- Datatable CSS -->
+	<link href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+
+    <!-- jQuery Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Datatable JS -->
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
     <style>
         .error {color: #FF0000;}
         table {
@@ -43,7 +52,7 @@
     </style>
 </head>
 
-<body>
+<body class="bg-white">
 
     <!-- loader -->
     <div id="loader">
@@ -208,7 +217,7 @@
 
     <!-- ///////////// Js Files ////////////////////  -->
     <!-- Jquery -->
-    <script src="<?= base_url() ?>/assets/js/lib/jquery-3.4.1.min.js"></script>
+    <!-- <script src="<?= base_url() ?>/assets/js/lib/jquery-3.4.1.min.js"></script> -->
     <!-- Bootstrap-->
     <script src="<?= base_url() ?>/assets/js/lib/popper.min.js"></script>
     <script src="<?= base_url() ?>/assets/js/lib/bootstrap.min.js"></script>
