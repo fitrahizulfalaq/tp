@@ -34,14 +34,28 @@
             
 
             <div class="form-group boxed">
-                <label class="text" for="name3">Upload foto selfie & Lokasi<span class="error">*</span></label>                   
+                <label class="text" for="name3">Upload foto selfie<span class="error">*</span></label>                   
             </div>
-            <input type="file" name="selfielokasi" class="btn btn-primary" required>
+            <input type="file" name="selfie" class="btn btn-primary" required>
 
             <?php
                 if (isset($error)){
-                    echo "<div class='form-group boxed'><h4>ERROR UPLOAD FOTO SELFIE & LOKASI: </h4>";
+                    echo "<div class='form-group boxed'><h4>ERROR UPLOAD FOTO SELFIE: </h4>";
                     echo "<label class='label-error' for='name3'>$error</label>
+                          </div>";
+                }
+            ?> 
+
+            <div class="form-group boxed">                
+                <label class="text" for="name3">Upload LOKASI <span class="error">*</span></label>
+            </div>
+            <input type="file" name="lokasi" class="btn btn-primary" required>
+
+            
+            <?php
+                if (isset($errir)){
+                    echo "<div class='form-group boxed'><h4>ERROR UPLOAD LOKASI: </h4>";
+                    echo "<label class='label-error' for='name3'>$errir</label>
                           </div>";
                 }
             ?> 
@@ -53,9 +67,9 @@
 
             
             <?php
-                if (isset($errir)){
+                if (isset($errr)){
                     echo "<div class='form-group boxed'><h4>ERROR UPLOAD SPPD: </h4>";
-                    echo "<label class='label-error' for='name3'>$errir</label>
+                    echo "<label class='label-error' for='name3'>$errr</label>
                           </div>";
                 }
             ?> 

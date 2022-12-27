@@ -2,6 +2,7 @@
 <div id="appCapsule">
 
         <div class="blog-post">
+            
 
             <!-- Table -->
             <div class="table-responsive">
@@ -46,8 +47,8 @@
 	         	{ data: 'resume' },
 	         	{ data: 'created'},
                 { data: 'id',
-                    "render": function(data, type, row) { // Tampilkan kolom aksi
-                    var html = "<a href='edit_barcode.php?id='" + data + "' class='btn btn-danger'><i class='fa fa-edit'></i></a>"
+                    "render": function(data) { // Tampilkan kolom aksi
+                    var html = "<a href='edit_kunjungan.php?id=" + data + "' class='btn btn-danger'><i class='fa fa-edit'></i></a>"
                     return html
                     }
                 },

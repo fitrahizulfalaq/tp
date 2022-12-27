@@ -41,8 +41,10 @@ class Data_m extends CI_Model {
       $this->db->select('*');
       if($searchQuery != '')
       $this->db->where($searchQuery);
+      $this->db->where('user_id',$this->session->id);
       $this->db->order_by($columnName, $columnSortOrder);
       $this->db->limit($rowperpage, $start);
+
       $records = $this->db->get('tb_kunjung')->result();
 
       $data = array();
@@ -50,6 +52,7 @@ class Data_m extends CI_Model {
       foreach($records as $record ){
          
           $data[] = array( 
+              "id"=>$record->id,
               "resume"=>$record->resume,
               "created"=>$record->created
           ); 

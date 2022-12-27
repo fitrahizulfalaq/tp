@@ -23,9 +23,7 @@ class Kunjungan extends CI_Controller
         $this->load->model("location_m");
         $lokasi = $this->location_m->get();
         test($lokasi);
-    }
-
-    
+    }    
 
     public function lokasi()
     {
@@ -55,13 +53,13 @@ class Kunjungan extends CI_Controller
             $this->load->library("upload");
             
             $config = array(
-                'upload_path' => './assets/files/uploads/selfielokasi',
+                'upload_path' => './assets/files/uploads/selfie',
                 'allowed_types' => 'gif|jpg|png|jpeg',
                 'max_size' => '2048',
             );
             $this->upload->initialize($config);
 
-            if(!$this->upload->do_upload('selfielokasi')){
+            if(!$this->upload->do_upload('selfie')){
 
                 $error=$this->upload->display_errors();
                 $data['error'] = $this->upload->display_errors();
@@ -70,8 +68,26 @@ class Kunjungan extends CI_Controller
                 $this->templateadmin->load('template/dashboard','kunjungan/kunjungan_data', $data);
                 
             }else{
-                    $selfielokasi_img_data = $this->upload->data();
-                    $selfielokasi_img = $selfielokasi_img_data['file_name'];
+                    $selfie_img_data = $this->upload->data();
+                    $selfie_img = $selfie_img_data['file_name'];
+
+                    $config = array(
+                        'upload_path' => './assets/files/uploads/lokasi',
+                        'allowed_types' => 'pdf|jpg|png|jpeg',
+                        'max_size' => '2048',
+                    );
+                    $this->upload->initialize($config);
+
+                if(!$this->upload->do_upload('lokasi')){       
+                    $errir=$this->upload->display_errors();
+                    $data['errir'] = $this->upload->display_errors();
+                    $data['title'] = "Kunjungan";
+                    echo "<script> alert('Format/Ukuran LOKASI tidak Sesuai-$errir')</script>";
+                    $this->templateadmin->load('template/dashboard','kunjungan/kunjungan_data', $data);
+                }else{
+                       
+                    $lokasi_img_data = $this->upload->data();
+                    $lokasi_img = $lokasi_img_data['file_name'];
 
                     $config = array(
                         'upload_path' => './assets/files/uploads/sppd',
@@ -80,28 +96,35 @@ class Kunjungan extends CI_Controller
                     );
                     $this->upload->initialize($config);
 
-                if(!$this->upload->do_upload('sppd')){       
-                    $errir=$this->upload->display_errors();
-                    $data['errir'] = $this->upload->display_errors();
-                    $data['title'] = "Kunjungan";
-                    echo "<script> alert('Format/Ukuran SPPD tidak Sesuai-$errir')</script>";
-                    $this->templateadmin->load('template/dashboard','kunjungan/kunjungan_data', $data);
-                }else{
-                       
-                    $sppd_img_data = $this->upload->data();
-                    $sppd_img = $sppd_img_data['file_name'];
-
-                    $post['foto_selfielokasi']= $selfielokasi_img;
-                    $post['sppd']= $sppd_img;
-    
-                    $result = $this->kunjungan_m->addkunjung($post);
-    
-                    if($result){
-                        echo "<script> alert('sukses')</script>";
+                    if(!$this->upload->do_upload('sppd')){       
+                        $errr=$this->upload->display_errors();
+                        $data['errr'] = $this->upload->display_errors();
+                        $data['title'] = "Kunjungan";
+                        echo "<script> alert('Format/Ukuran LOKASI tidak Sesuai-$errr')</script>";
+                        $this->templateadmin->load('template/dashboard','kunjungan/kunjungan_data', $data);
+                        
                     }else{
-                        echo "<script> alert('gagal')</script>";
-                    }
-                    redirect('dashboard');
+                            //post
+                            $sppd_img_data = $this->upload->data();
+                            $sppd_img = $sppd_img_data['file_name'];
+
+                            $post['foto_selfie']= $selfie_img;
+                            $post['foto_lokasi']= $lokasi_img;
+                            $data['sppd']= $sppd_img;
+            
+                            $result = $this->kunjungan_m->addkunjungan($post);
+                            $sppdupload= $this->kunjungan_m->addSPPD($data);
+            
+                            if($result){
+                                echo "<script> alert('sukses')</script>";
+                            }else{
+                                echo "<script> alert('gagal')</script>";
+                            }
+                            redirect('dashboard');
+
+                        }
+
+                    
                 }
             }
         }
