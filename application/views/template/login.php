@@ -27,7 +27,7 @@
     <!-- * loader -->
 
     <!-- App Capsule -->
-    
+    <?=$contents?>
     <!-- * App Capsule -->
 
 

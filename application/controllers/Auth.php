@@ -9,31 +9,31 @@ class Auth extends CI_Controller {
 		$this->load->model('validation_m');
 	}
 
+	/*
+		Template halaman login
+	*/
 	public function login()
 	{
 		check_already_login();
-		$this->load->view('page/login');
+		$this->templateadmin->load('template/login','page/login/main');
 	}
 	
 	public function loginOTP()
 	{
 		check_already_login();
-		$this->load->view('page/loginOTP');
+		$this->templateadmin->load('template/login','page/login/otp');
 	}
-
+	
 	public function loginOTPConfirm()
 	{
 		check_already_login();
-		$this->load->view('page/loginOtpConfirm');
+		$this->templateadmin->load('template/login','page/login/validation_otp');
 	}
+	
 
-	public function logout()
-	{
-		$params = array('id','username','tipe_user','date_now');
-		$this->session->unset_userdata($params);
-		redirect('auth/login');
-	}
-
+	/*
+		Controller Pemrosesan
+	*/
 	public function process()
 	{
 		$post = $this->input->post(null, TRUE);
@@ -56,8 +56,6 @@ class Auth extends CI_Controller {
 					'date_now' => date('Y:m:d H:i:s'),
 				);
 				$this->session->set_userdata($params);
-				// $kalimat = "Terima kasih telah membuka logbook UPTKUKM Jatim, *".$row->nama."*\n\nSelamat Berkerja Penuh Khidmat untuk Lembaga, Bangsa, dan Negara";
-				// $this->fungsi->sendWA("0".$row->hp,$kalimat);
 				redirect('dashboard');
 			} else {
 				$this->session->set_flashdata('danger','Login Gagal');
@@ -69,14 +67,18 @@ class Auth extends CI_Controller {
 		}
 	}
 
-	public function processotp()
+	/*
+		Perintah login by OTP.
+		Cukup arahkan ke url base_url(auth/loginOTP);
+	*/
+	public function checkOTP()
 	{
 		$post = $this->input->post(null, TRUE);
 		if(isset($post['login'])) {
-			$this->load->model('user_m');
+			$this->load->model('validation_m');
 			$this->load->library('wa');
 
-			$query = $this->user_m->getotp($post);
+			$query = $this->validation_m->cekHp($post);
 			if($query->num_rows() > 0) {
 				$row = $query->row();
 				$params = array (
@@ -88,8 +90,8 @@ class Auth extends CI_Controller {
 				$params['otp'] = rand(100000,999999);
 				$this->session->set_userdata($params);
 				$kalimat = "Kode OTP KAMU : ".$params['otp'];			
-				$this->wa->waWhacenter(hp($post['hp']),$kalimat);
-				$this->user_m->insertOtp($params);
+				$this->wa->send(($post['hp']),$kalimat);
+				$this->validation_m->insertOtp($params);
 				redirect('auth/loginOTPConfirm');
 			} else {
 				$this->session->set_flashdata('danger','Nomor tidak ditemukan');
@@ -106,9 +108,35 @@ class Auth extends CI_Controller {
 		$post = $this->input->post(null, TRUE);
 		if(isset($post['login'])) {
 			$this->load->model('validation_m');
-			$query = $this->validation_m->validationOtp($post);
+			$query = $this->validation_m->validationOTP($post);
+			if($query->num_rows() > 0) {
+				$row = $query->row();
+				$params = array (
+					'id' => $row->id,					
+					'username' => $row->username,					
+					'nama' => $row->nama,					
+					'hp' => $row->hp,
+					'email' => $row->email,
+					'tempat_lahir' => $row->tempat_lahir,
+					'tgl_lahir' => $row->tgl_lahir,
+					'domisili' => $row->domisili,
+					'nik' => $row->nik,
+					'wilayah_kerja' => $row->wilayah_kerja,
+					'tipe_user' => $row->tipe_user,
+					'date_now' => date('Y:m:d H:i:s'),
+				);
+				$this->session->set_userdata($params);
+				redirect('dashboard');
+			} else {
+				$this->session->set_flashdata('danger','Kode OTP Tidak Valid. Pastikan KODE OTP yang diinputkan benar)');
+				redirect("auth/login");
+			}
+		} else {
+			echo "Mau Main2 ya";
+			redirect('auth/login');
 		}
 	}
+
 	/*
 		Perintah login by Google.
 		Cukup arahkan ke url base_url(auth/google);
@@ -116,8 +144,8 @@ class Auth extends CI_Controller {
 	function google()
 	{
 		// Konfigurasi kredensial google
-        $clientID = '916270909408-c3pap08k09p2bnsdd0bp6ga6bb4evio4.apps.googleusercontent.com';
-        $clientSecret = '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';
+        $clientID = '916270909408-klbhg0eu8gl2jeo6p0uu61va8prg6lsq.apps.googleusercontent.com';
+        $clientSecret = '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';
         $redirectUri = base_url().'auth/google';
 
         // Buat Perintah Request ke API Google
@@ -127,15 +155,22 @@ class Auth extends CI_Controller {
         $client->setRedirectUri($redirectUri);
         $client->addScope("email");
 
-        // Koneksikan sesuai alur kredensial google
+        // create Client Request to access Google API
+        $client = new Google_Client();
+        $client->setClientId($clientID);
+        $client->setClientSecret($clientSecret);
+        $client->setRedirectUri($redirectUri);
+        $client->addScope("email");
+
+        // authenticate code from Google OAuth Flow
         if (isset($_GET['code'])) {
             $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
             $client->setAccessToken($token['access_token']);
 
-            // dapatkan info google
+            // get profile info
             $google_oauth = new Google_Service_Oauth2($client);
-            $data = $google_oauth->userinfo->get();
-            $email=  $data->email;
+            $google_account_info = $google_oauth->userinfo->get();
+            $email=  $google_account_info->email;
 			$this->load->model("validation_m");
             $query = $this->validation_m->loginGoogle($email);			
 			if($query->num_rows() > 0) {
@@ -144,23 +179,33 @@ class Auth extends CI_Controller {
 					'id' => $row->id,					
 					'username' => $row->username,					
 					'nama' => $row->nama,					
-					'email' => $row->email,					
-					'hp' => $row->hp,					
+					'hp' => $row->hp,
+					'email' => $row->email,
+					'tempat_lahir' => $row->tempat_lahir,
+					'tgl_lahir' => $row->tgl_lahir,
+					'domisili' => $row->domisili,
+					'nik' => $row->nik,
+					'wilayah_kerja' => $row->wilayah_kerja,
 					'tipe_user' => $row->tipe_user,
 					'date_now' => date('Y:m:d H:i:s'),
 				);
 				$this->session->set_userdata($params);
-				// $kalimat = "Terima kasih telah membuka logbook UPTKUKM Jatim, *".$row->nama."*\n\nSelamat Berkerja Penuh Khidmat untuk Lembaga, Bangsa, dan Negara";
-				// $this->fungsi->sendWA("0".$row->hp,$kalimat);
 				redirect('dashboard');
 			} else {
-				$this->session->set_flashdata('danger','Login Gagal');
+				$this->session->set_flashdata('danger','Email Tidak Terdaftar');
 				redirect("auth/login");
 			}
-		} else {
-			echo "Mau Main2 ya";
-			redirect('auth/login');
-		}
+
+            // now you can use this profile info to create account in your website and make user logged in.
+        } else {
+            redirect($client->createAuthUrl());
+        }
 	}
 
+	public function logout()
+	{
+		$params = array('id','username','tipe_user','date_now');
+		$this->session->unset_userdata($params);
+		redirect('auth/login');
+	}
 }
