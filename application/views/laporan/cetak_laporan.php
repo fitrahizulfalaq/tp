@@ -8,7 +8,7 @@
     <div class="row">
 		<div class="col-12">
 			<div class="col-12">	
-            <h3>DATA LAPORAN</h3>
+            <h3>CETAK DATA LAPORAN</h3>
             <div class="card">
 					<div class="card-body">
 				
@@ -63,9 +63,9 @@
 								<thead>
 									<tr>
 										<th width="5%">No</th>
-										<th width="20%">Tanggal</th>
-                                        <th width="60%">Resume</th>
-                                        <th width="20%">Aksi</th>
+										<th width="40%">Bulan</th>
+                                        <th width="40%">Tahun</th>
+                                        <th width="30%">#</th>
 
 									</tr>
 								</thead>
@@ -75,13 +75,14 @@
                                             <p>1</p>
                                         </td>
                                         <td scope="row">
-                                            <p>2 JANUARI 2023</p>                                        
+                                            <p>JANUARI</p>                                        
                                         </td>
                                         <td scope="row">
-                                            <p>Hari ini tanggal 1 Januari 2023 pukul 10.30 saya melakukan pendampingan kepada UKM/Koperasi bidang Mamin yang bernama Bapak Parlan beralamat di Jl. Mastrip No. 3, Kebonsari Kulon, Probolinggo.</p>
+                                            <p>2023</p>
                                         </td>                                        
                                         <td>
-                                            <a href="<?=site_url('kunjungan/editkunjungan')?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                                            <a href="" class="btn btn-danger"><i class="fa fa-download"></i></a>
+                                            <a href="" class="btn btn-warning"><i class="fa fa-print"></i></a>
                                         </td>
                                     </tr>									
 								</tbody>

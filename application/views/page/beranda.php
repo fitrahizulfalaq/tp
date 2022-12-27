@@ -31,13 +31,13 @@
                         <!-- small card -->
                         <div class="card product-card">
                             <div class="inner text-center">
-                                <a href="<?= base_url('data') ?>">
+                                <a href="<?= base_url('laporan') ?>">
                                     <img src="<?= base_url("") ?>/assets/img/icon/folder-link.png" alt="" width="100%">
                                 </a>
                             </div>
                             <p align="center">
-                                <a href="<?= base_url('data') ?>">
-                                    DATA
+                                <a href="<?= base_url('laporan') ?>">
+                                    LAPORAN
                                 </a>
                             </p>
                         </div>
@@ -47,12 +47,12 @@
                         <!-- small card -->
                         <div class="card product-card">
                             <div class="inner text-center">
-                                <a href="<?= base_url('laporan') ?>">
+                                <a href="<?= base_url('laporan/cetaklaporan') ?>">
                                     <img src="<?= base_url("") ?>/assets/img/icon/text-folder.png" alt="" width="100%">
                                 </a>
                             <p align="center">
-                                <a href="<?= base_url('laporan') ?>">
-                                    LAPORAN
+                                <a href="<?= base_url('laporan/cetaklaporan') ?>">
+                                    CETAK LAPORAN
                                 </a>
                             </p>
                             </div>

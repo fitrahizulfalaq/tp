@@ -17,4 +17,12 @@ class Laporan extends CI_Controller {
 
 	}
 
+	public function cetaklaporan()
+	{
+		$data['title'] = "Cetak Laporan";
+		$this->templateadmin->load('template/dashboard','laporan/cetak_laporan',$data);	
+
+
+	}
+
 }

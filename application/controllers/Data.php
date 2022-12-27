@@ -18,7 +18,7 @@ class Data extends CI_Controller {
     // load view
     // $this->load->view('data/viewdata');
     $data['title']="Data";   
-    $this->templateadmin->load('template/dashboard','data/viewdata',$data);
+    $this->templateadmin->load('template/dashboard','data/view_data',$data);
 
   }
 
