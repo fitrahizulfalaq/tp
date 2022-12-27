@@ -17,29 +17,14 @@
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fa fa-calendar"></i></span>
-						</div>
-                        
-						<select name="bulan" class="btn btn-outline-primary " required>
-							<option value="">Pilih Bulan</option>
-							<option value="01">Januari</option>
-							<option value="02">Februari</option>
-							<option value="03">Maret</option>
-							<option value="04">April</option>
-							<option value="05">Mei</option>
-							<option value="06">Juni</option>
-							<option value="07">Juli</option>
-							<option value="08">Agustus</option>
-							<option value="09">September</option>
-							<option value="10">Oktober</option>
-							<option value="11">November</option>
-							<option value="12">Desember</option>
-                        </select>
+						</div>                     
+						
                         
 
 						<select name="tahun" class="btn btn-outline-primary " required>
 							<option value="">Pilih Tahun</option>
 							<?php $thn_skr = date('Y');
-							for ($x = $thn_skr; $x >= 2018; $x--) { ?>
+							for ($x = $thn_skr; $x >= 2022; $x--) { ?>
 								<option value="<?php echo $x ?>"><?php echo $x ?></option>
 							<?php } ?>
 						</select>
@@ -62,29 +47,27 @@
 							<table class="<table table-striped table-bordered table-hover table-full-width dataTable" id="list">
 								<thead>
 									<tr>
-										<th width="5%">No</th>
 										<th width="40%">Bulan</th>
                                         <th width="40%">Tahun</th>
-                                        <th width="30%">#</th>
 
 									</tr>
 								</thead>
 								<tbody>
+								
+									<?php
+									$bulan = [1 => "Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+									for($i=1;$i<=12;$i++){
+									?>
                                     <tr>
                                         <td scope="row">
-                                            <p>1</p>
-                                        </td>
-                                        <td scope="row">
-                                            <p>JANUARI</p>                                        
-                                        </td>
-                                        <td scope="row">
-                                            <p>2023</p>
-                                        </td>                                        
+                                            <p><?=$bulan[$i]?></p>                                        
+                                        </td>                                       
                                         <td>
                                             <a href="" class="btn btn-danger"><i class="fa fa-download"></i></a>
                                             <a href="" class="btn btn-warning"><i class="fa fa-print"></i></a>
                                         </td>
-                                    </tr>									
+                                    </tr>	
+									<?php }?>								
 								</tbody>
 							</table>
                             </div>
