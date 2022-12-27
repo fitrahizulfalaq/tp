@@ -26,7 +26,7 @@ class Validation_m extends CI_Model
 		return $query; 
 	}
 
-    function cekHp()
+    function cekHp($post)
     {
         $this->db->select('*');
 		$this->db->from('tb_user');
@@ -37,7 +37,7 @@ class Validation_m extends CI_Model
     
 	}
 
-    function insertOTP()
+    function insertOTP($post)
     {
        $params['id'] =  $post['id'];
        $params['otp'] =  $post['otp'];
