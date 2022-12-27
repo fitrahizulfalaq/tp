@@ -1,24 +1,33 @@
     
 <div id="appCapsule">
+    <div class="row">
+		<div class="col-12">
+			<div class="col-12">	
+                <h3>DATA KUNJUNGAN</h3>
 
-        <div class="blog-post">
-            
+                    <div class="card">
+                        <div class="card-body">        
 
-            <!-- Table -->
-            <div class="table-responsive">
-                <table id='empTable' class='table table-bordered'>
+                        <!-- Table -->
+                        <div class="table-responsive-sm">
+                            <table id='empTable' class='table table-bordered'>
 
-                <thead>
-                    <tr>
-                    <th>No</th>
-                    <th>Resume</th>
-                    <th>Tanggal</th>
-                    <th>Aksi</th>                    
-                    </tr>
-                </thead>
+                            <thead>
+                                <tr>
+                                <th>No</th>
+                                <th>Resume</th>
+                                <th>Tanggal</th>
+                                <th>Aksi</th>                    
+                                </tr>
+                            </thead>
 
-                </table>
-            </div>
+                            </table>
+                        </div>
+                        </div>
+                    </div>    
+                </div>        
+            </div>                
+        </div>
     </div>
 </div>
 
@@ -47,8 +56,8 @@
 	         	{ data: 'resume' },
 	         	{ data: 'created'},
                 { data: 'id',
-                    "render": function(data) { // Tampilkan kolom aksi
-                    var html = "<a href='edit_kunjungan.php?id=" + data + "' class='btn btn-danger'><i class='fa fa-edit'></i></a>"
+                    "render": function(data, type, row, meta) { // Tampilkan kolom aksi
+                    var html = "<a href='kunjungan/updatekunjungan' class='btn btn-danger'><i class='fa fa-edit'></i></a>"
                     return html
                     }
                 },

@@ -18,22 +18,21 @@ class Data_m extends CI_Model {
       ## Search 
       $searchQuery = "";
       if($searchValue != ''){
-          $searchQuery = " (emp_name like '%".$searchValue."%' or 
-                email like '%".$searchValue."%' or 
-                city like'%".$searchValue."%' ) ";
+          $searchQuery = " (resume like '%".$searchValue."%' or 
+                created like '%".$searchValue."%') ";
       }
 
 
       ## Total number of records without filtering
       $this->db->select('count(*) as allcount');
-      $records = $this->db->get('tb_kunjung')->result();
+      $records = $this->db->get('tb_kunjungan')->result();
       $totalRecords = $records[0]->allcount;
 
       ## Total number of record with filtering
       $this->db->select('count(*) as allcount');
       if($searchQuery != '')
       $this->db->where($searchQuery);
-      $records = $this->db->get('tb_kunjung')->result();
+      $records = $this->db->get('tb_kunjungan')->result();
       $totalRecordwithFilter = $records[0]->allcount;
 
       
@@ -45,7 +44,7 @@ class Data_m extends CI_Model {
       $this->db->order_by($columnName, $columnSortOrder);
       $this->db->limit($rowperpage, $start);
 
-      $records = $this->db->get('tb_kunjung')->result();
+      $records = $this->db->get('tb_kunjungan')->result();
 
       $data = array();
 

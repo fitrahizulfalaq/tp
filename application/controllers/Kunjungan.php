@@ -122,12 +122,16 @@ class Kunjungan extends CI_Controller
                             }
                             redirect('dashboard');
 
-                        }
-
-                    
+                        }                    
                 }
             }
         }
+    }      
+
+    public function editkunjungan()
+    {        
+        $data['title']="Edit Kunjungan";
+        $this->templateadmin->load('template/dashboard','kunjungan/kunjungan_edit',$data);
     }      
     
     public function sukses()
