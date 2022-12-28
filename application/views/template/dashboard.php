@@ -85,7 +85,7 @@
     <!-- App Bottom Menu -->
     <div class="appBottomMenu">
 
-        <a href="<?=site_url('kunjungan/lokasi');?>" class="item">
+        <a href="<?=site_url('kunjungan/checkin');?>" class="item">
             <div class="col">
                 <ion-icon name="map-outline"></ion-icon>
             </div>
@@ -140,7 +140,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="<?=site_url('kunjungan/lokasi')?>" class="item">
+                            <a href="<?=site_url('kunjungan/checkin')?>" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="map"></ion-icon>
                                 </div>

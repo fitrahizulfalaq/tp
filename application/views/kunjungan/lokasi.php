@@ -13,8 +13,8 @@
             <p id="lokasi"></p>
         </div>
         <form action="<?= base_url("kunjungan/addCheckIn")?>" method="post">  
-            <input type="hidden" id="lat-input" name="lat-input" readonly>
-            <input type="hidden" id="lng-input" name="lng-input" readonly>
+            <input type="hidden" id="lat" name="lat" readonly>
+            <input type="hidden" id="lng" name="lng" readonly>
             <a class="btn btn-outline-warning btn-block" id="btn-ulangi" onclick="window.location.reload()" style="visibility: hidden;"><ion-icon name="repeat-outline"></ion-icon> ULANGI</a>
             <button id="btn-kirim" class="btn btn-success btn-block btn-lg" style="visibility: hidden;"><ion-icon name="paper-plane-outline"></ion-icon> Selanjutnya</button>
             <div id="ket-selanjutnya" class="section-title" style="visibility: hidden;">*Dengan menekan tombol selanjutnya, saya menyatakan bahwa lokasi saya sudah benar. Data akan terekam dan diolah oleh sistem, setiap kecurangan akan mengakibatkan data tidak valid</div>
@@ -42,9 +42,9 @@
       x.setAttribute("id", "lokasi-img");
       x.setAttribute("src", "https://maps.googleapis.com/maps/api/staticmap?markers=color:red%7Clabel:LOKASI%7C" + position.coords.latitude + "," + position.coords.longitude + "&zoom=15&size=400x400&maptype=roadmap&key=AIzaSyBulTatyUv6oR6ykvWU-QDzp-wYQXNWV7A");
       document.getElementById("lokasi").appendChild(x);
-      //Input Nilai Maps
-      document.getElementById("lat-input").value = position.coords.latitude;
-      document.getElementById("lng-input").value = position.coords.longitude;
+      //Input Nilai Maps1
+      document.getElementById("lat").value = position.coords.latitude;
+      document.getElementById("lng").value = position.coords.longitude;
       document.getElementById("btn-kirim").style.visibility = 'visible';
       document.getElementById("btn-ulangi").style.visibility = 'visible';
       document.getElementById("ket-selanjutnya").style.visibility = 'visible';

@@ -68,13 +68,40 @@ class Kunjungan_m extends CI_Model
     /*
         Tambahkan Kunjungan
     */
-    function addCheckIn($post)
+    function addCheckInNonLainnya($post)
     {
         //Migrasi Gambar Peta dari TMP ke Storage Utama
         $params['loc_img'] =  $this->maps->saveMapsImg(FCPATH . $post['loc_img'],$this->session->hp);
         $params['id'] =  "";
         $params['user_id'] =  $this->session->id;
         $params['tipe'] =  $post['tipe'];
+        $params['nama'] =  $post['nama'];
+        $params['kelamin'] =  $post['kelamin'];
+        $params['hp'] =  $post['hp'];
+        $params['tujuan'] =  $post['tujuan'];
+        $params['lat'] =  $post['lat'];
+        $params['lng'] =  $post['lng'];
+        $params['created'] =  date("Ymdhmsi");
+        $params['ip_address'] = $this->input->ip_address();
+        $this->db->insert('tb_kunjungan', $params);
+    }
+
+    function addCheckInLainnya($post)
+    {
+        //Migrasi Gambar Peta dari TMP ke Storage Utama
+        $params['loc_img'] =  $this->maps->saveMapsImg(FCPATH . $post['loc_img'],$this->session->hp);
+        $params['id'] =  "";
+        $params['user_id'] =  $this->session->id;
+        $params['tipe'] =  $post['tipe'];
+        $params['masalah'] =  $post['masalah'];
+        $params['target'] =  $post['target'];
+        $params['realisasi'] =  $post['realisasi'];
+        $params['kegiatan'] =  $post['kegiatan'];
+        $params['tujuan'] =  $post['tujuan'];
+        $params['kesimpulan'] =  $post['kesimpulan'];
+        $params['tindak_lanjut'] =  $post['tindak_lanjut'];
+        $params['foto_selfie'] =  $post['foto_selfie'];
+        $params['foto_lokasi'] =  $post['foto_lokasi'];
         $params['lat'] =  $post['lat'];
         $params['lng'] =  $post['lng'];
         $params['created'] =  date("Ymdhmsi");

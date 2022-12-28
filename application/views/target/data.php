@@ -26,7 +26,7 @@
 												<p>2023</p>                                        
 											</td>    
 											<td>
-												<a href="<?= base_url("target/open?tahun=".date("Y"))?>" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+												<a href="<?= base_url("target/open?tahun=".date("Y"))?>" class="btn btn-primary" target="_blank"><i class="fa fa-eye"></i></a>
 												<a href="<?= base_url("target/download?tahun=".date("Y"))?>" class="btn btn-danger" target="_blank"><i class="fa fa-download"></i></a>
 												<a href="<?= base_url("target/print?tahun=".date("Y"))?>" class="btn btn-warning"><i class="fa fa-print"></i></a>
 											</td>
