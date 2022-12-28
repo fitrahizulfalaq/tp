@@ -17,6 +17,8 @@
     <link rel="manifest" href="__manifest.json">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <script src="https://cdn.logwork.com/widget/countdown.js"></script>
+
     <!-- Datatable CSS -->
 	<link href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
 
@@ -170,7 +172,7 @@
                         <li>
 
                         <li>
-                            <a href="<?=site_url('target')?>" class="item">
+                            <a href="<?=site_url('tampilan/target')?>" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="locate"></ion-icon>
                                 </div>
@@ -232,6 +234,7 @@
     <script src="<?= base_url() ?>/assets/js/plugins/jquery-circle-progress/circle-progress.min.js"></script>
     <!-- Base Js File -->
     <script src="<?= base_url() ?>/assets/js/base.js"></script>
+    
 
 
     
