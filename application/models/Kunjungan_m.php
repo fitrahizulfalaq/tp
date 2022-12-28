@@ -65,6 +65,23 @@ class Kunjungan_m extends CI_Model
         return $query;
     }
 
+    /*
+        Tambahkan Kunjungan
+    */
+    function addCheckIn($post)
+    {
+        //Migrasi Gambar Peta dari TMP ke Storage Utama
+        $params['loc_img'] =  $this->maps->saveMapsImg(FCPATH . $post['loc_img'],$this->session->hp);
+        $params['id'] =  "";
+        $params['user_id'] =  $this->session->id;
+        $params['tipe'] =  $post['tipe'];
+        $params['lat'] =  $post['lat'];
+        $params['lng'] =  $post['lng'];
+        $params['created'] =  date("Ymdhmsi");
+        $params['ip_address'] = $this->input->ip_address();
+        $this->db->insert('tb_kunjungan', $params);
+    }
+
     function addKunjungan($post)
     {
         //Migrasi Gambar Peta dari TMP ke Storage Utama
@@ -145,10 +162,10 @@ class Kunjungan_m extends CI_Model
         Gunakan variabel tahun dan user_id untuk memilah
         $this->kunjungan_m->getTarget("2022","user_id")
     */
-    function getTarget($tahun = null, $id = null, $kondisi = null)
+    function getTarget($tahun = null, $id = null)
     {
-        $this->db->from('tb_kunjungan');
-        if ($tahun != null && $id != null) { $this->db->where($kolom, $id); }
+        $this->db->from('tb_target');
+        if ($tahun != null && $id != null) { $this->db->where("tahun", $tahun); }
         $query = $this->db->get();
         return $query;
     }
@@ -158,7 +175,7 @@ class Kunjungan_m extends CI_Model
         $params['id'] = "";
         $params['tahun'] =  date("Y");
         $params['user_id'] =  $this->session->id;
-        $params['target'] =  $post['target'];
+        $params['file'] =  $post['file'];
         $params['created'] =  date("Ymdhmsi");
         $this->db->insert('tb_target', $params);
     }

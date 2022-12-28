@@ -2,182 +2,91 @@
 ob_start();
 defined('BASEPATH') or exit('No direct script access allowed');
 
-use GuzzleHttp\Client;
-
 class Kunjungan extends CI_Controller
 {
     public function __construct(){
 		parent::__construct();
 		check_not_login();
+        $this->load->model("kunjungan_m");
 	}
     public $key = "AIzaSyBulTatyUv6oR6ykvWU-QDzp-wYQXNWV7A";
 
-    public function login()
+    function index()
     {
-        check_already_login();
-        $this->load->view('test/login');
-    }    
-
-    public function lokasi()
-    {
-        $data['title']="Kunjungan";   
-        $this->templateadmin->load('template/dashboard','kunjungan/lokasi',$data);
+        $this->session->set_flashdata('warning', 'Inputan Anda Tidak Valid');
+        redirect("");
     }
     
-    public function kunjungan()
+    /*
+        CHECK IN
+        Step 1 - Tentukan Lokasi        
+    */
+    function checkIn()
+    {
+        $data['title']="CHECK IN LOKASI";   
+        $this->templateadmin->load('template/dashboard','kunjungan/lokasi',$data);
+    }
+
+    /*
+        Step 2 - Tambahkan data kunjungan awal
+        Koperasi/UMKM/Wirausaha Pemula --> Isian (1)
+        Kalau di Kantor --> Isian (2)
+    */
+    function addCheckIn()
     {
         $this->load->library("maps");
         $post = $this->input->post(null, TRUE);
-
-        $data['lat'] = $post['lat-input'];
-        $data['lng'] = $post['lng-input'];
-        $data['loc_img'] = $this->maps->saveMapsTmp($post['lat-input'], $post['lng-input']);
-        $data['title']="Kunjungan";
-        $this->templateadmin->load('template/dashboard','kunjungan/kunjungan_input',$data);
-    }        
-
-    public function addkunjungan()
-    {
-        $this->load->library("maps");
-        $this->load->model("kunjungan_m");
-        $post = $this->input->post(null, TRUE);
-        if ($_SERVER['REQUEST_METHOD'] == "POST"){
-
-            $this->load->library("upload");
-            
-            $config = array(
-                'upload_path' => './assets/files/uploads/selfie',
-                'allowed_types' => 'gif|jpg|png|jpeg',
-                'max_size' => '2048',
-            );
-            $this->upload->initialize($config);
-
-            if(!$this->upload->do_upload('selfie')){
-
-                $error=$this->upload->display_errors();
-                $data['error'] = $this->upload->display_errors();
-                $data['title'] = "Kunjungan";
-                echo "<script> alert('Format/Ukuran Foto Selfie dan Lokasi tidak Sesuai-$error')</script>";
-                $this->templateadmin->load('template/dashboard','kunjungan/kunjungan_data', $data);
-                
-            }else{
-                    $selfie_img_data = $this->upload->data();
-                    $selfie_img = $selfie_img_data['file_name'];
-
-                    $config = array(
-                        'upload_path' => './assets/files/uploads/lokasi',
-                        'allowed_types' => 'pdf|jpg|png|jpeg',
-                        'max_size' => '2048',
-                    );
-                    $this->upload->initialize($config);
-
-                if(!$this->upload->do_upload('lokasi')){       
-                    $errir=$this->upload->display_errors();
-                    $data['errir'] = $this->upload->display_errors();
-                    $data['title'] = "Kunjungan";
-                    echo "<script> alert('Format/Ukuran LOKASI tidak Sesuai-$errir')</script>";
-                    $this->templateadmin->load('template/dashboard','kunjungan/kunjungan_data', $data);
-                }else{
-                    $lokasi_img_data = $this->upload->data();
-                    $lokasi_img = $lokasi_img_data['file_name'];
-
-                    $config = array(
-                        'upload_path' => './assets/files/uploads/sppd',
-                        'allowed_types' => 'pdf|jpg|png|jpeg',
-                        'max_size' => '2048',
-                    );
-                    $this->upload->initialize($config);
-
-                    if(!$this->upload->do_upload('sppd')){       
-                        $errr=$this->upload->display_errors();
-                        $data['errr'] = $this->upload->display_errors();
-                        $data['title'] = "Kunjungan";
-                        echo "<script> alert('Format/Ukuran LOKASI tidak Sesuai-$errr')</script>";
-                        $this->templateadmin->load('template/dashboard','kunjungan/kunjungan_data', $data);
-                        
-                    }else{
-                            //post
-                            $sppd_img_data = $this->upload->data();
-                            $sppd_img = $sppd_img_data['file_name'];
-
-                            $post['foto_selfie']= $selfie_img;
-                            $post['foto_lokasi']= $lokasi_img;
-                            $data['sppd']= $sppd_img;
-            
-                            $result = $this->kunjungan_m->addkunjungan($post);
-                            $sppdupload= $this->kunjungan_m->addSPPD($data);
-            
-                            if($result){
-                                echo "<script> alert('sukses')</script>";
-                            }else{
-                                echo "<script> alert('gagal')</script>";
-                            }
-                            redirect('dashboard');
-
-                        }                    
-                }
-            }
+        // Validasi
+        if ($post == null){
+            $this->session->set_flashdata('danger', 'Mohon Share Loc Terlebih Dahulu');
+            redirect("kunjungan/checkin");
+        } else {
+            $data['lat'] = $post['lat-input'];
+            $data['lng'] = $post['lng-input'];
+            $data['loc_img'] = $this->maps->saveMapsTmp($post['lat-input'], $post['lng-input']);
+            $data['title']="Kunjungan";
+            $this->templateadmin->load('template/dashboard','kunjungan/kunjungan_input',$data);
         }
-    }      
+    }
+    /*
+        Step 3 - Simpan ke Database Kunjungan
+    */
+    function saveCheckIn()
+    {
+		//Load librarynya dulu
+		$this->load->library('form_validation');
+		//Atur validasinya
+		$this->form_validation->set_rules('target', 'target', 'min_length[30]|max_length[5000]');
+
+		//Pesan yang ditampilkan
+		$this->form_validation->set_message('min_length', '{field} Setidaknya  minimal {param} karakter.');
+		$this->form_validation->set_message('max_length', '{field} Seharusnya maksimal {param} karakter.');
+		$this->form_validation->set_message('is_unique', 'Data sudah ada');
+		//Tampilan pesan error
+		$this->form_validation->set_error_delimiters('<span class="badge badge-danger">', '</span>');
+
+		if ($this->form_validation->run() == FALSE) {
+ 
+            // Redirect agar tidak di hit langsung
+            $post = $this->input->post(null, TRUE);
+            if ($post == null){$this->session->set_flashdata('danger', 'Mohon Share Loc Terlebih Dahulu');redirect("kunjungan/checkin");}
+
+            $data['title']="TAMBAH DATA KUNJUNGAN";
+            $this->templateadmin->load('template/dashboard','kunjungan/kunjungan_input',$data);
+		} else {
+			$post = $this->input->post(null, TRUE);
+			$this->kunjungan_m->addCheckIn($post);
+
+			if ($this->db->affected_rows() > 0) {
+				$this->session->set_flashdata('success', 'Check In Berhasil. Anda bisa mengedit hasil kunjungan pada menu Laporan.');
+			}
+			redirect('kunjungan/checkin');
+		}
+    }
 
     public function editkunjungan()
     {        
         $data['title']="Edit Kunjungan";
         $this->templateadmin->load('template/dashboard','kunjungan/kunjungan_edit',$data);
     }      
-    
-    public function sukses()
-    {
-        $this->load->view('test/kunjungan/sukses');        
-    }
-
-    public function turus()
-    {
-        $this->load->view('test/kunjungan/turus');        
-    }
-
-    public function addTurus()
-    {
-        $this->load->model("approval_m");
-        $post = $this->input->post(null, TRUE);
-        $cek = $this->approval_m->getByDate(date("Y",strtotime($post['tgl'])),date("m",strtotime($post['tgl'])),date("d",strtotime($post['tgl'])));
-        // test(date("d",strtotime($post['tgl'])));
-        // test($cek->num_rows());
-        if ($cek->num_rows() == null)
-        {
-            $this->approval_m->addTurus($post);
-            redirect("test/sukses");
-        } else {
-            echo "sudah ada";
-        }
-
-    }
-
-    public function get()
-    {
-        $this->load->model("approval_m");
-        $inputan = $this->approval_m->getByMonth("2022","11")->result();
-        test($inputan);
-    }
-
-    public function hapus()
-    {
-        $id = $_GET['id'];
-        $this->load->model("kunjungan_m");
-        $inputan = $this->kunjungan_m->delete($id)->result();
-    }
-
-    public function acc()
-    {
-        $id = $_GET['id'];
-        $this->load->model("approval_m");
-        $inputan = $this->approval_m->accTurus($id);
-    }
-
-    public function wa()
-    {
-        $hp = "081231390340";
-        $wa = $this->wa->send($hp,"Testing");
-        test($wa);
-    }
 }

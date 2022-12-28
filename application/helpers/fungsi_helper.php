@@ -48,14 +48,15 @@ function akses($level)
 	Ex : timevalidation("20221220","20221225")
 	Artinya, dimulai tanggal 20 Desember dan berakhir tanggal 25 Desember
 */
-function timevalidation($start,$end)
+function timevalidation($start,$end,$redirect)
 {
 	$ci =& get_instance();
 	if (date("Ymd") > date("Ymd",strtotime($start)) && date("Ymd") < date("Ymd",strtotime($end)))
 	{
-    	$ci->session->set_flashdata('success', 'Waktu Tersedia');
+		
 	} else {
-    	$ci->session->set_flashdata('danger', 'Waktu Pendaftaran Belum Dimulai atau Sudah Melewati Batas');
+		$ci->session->set_flashdata('danger', 'Waktu Pendaftaran Belum Dimulai atau Sudah Melewati Batas');
+		redirect($redirect);
 	}
 }
 

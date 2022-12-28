@@ -21,18 +21,18 @@ class Maps
         {
                 $url = "https://maps.googleapis.com/maps/api/staticmap?markers=color:red%7Clabel:LOKASI%7C" . $lat . "," . $lng . "&zoom=15&size=500x500&maptype=roadmap&key=" . $this->key;
                 // test($url);
-                $img = FCPATH . $this->storagetmp . date("Ymdhmsi") . "nama.jpg";
-                $fix = $this->storagetmp . date("Ymdhmsi") . "nama.jpg";
+                $img = FCPATH . $this->storagetmp . date("Ymdhmsi") . $this->ci->session->hp. ".jpg";
+                $fix = $this->storagetmp . date("Ymdhmsi") . $this->ci->session->hp. ".jpg";
                 // test($img);
                 file_put_contents($img, file_get_contents($url));
                 return $fix;
         }
 
-        function saveMapsImg($url,$nik)
+        function saveMapsImg($url,$hp)
         {
                 // test($url);
-                $img = FCPATH . $this->storage . date("Ymdh") . "FIX".$nik.".jpg";
-                $name = date("Ymdh") . "FIX".$nik.".jpg";
+                $img = FCPATH . $this->storage . date("Ymdh") . "FIX".$hp.".jpg";
+                $name = date("Ymdh") . "FIX".$hp.".jpg";
                 // test($img);
                 file_put_contents($img, file_get_contents($url));
                 return $name;       
