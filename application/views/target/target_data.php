@@ -9,9 +9,8 @@
 		<div class="col-12">
 			<div class="col-12">	
             <h3>DATA TARGET</h3>
-            <div class="card">
-            <a href="<?=site_url('target/addtarget')?>" class="btn btn-success">Tambah Target Kinerja<i class="fa fa-add"></i></a>
-					<div class="card-body">
+            <div class="card">            
+				<div class="card-body">
                     
 				
 				<form action="" enctype="multipart/form-data" method="post" accept-charset="utf-8">
@@ -66,10 +65,9 @@
                                             <p>2023</p>                                        
                                         </td>
                                         <td scope="row">
-                                            <p> </p>
+                                            <p>file pdf </p>
                                         </td>                                        
                                         <td>
-                                            <a href="<?=site_url('target/edittarget')?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                                             <a href="" class="btn btn-danger"><i class="fa fa-download"></i></a>
                                             <a href="" class="btn btn-warning"><i class="fa fa-print"></i></a>
                                         </td>

@@ -19,10 +19,10 @@
 
 		<div class="section full mt-2 mb-2">
 				<div class="wide-block pb-2 pt-2">
-					<form>
+					<form action="<?=site_url('tampilan/targetdata')?>" method="post">
 						<div class="custom-file-upload">
 							<input type="file" id="targetkerja" accept=".pdf">
-							<label for="fileuploadInput">
+							<label for="targetkerja">
 								<span>
 									<strong>
 										<ion-icon name="cloud-upload-outline"></ion-icon>
@@ -31,6 +31,9 @@
 								</span>
 							</label>
 						</div>
+                        <div class="form-button">
+                            <button type="submit" class="btn btn-success btn-block btn-lg">KIRIM</button>
+                        </div>
 					</form>
 				</div>
         	</div>
