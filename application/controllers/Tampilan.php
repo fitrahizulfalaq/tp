@@ -23,5 +23,12 @@ class Tampilan extends CI_Controller {
         $data['title']="Data Target Kerja";
 		$this->templateadmin->load('template/dashboard','target/target_data',$data);
 	}
+
+	public function kunjunganinput()
+	{		
+        $data['title']="Data Target Kerja";
+		$this->templateadmin->load('template/dashboard','kunjungan/kunjungan_input',$data);
+	}
+
 }
 	
