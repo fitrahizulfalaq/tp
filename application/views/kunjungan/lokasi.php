@@ -5,16 +5,14 @@
     <div class="section">
         <h1>BAGIKAN LOKASI</h1>
         <h4>Klik untuk Membagikan Lokasi Terkini</h4>
-    </div>
-    <div class="section mt-2 mb-5">
-                            
-
+      </div>
+      <div class="section mt-2 mb-5">
+        <?php $this->view('message'); ?>
         <div class="mt-1">
             <button onclick="getLocation()" id="btn-getlocation" class="btn btn-primary btn-block"><ion-icon name="locate-outline"></ion-icon> BAGIKAN LOKASI</button>
             <p id="lokasi"></p>
         </div>
-        
-        <form action="<?= base_url("kunjungan/kunjungan")?>" method="post">  
+        <form action="<?= base_url("kunjungan/addCheckIn")?>" method="post">  
             <input type="hidden" id="lat-input" name="lat-input" readonly>
             <input type="hidden" id="lng-input" name="lng-input" readonly>
             <a class="btn btn-outline-warning btn-block" id="btn-ulangi" onclick="window.location.reload()" style="visibility: hidden;"><ion-icon name="repeat-outline"></ion-icon> ULANGI</a>
