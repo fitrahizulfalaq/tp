@@ -8,9 +8,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#000000">
-    <title> .:: KITAPKU APPS - APLIKASI MENTORING TENAGA PENDAMPING JAWA TIMUR ::.</title>
-    <meta name="description" content="KITAPKU APPS - APLIKASI MENTORING TENAGA PENDAMPING JAWA TIMUR MADE WITH LOVE BY UPTKUKM.ID">
-    <meta name="keywords" content="uptkukm, upt, uptkukmjatim, tenaga pendamping jawa timur" />
+    <title>KITAPKU</title>
+    <meta name="description" content="Mobilekit HTML Mobile UI Kit">
+    <meta name="keywords" content="bootstrap 4, mobile template, cordova, phonegap, mobile, html" />
     <link rel="icon" type="image/png" href="<?=base_url()?>/assets/img/favicon.png" sizes="32x32">
     <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url() ?>/assets/img/icon/192x192.png">
     <link rel="stylesheet" href="<?= base_url() ?>/assets/css/style.css">
@@ -46,6 +46,9 @@
             margin: 10px;
             position: relative;
         }
+
+        
+
     </style>
 </head>
 
@@ -65,13 +68,9 @@
             </a>
         </div>
         <div class="pageTitle">
-            <?=strtoupper($title)?>
+            <?=$title?>
         </div>
-        <div class="right">
-            <a href="<?=site_url('auth/logout');?>" class="headerButton">
-                <ion-icon name="log-out-outline" role="img" class="md hydrated" aria-label="log-out-outline"></ion-icon>
-            </a>
-        </div>
+        
     </div>
     <!-- * App Header -->
 
@@ -114,11 +113,8 @@
                             <img src="<?=base_url()?>/assets/img/favicon.png" alt="image" class="imaged rounded">
                         </div>
                         <div class="in">
-                            <strong><?= $this->session->nama?></strong>
-                            <div class="text-muted">
-                                <ion-icon name="location" role="img" class="md hydrated" aria-label="location"></ion-icon>
-                                IP : <?= $this->input->ip_address()?>
-                            </div>
+                            <strong>Tenaga Pendamping</strong>
+                            
                         </div>
                         <a href="javascript:;" class="close-sidebar-button" data-dismiss="modal">
                             <ion-icon name="close"></ion-icon>
@@ -205,7 +201,8 @@
                 <div class="sidebar-buttons">
                     <a href="javascript:;" class="button">
                         <ion-icon name="person-outline"></ion-icon>
-                    </a>                    
+                    </a>
+                    
                     <a href="<?=site_url('auth/logout');?>" class="button">
                         <ion-icon name="log-out-outline"></ion-icon>
                     </a>

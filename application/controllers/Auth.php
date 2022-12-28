@@ -89,7 +89,7 @@ class Auth extends CI_Controller {
 				);
 				$params['otp'] = rand(100000,999999);
 				$this->session->set_userdata($params);
-				$kalimat = "Kode OTP KAMU : ".$params['otp'];			
+				$kalimat = "Kode OTP KAMU : ".$params['otp']."\n\nKITAPKU, Aplikasi Monitoring Kinerja Tenaga Pendamping Koperasi dan UKM";			
 				$this->wa->send(($post['hp']),$kalimat);
 				$this->validation_m->insertOtp($params);
 				redirect('auth/loginOTPConfirm');
@@ -128,7 +128,7 @@ class Auth extends CI_Controller {
 				$this->session->set_userdata($params);
 				redirect('dashboard');
 			} else {
-				$this->session->set_flashdata('danger','Kode OTP Tidak Valid. Pastikan KODE OTP yang diinputkan benar)');
+				$this->session->set_flashdata('danger','Kode OTP Tidak Valid. Pastikan KODE OTP	 yang diinputkan benar)');
 				redirect("auth/login");
 			}
 		} else {

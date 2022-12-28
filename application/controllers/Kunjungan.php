@@ -16,19 +16,12 @@ class Kunjungan extends CI_Controller
     {
         check_already_login();
         $this->load->view('test/login');
-    }
-
-    public function getLocation()
-    {
-        $this->load->model("location_m");
-        $lokasi = $this->location_m->get();
-        test($lokasi);
     }    
 
     public function lokasi()
     {
         $data['title']="Kunjungan";   
-        $this->templateadmin->load('template/dashboard','kunjungan/kunjungan_data',$data);
+        $this->templateadmin->load('template/dashboard','kunjungan/lokasi',$data);
     }
     
     public function kunjungan()
@@ -85,7 +78,6 @@ class Kunjungan extends CI_Controller
                     echo "<script> alert('Format/Ukuran LOKASI tidak Sesuai-$errir')</script>";
                     $this->templateadmin->load('template/dashboard','kunjungan/kunjungan_data', $data);
                 }else{
-                       
                     $lokasi_img_data = $this->upload->data();
                     $lokasi_img = $lokasi_img_data['file_name'];
 
