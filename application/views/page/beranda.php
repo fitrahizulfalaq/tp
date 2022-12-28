@@ -63,12 +63,12 @@
                         <!-- small card -->
                         <div class="card product-card">
                             <div class="inner text-center">
-                                <a href="<?= base_url('target') ?>">
+                                <a href="<?= base_url('tampilan/target') ?>">
                                     <img src="<?= base_url("") ?>/assets/img/icon/pencil-folder.png" alt="" width="100%">
                                 </a>
                             </div>
                             <p align="center">
-                                <a href="<?= base_url('target') ?>">
+                                <a href="<?= base_url('tampilan/target') ?>">
                                     TARGET KERJA
                                 </a>
                             </p>

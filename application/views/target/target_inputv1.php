@@ -2,8 +2,8 @@
 <div id="appCapsule">
 
 		<div class="section mt-2">
-            <div class="card text-center">            
-                <a href="https://logwork.com/countdown-xhpy" class="countdown-timer" data-style="circles" data-timezone="Asia/Jakarta" data-date="2023-01-02 00:00">Sisa Waktu Upload</a>
+            <div class="card text-center">			
+				<a href="https://logwork.com/countdown-xhpw" class="countdown-timer" data-style="circles" data-timezone="Asia/Jakarta" data-date="2022-12-30 06:01">Sisa Waktu Upload</a>
 			</div>
         </div>
 
