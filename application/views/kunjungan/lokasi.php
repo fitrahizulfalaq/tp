@@ -10,16 +10,16 @@
                             
 
         <div class="mt-1">
-            <button onclick="getLocation()" id="btn-getlocation" class="btn btn-primary btn-block">BAGIKAN LOKASI</button>
+            <button onclick="getLocation()" id="btn-getlocation" class="btn btn-primary btn-block"><ion-icon name="locate-outline"></ion-icon> BAGIKAN LOKASI</button>
             <p id="lokasi"></p>
         </div>
         
         <form action="<?= base_url("kunjungan/kunjungan")?>" method="post">  
             <input type="hidden" id="lat-input" name="lat-input" readonly>
             <input type="hidden" id="lng-input" name="lng-input" readonly>
-            <button class="btn btn-outline-warning btn-block" id="btn-ulangi" onclick="window.location.reload()" style="visibility: hidden;">ULANGI</button>
+            <a class="btn btn-outline-warning btn-block" id="btn-ulangi" onclick="window.location.reload()" style="visibility: hidden;"><ion-icon name="repeat-outline"></ion-icon> ULANGI</a>
             <button id="btn-kirim" class="btn btn-success btn-block btn-lg" style="visibility: hidden;"><ion-icon name="paper-plane-outline"></ion-icon> Selanjutnya</button>
-            <div id="ket-selanjutnya" class="section-title" style="visibility: hidden;">*Dengan menekan tombol selanjutnya, saya menyatakan bahwa lokasi saya sudah benar.</div>
+            <div id="ket-selanjutnya" class="section-title" style="visibility: hidden;">*Dengan menekan tombol selanjutnya, saya menyatakan bahwa lokasi saya sudah benar. Data akan terekam dan diolah oleh sistem, setiap kecurangan akan mengakibatkan data tidak valid</div>
         </form>
     </div>
 </div>

@@ -8,8 +8,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#000000">
-    <title> .:: KITAPKU APPS - APLIKASI MENTORING TENAGA PENDAMPING JAWA TIMUR ::.</title>
-    <meta name="description" content="KITAPKU APPS - APLIKASI MENTORING TENAGA PENDAMPING JAWA TIMUR MADE WITH LOVE BY UPTKUKM.ID">
+    <title> .:: KITAPKU APPS - APLIKASI MONITORING TENAGA PENDAMPING JAWA TIMUR ::.</title>
+    <meta name="description" content="KITAPKU APPS - APLIKASI MONITORING TENAGA PENDAMPING JAWA TIMUR MADE WITH LOVE BY UPTKUKM.ID">
     <meta name="keywords" content="uptkukm, upt, uptkukmjatim, tenaga pendamping jawa timur" />
     <link rel="icon" type="image/png" href="<?=base_url()?>/assets/img/favicon.png" sizes="32x32">
     <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url() ?>/assets/img/icon/192x192.png">
