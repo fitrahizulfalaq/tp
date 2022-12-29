@@ -15,6 +15,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url() ?>/assets/img/icon/192x192.png">
     <link rel="stylesheet" href="<?= base_url() ?>/assets/css/style.css">
     <link rel="manifest" href="__manifest.json">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <script src="https://cdn.logwork.com/widget/countdown.js"></script>
@@ -172,7 +173,7 @@
                         <li>
 
                         <li>
-                            <a href="<?=site_url('tampilan/target')?>" class="item">
+                            <a href="<?=site_url('target')?>" class="item">
                                 <div class="icon-box bg-primary">
                                     <ion-icon name="locate"></ion-icon>
                                 </div>

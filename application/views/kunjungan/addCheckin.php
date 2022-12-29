@@ -3,7 +3,7 @@
 
     <div class="section mt-2">
         <div class="section">
-            <h1 class="mb-0">Input Kunjungan Hari Ini </h1>
+            <h1 class="mb-0">Absen Kunjungan</h1>
             <h4 class="mb-0">Tanggal : <?= date('d / m / y - H : i') ?></h4>
         </div>
         <hr>
@@ -27,7 +27,7 @@
             <input type="hidden" name="tipe" id="tampiltipe">
             <div class="form-group boxed">
                 <div class="input-wrapper">
-                    <label class="label">Nama <span id="alert-resume" class="error">*</span></label>
+                    <label class="label">Nama Pelaku UMKM / Pengurus Koperasi <span id="alert-resume" class="error">*</span></label>
                     <input type="text" id="word" name="nama" class="form-control" placeholder="Nama Pelaku Usaha/Koperasi yang dikunjungi" required minlength="3">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
@@ -74,6 +74,7 @@
             </div>
             <?= form_close() ?>
 
+            
 
             <?= form_open_multipart('', array('id' => 'lainnya', 'style' => 'display:none;')) ?>
             <input type="hidden" name="tipe" value="LAINNYA">
@@ -165,7 +166,7 @@
                 <input type="hidden" value="<?= $lat ?>" name="lat" readonly>
                 <input type="hidden" value="<?= $lng ?>" name="lng" readonly>
                 <input type="hidden" value="<?= $loc_img ?>" name="loc_img" readonly>
-
+                <hr>
                 <div class="form-button" style="display:block;">
                     <button type="submit" class="btn btn-success btn-block btn-lg">ABSEN</button>
                 </div>

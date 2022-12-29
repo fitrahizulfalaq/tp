@@ -11,6 +11,7 @@
         <div class="mt-1">
             <button onclick="getLocation()" id="btn-getlocation" class="btn btn-primary btn-block"><ion-icon name="locate-outline"></ion-icon> BAGIKAN LOKASI</button>
             <p id="lokasi"></p>
+            <!-- <p id="ket-akurasi" class="text-red">Tingkat Akurasi Google : </p> -->
         </div>
         <form action="<?= base_url("kunjungan/addCheckIn")?>" method="post">  
             <input type="hidden" id="lat" name="lat" readonly>
@@ -45,6 +46,7 @@
       //Input Nilai Maps1
       document.getElementById("lat").value = position.coords.latitude;
       document.getElementById("lng").value = position.coords.longitude;
+      // document.getElementById("ket-akurasi").innerHTML = "Tingkat Akurasi Google : " + position.coords.accuracy;
       document.getElementById("btn-kirim").style.visibility = 'visible';
       document.getElementById("btn-ulangi").style.visibility = 'visible';
       document.getElementById("ket-selanjutnya").style.visibility = 'visible';

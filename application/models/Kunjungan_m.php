@@ -38,7 +38,7 @@ class Kunjungan_m extends CI_Model
             $this->db->where('user_id', $user_id);
         }
         $this->db->like('created', $tahun . "-" . $bulan . "-" . $tanggal);
-        $this->db->order_by('created', "asc");
+        $this->db->order_by('created', "desc");
         $query = $this->db->get();
         return $query;
     }
@@ -49,7 +49,7 @@ class Kunjungan_m extends CI_Model
             $this->db->where('user_id', $user_id);
         }
         $this->db->like('created', $tahun . "-" . $bulan);
-        $this->db->order_by('created', "asc");
+        $this->db->order_by('created', "desc");
         $query = $this->db->get();
         return $query;
     }
@@ -60,7 +60,7 @@ class Kunjungan_m extends CI_Model
             $this->db->where('user_id', $user_id);
         }
         $this->db->like('created', $tahun);
-        $this->db->order_by('created', "asc");
+        $this->db->order_by('created', "desc");
         $query = $this->db->get();
         return $query;
     }
