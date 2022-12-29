@@ -135,11 +135,25 @@ class Kunjungan_m extends CI_Model
         //Id	  
         $params['id'] =  $post['id'];
         // Kebutuhan User
-        $params['resume'] =  $post['resume'];
-        $params['detail'] =  $post['detail'];
-        $params['identifikasi'] =  $post['identifikasi'];
-        $params['kegiatan'] =  $post['kegiatan'];
-        $params['lokasi'] =  $post['lokasi'];
+        $params['nama'] =  $post['nama'];
+        $params['kelamin'] =  $post['kelamin'];
+        $params['agama'] =  $post['agama'];
+        $params['hp'] =  $post['hp'];
+        $params['tempat_lahir'] =  $post['tempat_lahir'];
+        $params['tgl_lahir'] =  $post['tgl_lahir'];
+        $params['pendidikan'] =  $post['pendidikan'];
+        $params['email'] =  $post['email'];
+        $params['alamat'] =  $post['alamat'];
+        $params['produk'] =  $post['produk'];
+        $params['tahun_berdiri'] =  $post['tahun_berdiri'];
+        $params['nik_koperasi'] =  $post['nik_koperasi'];
+        $params['iumk'] =  $post['iumk'];
+        $params['jabatan'] =  $post['jabatan'];
+        $params['skala'] =  $post['skala'];
+        $params['jumlah_karyawan'] =  $post['jumlah_karyawan'];
+        $params['masalah'] =  $post['masalah'];
+        $params['kebutuhan'] =  $post['kebutuhan'];
+        $params['rekomendasi'] =  $post['rekomendasi'];
         //Cek foto
         if ($post['foto_selfie'] != null) { $params['foto_selfie'] =  $post['foto_selfie']; } else { $params['foto_selfie'] =  ""; }
         if ($post['foto_lokasi'] != null) { $params['foto_lokasi'] =  $post['foto_lokasi']; } else { $params['foto_lokasi'] =  ""; }

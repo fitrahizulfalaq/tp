@@ -23,6 +23,7 @@ class Kunjungan extends CI_Controller
     */
     function checkIn()
     {
+        previllage($this->session->tipe_user,"1","!=","kunjungan/data");
         $data['title']="CHECK IN LOKASI";   
         $this->templateadmin->load('template/dashboard','kunjungan/lokasi',$data);
     }
@@ -31,104 +32,126 @@ class Kunjungan extends CI_Controller
         Step 2 - Tambahkan data kunjungan awal
         Koperasi/UMKM/Wirausaha Pemula --> Isian (1)
         Kalau di Kantor --> Isian (2)
-        */
-        function addCheckIn()
-        {
-            $this->load->library("maps");
-            $post = $this->input->post(null, TRUE);
-            // Validasi
-            if ($post == null){
-                $this->session->set_flashdata('danger', 'Mohon Share Loc Terlebih Dahulu');
-                redirect("kunjungan/checkin");
-            } else {
+    */
+    function addCheckIn()
+    {
+        $this->load->library("maps");
+        $post = $this->input->post(null, TRUE);
+
+        // Validasi menghindari injection. Alihkan jika posisi latitude dan longtitude tidak ada
+        if ($post['lat'] == null or $post['lng'] == null){
+            $this->session->set_flashdata('danger', 'Mohon Share Loc Terlebih Dahulu');
+            redirect("kunjungan/checkin");
+        } else {
+            //Load librarynya form
             $this->load->library('form_validation');
-            $data['lat'] = $post['lat-input'];
-            $data['lng'] = $post['lng-input'];
-            $data['loc_img'] = $this->maps->saveMapsTmp($post['lat-input'], $post['lng-input']);
-            $data['title']="Kunjungan";
-            $this->templateadmin->load('template/dashboard','kunjungan/addCheckin',$data);
+            //Atur validasinya
+            $this->form_validation->set_rules('hp', 'hp', 'min_length[10]|max_length[15]');
+            //Pesan yang ditampilkan
+            $this->form_validation->set_message('is_unique', 'Data sudah ada');
+            //Tampilan pesan error
+            $this->form_validation->set_error_delimiters('<span class="badge badge-danger">', '</span>');
+
+            if ($this->form_validation->run() == FALSE or !isset($post['loc_img'])) {
+                // Redirect agar tidak di hit langsung
+                $post = $this->input->post(null, TRUE);
+
+                $data['lat'] = $post['lat'];
+                $data['lng'] = $post['lng'];
+                $data['loc_img'] = $this->maps->saveMapsTmp($post['lat'], $post['lng']);
+                $data['title']="ABSEN KUNJUNGAN";
+                $this->templateadmin->load('template/dashboard','kunjungan/addCheckin',$data);
+            } else {
+                $post = $this->input->post(null, TRUE);
+                
+                //Input database sesuai tipe
+                if ($post['tipe'] == "UKM" or $post['tipe'] == "KOPERASI" or $post['tipe'] == "CALON WIRAUSAHA"){
+                    $this->kunjungan_m->addCheckInNonLainnya($post);
+                } elseif ($post['tipe'] == "LAINNYA"){
+                    $this->kunjungan_m->addCheckInLainnya($post);                
+                }
+
+                if ($this->db->affected_rows() > 0) {
+                    $this->session->set_flashdata('success', 'Check In Berhasil. Silahkan tambahkan data hasil kunjungan.');
+                }
+                redirect('kunjungan/data');
+            }
         }
     }
-    /*
-        Step 3 - Simpan ke Database Kunjungan
-    */
-    function saveCheckIn()
+
+    function data()
+    {
+        !isset($_GET['tahun']) ? $tahun = date("Y") : $tahun = $_GET['tahun'];
+        !isset($_GET['bulan'])  ? $bulan = date("m") : $bulan = $_GET['bulan'];
+
+        $data['title'] = "Kegiatan BULAN " . $bulan . " / " . $tahun;
+		$data['row'] = $this->kunjungan_m->getByMonth($tahun,$bulan,$this->session->id);
+
+		$this->templateadmin->load('template/dashboard', 'kunjungan/logData', $data);
+    }
+    
+    public function edit($id)
     {
 		//Load librarynya dulu
 		$this->load->library('form_validation');
 		//Atur validasinya
-		$this->form_validation->set_rules('target', 'target', 'min_length[30]|max_length[5000]');
+		$this->form_validation->set_rules('hp', 'hp', 'min_length[10]|max_length[16]');
 
 		//Pesan yang ditampilkan
 		$this->form_validation->set_message('min_length', '{field} Setidaknya  minimal {param} karakter.');
 		$this->form_validation->set_message('max_length', '{field} Seharusnya maksimal {param} karakter.');
+		$this->form_validation->set_message('alpha_dash', 'Gak Boleh pakai Spasi');
 		$this->form_validation->set_message('is_unique', 'Data sudah ada');
 		//Tampilan pesan error
 		$this->form_validation->set_error_delimiters('<span class="badge badge-danger">', '</span>');
 
 		if ($this->form_validation->run() == FALSE) {
-            // Redirect agar tidak di hit langsung
-            $post = $this->input->post(null, TRUE);
-            if ($post == null){$this->session->set_flashdata('danger', 'Mohon Share Loc Terlebih Dahulu');redirect("kunjungan/checkin");}
+			$query = $this->kunjungan_m->getAllBy("id",$id);
 
-            $data['title']="TAMBAH DATA KUNJUNGAN";
-            $this->templateadmin->load('template/dashboard','kunjungan/addCheckin',$data);
+			if ($query->num_rows() > 0) {
+				$data['row'] = $query->row();
+				$data['title'] = "HASIL KUNJUNGAN";
+                if ($query->row("tipe") != "LAINNYA" ) {
+                    $this->templateadmin->load('template/dashboard', 'kunjungan/updateHasilUKM', $data);
+                } else {
+                    $this->templateadmin->load('template/dashboard', 'kunjungan/updateHasilLainnya', $data);
+                }
+			} else {
+				echo "<script>alert('Data Tidak Ditemukan');</script>";
+				echo "<script>window.location='" . site_url('kunjungan') . "';</script>";
+			}
 		} else {
 			$post = $this->input->post(null, TRUE);
             test($post);
-            //Input database sesuai tipe
-            if ($post['tipe'] == "UKM" or $post['tipe'] == "KOPERASI" or $post['tipe'] == "CALON WIRAUSAHA"){
-                $this->kunjungan_m->addCheckInNonLainnya($post);
-            } elseif ($post['tipe'] == "LAINNYA"){
-                //CEK FOTO SELFIE
-                $foto_selfie['upload_path']          = 'assets/files/foto_selfie';
-                $foto_selfie['allowed_types']        = 'png|jpg|jpeg';
-                $foto_selfie['max_size']             = 5000;
-                $foto_selfie['file_name']            = "TARGETTAHUNAN-".strtoupper($this->session->hp);
+			//CEK GAMBAR
+			$config['upload_path']          = 'assets/dist/img/foto-tugas/';
+			$config['allowed_types']        = 'jpg|png|jpeg';
+			$config['max_size']             = 1000;
+			$config['file_name']            = $query->row('user_id') . '--' . $tgl;
 
-                $this->load->library('upload', $foto_selfie);
-                if (@$_FILES['foto_selfie']['name'] != null) {
-                    $this->upload->initialize($foto_selfie);
-                    if ($this->upload->do_upload('foto_selfie')) {
-                        $post['foto_selfie'] = $this->upload->data('file_name');
-                    } else {
-                        $pesan = $this->upload->display_errors();
-                        $this->session->set_flashdata('danger', $pesan);
-                        redirect('kunjungan/saveCheckIn');
-                    }
-                }
+			$this->load->library('upload', $config);
+			if (@$_FILES['gambar']['name'] != null) {
+				if ($this->upload->do_upload('gambar')) {
+					$itemfoto = $this->kunjungan_m->get_tugas($post['id'])->row();
+					if ($itemfoto->gambar != null) {
+						$target_file = 'assets/dist/img/foto-tugas/' . $itemfoto->gambar;
+						unlink($target_file);
+					}
 
-                //CEK FOTO LOKASI
-                $foto_lokasi['upload_path']          = 'assets/files/foto_lokasi';
-                $foto_lokasi['allowed_types']        = 'png|jpg|jpeg';
-                $foto_lokasi['max_size']             = 5000;
-                $foto_lokasi['file_name']            = "TARGETTAHUNAN-".strtoupper($this->session->hp);
-
-                $this->load->library('upload', $foto_lokasi);
-                if (@$_FILES['foto_lokasi']['name'] != null) {
-                    $this->upload->initialize($foto_lokasi);
-                    if ($this->upload->do_upload('foto_lokasi')) {
-                        $post['foto_lokasi'] = $this->upload->data('file_name');
-                    } else {
-                        $pesan = $this->upload->display_errors();
-                        $this->session->set_flashdata('danger', $pesan);
-                        redirect('kunjungan/saveCheckIn');
-                    }
-                }
-
-                $this->kunjungan_m->addCheckInLainnya($post);                
-            }
-
-			if ($this->db->affected_rows() > 0) {
-				$this->session->set_flashdata('success', 'Check In Berhasil. Anda bisa mengedit hasil kunjungan pada menu Laporan.');
+					$post['gambar'] = $this->upload->data('file_name');
+				} else {
+					$pesan = $this->upload->display_errors();
+					$this->session->set_flashdata('danger', $pesan);
+					redirect('log_book/edit_tugas/' . $id);
+				}
 			}
-			redirect('kunjungan/checkin');
+
+			$this->kunjungan_m->update_tugas($post);
+			if ($this->db->affected_rows() > 0) {
+				$this->session->set_flashdata('success', 'Berhasil Di Edit');
+			}
+			redirect('log_book');
 		}
     }
-
-    public function editkunjungan()
-    {        
-        $data['title']="Edit Kunjungan";
-        $this->templateadmin->load('template/dashboard','kunjungan/kunjungan_edit',$data);
-    }      
+      
 }

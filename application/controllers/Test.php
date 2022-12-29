@@ -142,4 +142,75 @@ class Test extends CI_Controller
     {
         $this->load->view('test/drive');
     }
+
+    public function edit($id)
+    {
+        $this->load->model("kunjungan_m");
+		//Load librarynya dulu
+		$this->load->library('form_validation');
+		//Atur validasinya
+		$this->form_validation->set_rules('hp', 'hp', 'min_length[10]|max_length[16]');
+
+		//Pesan yang ditampilkan
+		$this->form_validation->set_message('min_length', '{field} Setidaknya  minimal {param} karakter.');
+		$this->form_validation->set_message('max_length', '{field} Seharusnya maksimal {param} karakter.');
+		$this->form_validation->set_message('alpha_dash', 'Gak Boleh pakai Spasi');
+		$this->form_validation->set_message('is_unique', 'Data sudah ada');
+		//Tampilan pesan error
+		$this->form_validation->set_error_delimiters('<span class="badge badge-danger">', '</span>');
+
+		if ($this->form_validation->run() == FALSE) {
+			$query = $this->kunjungan_m->getAllBy("id",$id);
+
+			if ($query->num_rows() > 0) {
+				$data['row'] = $query->row();
+				$data['title'] = "HASIL KUNJUNGAN";
+                if ($query->row("tipe") != "LAINNYA" ) {
+                    $this->templateadmin->load('template/dashboard', 'kunjungan/updateHasilUKM', $data);
+                } else {
+                    $this->templateadmin->load('template/dashboard', 'kunjungan/updateHasilLainnya', $data);
+                }
+			} else {
+				echo "<script>alert('Data Tidak Ditemukan');</script>";
+				echo "<script>window.location='" . site_url('kunjungan') . "';</script>";
+			}
+		} else {
+			$post = $this->input->post(null, TRUE);
+            test($post);
+			//CEK GAMBAR
+			$config['upload_path']          = 'assets/dist/img/foto-tugas/';
+			$config['allowed_types']        = 'jpg|png|jpeg';
+			$config['max_size']             = 1000;
+			$config['file_name']            = $query->row('user_id') . '--' . $tgl;
+
+			$this->load->library('upload', $config);
+			if (@$_FILES['gambar']['name'] != null) {
+				if ($this->upload->do_upload('gambar')) {
+					$itemfoto = $this->kunjungan_m->get_tugas($post['id'])->row();
+					if ($itemfoto->gambar != null) {
+						$target_file = 'assets/dist/img/foto-tugas/' . $itemfoto->gambar;
+						unlink($target_file);
+					}
+
+					$post['gambar'] = $this->upload->data('file_name');
+				} else {
+					$pesan = $this->upload->display_errors();
+					$this->session->set_flashdata('danger', $pesan);
+					redirect('log_book/edit_tugas/' . $id);
+				}
+			}
+
+			$this->kunjungan_m->update_tugas($post);
+			if ($this->db->affected_rows() > 0) {
+				$this->session->set_flashdata('success', 'Berhasil Di Edit');
+			}
+			redirect('log_book');
+		}
+    }
+
+    function hasilPost($post)
+    {
+        $post = $this->input->post(null, TRUE);
+        test($post);
+    }
 }
