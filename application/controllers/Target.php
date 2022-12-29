@@ -64,7 +64,7 @@ class Target extends CI_Controller
 			$config['upload_path']          = 'assets/files/target_tahunan';
 			$config['allowed_types']        = 'pdf';
 			$config['max_size']             = 5000;
-			$config['file_name']            = "TARGETTAHUNAN-".strtoupper($this->session->hp);
+			$config['file_name']            = "TARGETTAHUNAN-".rand(0,9999).strtoupper($this->session->hp);
 			
 			$this->load->library('upload', $config);
 			if (@$_FILES['file']['name'] != null) {

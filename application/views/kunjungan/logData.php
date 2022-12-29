@@ -66,12 +66,12 @@
                                                     <td scope="row">
                                                         <p><?= $no++ ?></p>
                                                     </td>
-                                                    <td><?= date("d-m-Y H:i", strtotime($data->created)) ?></td>
+                                                    <td><?= date("d-m-Y G:i:s", strtotime($data->created)) ?></td>
                                                     <td>
                                                         <?= $data->tujuan ?>
                                                     </td>
                                                     <td>
-                                                        <a href="<?= site_url('kunjungan/edit/' . $data->id); ?>" onclick="alert('Yakin mau dihapus ?')" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
+                                                        <a href="<?= site_url('kunjungan/edit/' . $data->id); ?>" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
                                                     </td>
                                                 </tr>
                                             <?php } ?>

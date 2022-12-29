@@ -64,6 +64,15 @@ function previllage($previllage,$tipe_user,$aksi,$redirect)
 	
 }
 
+function isMe($id_login, $user_id)
+{
+	$ci = &get_instance();
+	if ($id_login != $user_id) {
+		$ci->session->set_flashdata('warning', 'Hanya Bisa mengedit miliknya sendiri');
+		redirect('dashboard');
+	}
+}
+
 /*
 	Memberi batasan waktu untuk melakukan pengisian
 	Penulisan dengan cukup dengan tanggal mulai dan tanggal akhir dengan format Ymd

@@ -81,7 +81,7 @@ class Kunjungan_m extends CI_Model
         $params['tujuan'] =  $post['tujuan'];
         $params['lat'] =  $post['lat'];
         $params['lng'] =  $post['lng'];
-        $params['created'] =  date("Ymdhmsi");
+        $params['created'] =  date("Y-m-d H:i:s");
         $params['ip_address'] = $this->input->ip_address();
         $this->db->insert('tb_kunjungan', $params);
     }
@@ -104,7 +104,7 @@ class Kunjungan_m extends CI_Model
         $params['foto_lokasi'] =  $post['foto_lokasi'];
         $params['lat'] =  $post['lat'];
         $params['lng'] =  $post['lng'];
-        $params['created'] =  date("Ymdhmsi");
+        $params['created'] =  date("Y-m-d H:i:s");
         $params['ip_address'] = $this->input->ip_address();
         $this->db->insert('tb_kunjungan', $params);
     }
@@ -125,12 +125,12 @@ class Kunjungan_m extends CI_Model
         $params['foto_lokasi'] =  $post['foto_lokasi'];
         $params['lat'] =  $post['lat'];
         $params['lng'] =  $post['lng'];
-        $params['created'] =  date("Ymdhmsi");
+        $params['created'] =  date("Y-m-d H:i:s");
         $parms['ip_address'] = $this->input->ip_address();
         $this->db->insert('tb_kunjungan', $params);
     }
 
-    function updateKunjungan($post)
+    function updateKunjunganNonLainnya($post)
     {
         //Id	  
         $params['id'] =  $post['id'];
@@ -138,27 +138,53 @@ class Kunjungan_m extends CI_Model
         $params['nama'] =  $post['nama'];
         $params['kelamin'] =  $post['kelamin'];
         $params['agama'] =  $post['agama'];
-        $params['hp'] =  $post['hp'];
+        $params['nik'] =  $post['nik'];
         $params['tempat_lahir'] =  $post['tempat_lahir'];
         $params['tgl_lahir'] =  $post['tgl_lahir'];
         $params['pendidikan'] =  $post['pendidikan'];
+        $params['hp'] =  $post['hp'];
         $params['email'] =  $post['email'];
+        $params['brand'] =  $post['brand'];
         $params['alamat'] =  $post['alamat'];
-        $params['produk'] =  $post['produk'];
+        $params['kota'] =  $post['kota'];
         $params['tahun_berdiri'] =  $post['tahun_berdiri'];
+        $params['produk'] =  $post['produk'];
         $params['nik_koperasi'] =  $post['nik_koperasi'];
         $params['iumk'] =  $post['iumk'];
         $params['jabatan'] =  $post['jabatan'];
         $params['skala'] =  $post['skala'];
+        $params['omset'] =  $post['omset'];
         $params['jumlah_karyawan'] =  $post['jumlah_karyawan'];
         $params['masalah'] =  $post['masalah'];
         $params['kebutuhan'] =  $post['kebutuhan'];
         $params['rekomendasi'] =  $post['rekomendasi'];
         //Cek foto
-        if ($post['foto_selfie'] != null) { $params['foto_selfie'] =  $post['foto_selfie']; } else { $params['foto_selfie'] =  ""; }
-        if ($post['foto_lokasi'] != null) { $params['foto_lokasi'] =  $post['foto_lokasi']; } else { $params['foto_lokasi'] =  ""; }
+        if ($post['foto_selfie'] != null) { $params['foto_selfie'] =  $post['foto_selfie']; }
+        if ($post['foto_lokasi'] != null) { $params['foto_lokasi'] =  $post['foto_lokasi']; }
         //End Cek foto
-        $params['modified'] =  date("Ymdhmsi");
+        $params['modified'] =  date("Y-m-d H:i:s");
+        $this->db->where('id', $params['id']);
+        $this->db->update('tb_kunjungan', $params);
+    }
+
+    function updateKunjunganLainnya($post)
+    {
+        //Id	  
+        $params['id'] =  $post['id'];
+        // Kebutuhan User
+        $params['masalah'] =  $post['masalah'];
+        $params['target'] =  $post['target'];
+        $params['realisasi'] =  $post['realisasi'];
+        $params['kegiatan'] =  $post['kegiatan'];
+        $params['tujuan'] =  $post['tujuan'];
+        $params['kesimpulan'] =  $post['kesimpulan'];
+        $params['tindak_lanjut'] =  $post['tindak_lanjut'];
+        $params['keterangan'] =  $post['keterangan'];
+        //Cek foto
+        if ($post['foto_selfie'] != null) { $params['foto_selfie'] =  $post['foto_selfie']; }
+        if ($post['foto_lokasi'] != null) { $params['foto_lokasi'] =  $post['foto_lokasi']; }
+        //End Cek foto
+        $params['modified'] =  date("Y-m-d H:i:s");
         $this->db->where('id', $params['id']);
         $this->db->update('tb_kunjungan', $params);
     }
@@ -168,7 +194,7 @@ class Kunjungan_m extends CI_Model
         $params['id'] = "";
         $params['user_id'] =  $this->session->id;
         $params['file'] =  $post['sppd'];
-        $params['created'] =  date("Ymdhmsi");
+        $params['created'] =  date("Y-m-d H:i:s");
         $this->db->insert('tb_sppd', $params);
     }
 
@@ -176,7 +202,7 @@ class Kunjungan_m extends CI_Model
     {
         $params['id'] =  $post['id'];
         if ($post['sppd'] != null) { $params['file'] =  $post['sppd']; } else { $params['file'] =  ""; }
-        $params['modified'] =  date("Ymdhmsi");
+        $params['modified'] =  date("Y-m-d H:i:s");
         $this->db->where('id', $params['id']);
         $this->db->update('tb_sppd', $params);
     }
@@ -217,7 +243,7 @@ class Kunjungan_m extends CI_Model
         $params['tahun'] =  date("Y");
         $params['user_id'] =  $this->session->id;
         $params['file'] =  $post['file'];
-        $params['created'] =  date("Ymdhmsi");
+        $params['created'] =  date("Y-m-d H:i:s");
         $this->db->insert('tb_target', $params);
     }
 
@@ -233,7 +259,7 @@ class Kunjungan_m extends CI_Model
     {
         $params['id'] =  $post['id'];
         $params['realisasi'] =  $post['realisasi'];
-        $params['modified'] =  date("Ymdhmsi");
+        $params['modified'] =  date("Y-m-d H:i:s");
         $this->db->where('id', $params['id']);
         $this->db->update('tb_target', $params);
     }
@@ -268,7 +294,7 @@ class Kunjungan_m extends CI_Model
         $params['sppd'] =  $post['sppd'];
         $params['lat'] =  $post['lat'];
         $params['lng'] =  $post['lng'];
-        $params['created'] =  date("Ymdhmsi");
+        $params['created'] =  date("Y-m-d H:i:s");
         $parms['ip_address'] = $this->input->ip_address();
         $this->db->insert('tb_kunjung', $params);
     }

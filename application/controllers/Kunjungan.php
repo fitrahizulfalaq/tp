@@ -78,16 +78,16 @@ class Kunjungan extends CI_Controller
         }
     }
 
-    // function data()
-    // {
-    //     !isset($_GET['tahun']) ? $tahun = date("Y") : $tahun = $_GET['tahun'];
-    //     !isset($_GET['bulan']) ? $bulan = date("m") : $bulan = $_GET['bulan'];
+    function data()
+    {
+        !isset($_GET['tahun']) ? $tahun = date("Y") : $tahun = $_GET['tahun'];
+        !isset($_GET['bulan']) ? $bulan = date("m") : $bulan = $_GET['bulan'];
 
-    //     $data['title'] = "Kegiatan BULAN " . $bulan . " / " . $tahun;
-	// 	$data['row'] = $this->kunjungan_m->getByMonth($tahun,$bulan,$this->session->id);
+        $data['title'] = "Kegiatan BULAN " . $bulan . " / " . $tahun;
+		$data['row'] = $this->kunjungan_m->getByMonth($tahun,$bulan,$this->session->id);
 
-	// 	$this->templateadmin->load('template/dashboard', 'kunjungan/logData', $data);
-    // }
+		$this->templateadmin->load('template/dashboard', 'kunjungan/logData', $data);
+    }
     
     public function edit($id)
     {
@@ -106,51 +106,71 @@ class Kunjungan extends CI_Controller
 
 		if ($this->form_validation->run() == FALSE) {
 			$query = $this->kunjungan_m->getAllBy("id",$id);
+            isMe($query->row("user_id"),$this->session->id);
 
 			if ($query->num_rows() > 0) {
 				$data['row'] = $query->row();
 				$data['title'] = "HASIL KUNJUNGAN";
-                if ($query->row("tipe") != "LAINNYA" ) {
+                
+                if ($query->row("tipe") != "lainnya" ) {
                     $this->templateadmin->load('template/dashboard', 'kunjungan/updateHasilUKM', $data);
                 } else {
                     $this->templateadmin->load('template/dashboard', 'kunjungan/updateHasilLainnya', $data);
                 }
 			} else {
 				echo "<script>alert('Data Tidak Ditemukan');</script>";
-				echo "<script>window.location='" . site_url('kunjungan') . "';</script>";
+				echo "<script>window.location='" . site_url('kunjungan/data') . "';</script>";
 			}
 		} else {
 			$post = $this->input->post(null, TRUE);
-            test($post);
-			//CEK GAMBAR
-			$config['upload_path']          = 'assets/dist/img/foto-tugas/';
+
+			//CEK FOTO SELFIE
+			$config['upload_path']          = 'assets/files/foto_selfie/';
 			$config['allowed_types']        = 'jpg|png|jpeg';
 			$config['max_size']             = 1000;
-			$config['file_name']            = $query->row('user_id') . '--' . $tgl;
-
-			$this->load->library('upload', $config);
-			if (@$_FILES['gambar']['name'] != null) {
-				if ($this->upload->do_upload('gambar')) {
-					$itemfoto = $this->kunjungan_m->get_tugas($post['id'])->row();
-					if ($itemfoto->gambar != null) {
-						$target_file = 'assets/dist/img/foto-tugas/' . $itemfoto->gambar;
-						unlink($target_file);
-					}
-
-					$post['gambar'] = $this->upload->data('file_name');
+			$config['file_name']            = rand(0,99999).$this->session->id;
+            $this->load->library('upload', $config);
+			if (@$_FILES['foto_selfie']['name'] != null) {
+				$this->upload->initialize($config);
+				if ($this->upload->do_upload('foto_selfie')) {
+					$post['foto_selfie'] = $this->upload->data('file_name');
 				} else {
 					$pesan = $this->upload->display_errors();
 					$this->session->set_flashdata('danger', $pesan);
-					redirect('log_book/edit_tugas/' . $id);
+					redirect('kunjungan/data');
 				}
 			}
 
-			$this->kunjungan_m->update_tugas($post);
+			//CEK GAMBAR
+			$config['upload_path']          = 'assets/files/foto_lokasi/';
+			$config['allowed_types']        = 'jpg|png|jpeg';
+			$config['max_size']             = 5000;
+			$config['file_name']            = rand(0,99999).$this->session->id;
+
+			$this->load->library('upload', $config);
+			if (@$_FILES['foto_lokasi']['name'] != null) {
+				$this->upload->initialize($config);
+				if ($this->upload->do_upload('foto_lokasi')) {
+					$post['foto_lokasi'] = $this->upload->data('file_name');
+				} else {
+					$pesan = $this->upload->display_errors();
+					$this->session->set_flashdata('danger', $pesan);
+					redirect('kunjungan/data');
+				}
+			}
+
+            // test($post['tipe'] != "lainnya");
+            if ($post['tipe'] == "lainnya" ) {
+                $this->kunjungan_m->updateKunjunganLainnya($post);
+            } else {
+                $this->kunjungan_m->updateKunjunganNonLainnya($post);
+            }
+
 			if ($this->db->affected_rows() > 0) {
 				$this->session->set_flashdata('success', 'Berhasil Di Edit');
 			}
-			redirect('log_book');
+			redirect('kunjungan/data');
 		}
     }
-      
+  
 }

@@ -8,8 +8,8 @@
         <!-- feed -->
         <div class="tab-pane fade show active" id="feed" role="tabpanel">
             <div class="mt-2 pr-2 pl-2">
+                <?php $this->view("message")?>
                 <div class="row">                  
-                    
                     <div class="col-lg-2 col-4">
                         <!-- small card -->
                         <div class="card product-card">
