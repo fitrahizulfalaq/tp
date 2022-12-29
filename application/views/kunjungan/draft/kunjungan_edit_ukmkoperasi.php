@@ -204,6 +204,32 @@
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
                 </div>
+                <hr>
+                <label class="label" for="name3">Foto Selfie <span id="alert-resume" class="error">*</span></label>
+                <div class="custom-file-upload">                
+                    <input type="file" id="foto_selfie" accept=".png, .jpg, .jpeg" required>
+                    <label for="foto_selfie">
+                        <span>
+                            <strong>
+                                <ion-icon name="cloud-upload-outline"></ion-icon>
+                                <i>Klik Untuk Upload Foto Selfie</i>
+                            </strong>
+                        </span>
+                    </label>
+                </div>
+                <hr>
+                <label class="label" for="name3">Foto Lokasi <span id="alert-resume" class="error">*</span></label>
+                <div class="custom-file-upload">                
+                    <input type="file" id="foto_lokasi" accept=".png, .jpg, .jpeg" required>
+                    <label for="foto_lokasi">
+                        <span>
+                            <strong>
+                                <ion-icon name="cloud-upload-outline"></ion-icon>
+                                <i>Klik Untuk Upload Foto Lokasi</i>
+                            </strong>
+                        </span>
+                    </label>
+                </div>
             </div>       
                  
             <hr>            
