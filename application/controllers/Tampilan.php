@@ -42,5 +42,29 @@ class Tampilan extends CI_Controller {
 		$this->templateadmin->load('template/dashboard','kunjungan/draft/kunjungan_edit_kantor',$data);
 	}
 
+	public function koordinatordata()
+	{		
+        $data['title']="DATA TENAGA PENDAMPING";
+		$this->templateadmin->load('template/dashboardkoor','koordinator/tp_data',$data);
+	}
+
+	public function koordinatorlaporan()
+	{		
+        $data['title']="LAPORAN TENAGA PENDAMPING";
+		$this->templateadmin->load('template/dashboardkoor','koordinator/laporankoor_data',$data);
+	}
+
+	public function koordinatorapprove()
+	{		
+        $data['title']="LAPORAN TENAGA PENDAMPING";
+		$this->templateadmin->load('template/dashboardkoor','koordinator/approve_data',$data);
+	}
+
+	public function koordinatordetail()
+	{		
+        $data['title']="LAPORAN TENAGA PENDAMPING";
+		$this->templateadmin->load('template/dashboardkoor','koordinator/detailkunjunganukm_data',$data);
+	}
+
 }
 	
