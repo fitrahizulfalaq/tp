@@ -27,7 +27,13 @@ class Tampilan extends CI_Controller {
 	public function kunjunganinput()
 	{		
         $data['title']="Data Target Kerja";
-		$this->templateadmin->load('template/dashboard','kunjungan/kunjungan_input',$data);
+		$this->templateadmin->load('template/dashboard','kunjungan/draft/kunjungan_input',$data);
+	}
+
+	public function kunjunganeditukm()
+	{		
+        $data['title']="Form Edit Kunjungan";
+		$this->templateadmin->load('template/dashboard','kunjungan/draft/kunjungan_edit_ukmkoperasi',$data);
 	}
 
 }
