@@ -32,15 +32,18 @@
                 <hr>
                 <div class="input-wrapper">
                     <label class="label">Agama <span id="alert-resume" class="error">*</span></label>
-                    <input type="text" id="word" name="agama" class="form-control" placeholder="Agama" required minlength="5">
-                    <i class="clear-input">
-                        <ion-icon name="close-circle"></ion-icon>
-                    </i>
+                    <select name="agama" class="form-control" >
+                        <option value="ISLAM" >ISLAM</option>
+                        <option value="KRISTEN" >KRISTEN</option>
+                        <option value="BUDHA" >BUDHA</option>
+                        <option value="KATOLIK" >KATOLIK</option>
+                        <option value="KONG HU CHU" >KONG HU CHU</option>
+                    </select>
                 </div>
                 <hr>
                 <div class="input-wrapper">
                     <label class="label">NIK <span id="alert-resume" class="error">*</span></label>
-                    <input type="number" id="word" name="hp" class="form-control" placeholder="No. KTP Pelaku Usaha/Koperasi yang dikunjungi" required minlength="16" maxlength="16">
+                    <input type="text" id="word" name="hp" class="form-control" placeholder="No. KTP Pelaku Usaha/Koperasi yang dikunjungi" required minlength="16" maxlength="16">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
@@ -56,7 +59,7 @@
                 <hr>
                 <div class="input-wrapper">
                     <label class="label">Tanggal Lahir <span id="alert-resume" class="error">*</span></label>
-                    <input type="text" id="word" name="tanggallahir" class="form-control" placeholder="Tempat Lahir" required minlength="5">
+                    <input type="date" id="word" name="tanggallahir" class="form-control" placeholder="Tempat Lahir" required minlength="5">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
@@ -93,7 +96,7 @@
                 <hr>
                 <div class="input-wrapper">
                     <label class="label">Nama UMKM/KOPERASI <span id="alert-resume" class="error">*</span></label>
-                    <input type="text" id="word" name="hp" class="form-control" placeholder="" required minlength="10" maxlength="30">
+                    <input type="text" id="word" name="hp" class="form-control" placeholder="Nama UMKM/ KOPERASI yang dikunjungi" required minlength="10" maxlength="30">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
