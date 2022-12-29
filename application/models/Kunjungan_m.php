@@ -192,7 +192,7 @@ class Kunjungan_m extends CI_Model
     function getTarget($tahun = null, $id = null)
     {
         $this->db->from('tb_target');
-        if ($tahun != null && $id != null) { $this->db->where("tahun", $tahun); }
+        if ($tahun != null && $id != null) { $this->db->where("tahun", $tahun); $this->db->where("user_id", $id);}
         $query = $this->db->get();
         return $query;
     }

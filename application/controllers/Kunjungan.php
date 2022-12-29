@@ -23,6 +23,7 @@ class Kunjungan extends CI_Controller
     */
     function checkIn()
     {
+        previllage($this->session->tipe_user,"1","!=","kunjungan/data");
         $data['title']="CHECK IN LOKASI";   
         $this->templateadmin->load('template/dashboard','kunjungan/lokasi',$data);
     }
@@ -83,7 +84,7 @@ class Kunjungan extends CI_Controller
         !isset($_GET['tahun']) ? $tahun = date("Y") : $tahun = $_GET['tahun'];
         !isset($_GET['bulan'])  ? $bulan = date("m") : $bulan = $_GET['bulan'];
 
-        $data['title'] = "Kegiatan Harian Bulan " . $bulan . " Tahun " . $tahun;
+        $data['title'] = "Kegiatan BULAN " . $bulan . " / " . $tahun;
 		$data['row'] = $this->kunjungan_m->getByMonth($tahun,$bulan,$this->session->id);
 
 		$this->templateadmin->load('template/dashboard', 'kunjungan/logData', $data);

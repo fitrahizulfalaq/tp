@@ -12,9 +12,6 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 		$data['title'] = "Beranda";
-		$this->templateadmin->load('template/dashboard','page/beranda',$data);
-		// $this->load->view('template/dashboard');
-
-
+		$this->templateadmin->load('template/dashboard','page/beranda/'.$this->session->tipe_user,$data);
 	}
 }

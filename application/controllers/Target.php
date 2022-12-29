@@ -4,18 +4,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Target extends CI_Controller
 {
-
+	
 	public function __construct()
 	{
 		parent::__construct();
 		check_not_login();
 		$this->load->model("kunjungan_m");
 	}
-
+	
 	function index()
 	{
 		//Cek Hak Akses
 		$akses = $this->session->tipe_user;
+		// test($akses);
 		if ($akses == "1"){
 			//Cek Sudah Isi atau Belum
 			$cek = $this->kunjungan_m->getTarget(date("Y"),$this->session->id);
@@ -27,42 +28,44 @@ class Target extends CI_Controller
 				redirect("target/tambah/");
 			}
 		} elseif ($akses == "2") {
-
+			redirect("target/data/");
 		}		
 	}
-
+	
 	function tambah()
 	{
 		// Validasi waktu: Format Ymd (Dimulai,Berakhir,Dialihkan kemana)
 		timevalidation("20220101","20230105","target/data");
+		// Khusus untuk TP
+		previllage($this->session->tipe_user,"1","!=","target");
 
 		$cek = $this->kunjungan_m->getTarget(date("Y"),$this->session->id);
 		$cek->num_rows() != null ? redirect("target") : "";
-
+		
 		//Load librarynya dulu
 		$this->load->library('form_validation');
 		//Atur validasinya
 		$this->form_validation->set_rules('judul', 'judul', 'min_length[3]|is_unique[tb_modul.judul]|max_length[50]');
-
+		
 		//Pesan yang ditampilkan
 		$this->form_validation->set_message('min_length', '{field} Setidaknya  minimal {param} karakter.');
 		$this->form_validation->set_message('max_length', '{field} Seharusnya maksimal {param} karakter.');
 		$this->form_validation->set_message('is_unique', 'Data sudah ada');
 		//Tampilan pesan error
 		$this->form_validation->set_error_delimiters('<span class="badge badge-danger">', '</span>');
-
+		
 		if ($this->form_validation->run() == FALSE) {
 			$data['title'] = "TAMBAH TARGET SETAHUN";
 			$this->templateadmin->load('template/dashboard', 'target/tambah', $data);
 		} else {
 			$post = $this->input->post(null, TRUE);
-
+			
 			//CEK FILES
 			$config['upload_path']          = 'assets/files/target_tahunan';
 			$config['allowed_types']        = 'pdf';
 			$config['max_size']             = 5000;
 			$config['file_name']            = "TARGETTAHUNAN-".strtoupper($this->session->hp);
-
+			
 			$this->load->library('upload', $config);
 			if (@$_FILES['file']['name'] != null) {
 				$this->upload->initialize($config);
@@ -74,7 +77,7 @@ class Target extends CI_Controller
 					redirect('target/tambah');
 				}
 			}
-
+			
 			$this->kunjungan_m->addTargetTahunan($post);
 			if ($this->db->affected_rows() > 0) {
 				$this->session->set_flashdata('success', 'Target Berhasil di Tambahkan');
@@ -82,40 +85,41 @@ class Target extends CI_Controller
 			redirect('target/data');
 		}
 	}
-
+	
 	function data()
 	{
 		$data['title'] = "DATA TARGET KINERJA";
 		$this->templateadmin->load('template/dashboard','target/data',$data);
 	}
 	
-	function open()
+	/*
+	Controller untuk membuka, mendownload, dan mencetak laporan akhir
+	*/
+	function perintah()
 	{
-		$tahun = $_GET['tahun'];
-		$file = $this->kunjungan_m->getTarget($tahun,$this->session->id)->row("file");
-		$filecontents = "/assets/files/target_tahunan/" . $file;
-
-		$data['title'] = "Open";
-		$data['url'] = base_url().$filecontents;
-		$this->load->view('target/open',$data);
+		$data['perintah'] = $_GET['aksi']; 
+		$data['tahun'] = $_GET['tahun']; 
+		!isset($data) ? redirect("") : "";
+		// Cek apakah sudah upload atau belum
+		$file = $this->kunjungan_m->getTarget($data['tahun'],$this->session->id);
+		$filecontents = "/assets/files/target_tahunan/" . $file->row("file");
+		// Buka sesuai metode
+		if ($file->num_rows() > 0){
+			if ($data['perintah'] == "open"){
+				$data['title'] = "Open";
+				$data['url'] = base_url().$filecontents;
+				$this->load->view('target/open',$data);
+			} elseif ($data['perintah'] == "download"){
+				redirect("".$filecontents);
+				echo "Download file";				
+			} elseif ($data['perintah'] == "print"){
+				exec(FCPATH . $filecontents);
+				redirect("target/data");
+			}
+		} else {
+			$this->session->set_flashdata('danger', "Anda belum mengupload file rencana kerja tahunan");
+			redirect("target/data");
+		}
 	}
-
-	function download()
-	{
-		$tahun = $_GET['tahun'];
-		$file = $this->kunjungan_m->getTarget($tahun,$this->session->id)->row("file");
-		$filecontents = "/assets/files/target_tahunan/" . $file;
-		redirect("".$filecontents);
-	}
-
-	function print()
-	{
-		// Ambil Data, yang dibutuhkan ID
-		$tahun = $_GET['tahun'];
-		$file = $this->kunjungan_m->getTarget($tahun,$this->session->id)->row("file");
-		$filecontents = FCPATH . "/assets/files/target_tahunan/" . $file;
-		exec($filecontents);
-		redirect("target/data");
-	}
-
+	
 }
