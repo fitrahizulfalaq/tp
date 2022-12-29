@@ -41,6 +41,29 @@ function akses($level)
 	}
 }
 
+function previllage($previllage,$tipe_user,$aksi,$redirect)
+{
+	$ci =& get_instance();
+	if ($aksi == "<") { 
+		if ($tipe_user < $previllage) {
+			redirect($redirect);
+		}
+	} else if ($aksi == ">") {
+		if ($tipe_user > $previllage) {
+			redirect($redirect);
+		}
+	} else if ($aksi == "=") {
+		if ($tipe_user == $previllage) {
+			redirect($redirect);
+		}
+	} else if ($aksi == "!=") {
+		if ($tipe_user != $previllage) {
+			redirect($redirect);
+		} 
+	}
+	
+}
+
 /*
 	Memberi batasan waktu untuk melakukan pengisian
 	Penulisan dengan cukup dengan tanggal mulai dan tanggal akhir dengan format Ymd

@@ -29,19 +29,14 @@
                                         <option value="12">Desember</option>
                                     </select>
 
-
                                     <select name="tahun" class="btn btn-outline-primary " required>
                                         <option value="">Pilih Tahun</option>
                                         <?php $thn_skr = date('Y');
-                                        for ($x = $thn_skr; $x >= 2018; $x--) { ?>
+                                        for ($x = $thn_skr; $x >= 2022; $x--) { ?>
                                             <option value="<?php echo $x ?>"><?php echo $x ?></option>
                                         <?php } ?>
                                     </select>
-
                                     <button type="submit" class="btn btn-success">Filter <i class="fa fa-eye"></i></button>
-
-                                </div>
-                                <div class="input-group-append">
                                 </div>
                             </form>
                         </div>
