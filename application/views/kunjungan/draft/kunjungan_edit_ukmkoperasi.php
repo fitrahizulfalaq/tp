@@ -120,10 +120,16 @@
                 <hr>
                 <div class="input-wrapper">
                     <label class="label">Kabupaten/Kota <span id="alert-resume" class="error">*</span></label>
-                    <input type="text" id="word" name="kabkota" class="form-control" placeholder="Kabupaten Kota/ Pelaku Usaha/Koperasi yang dikunjungi" required minlength="10">
-                    <i class="clear-input">
-                        <ion-icon name="close-circle"></ion-icon>
-                    </i>
+                    <select name="kabkota" class="form-control" >
+                        <option value="">Pilih Kab/Kota : </option>
+                        <?php
+                        $this->db->order_by('id','ASC');
+                        foreach ($this->fungsi->pilihan("tb_lembaga")->result() as $key => $pilihan) {;
+                        ?>
+                        <option value="<?= $pilihan->kota?>"><?= $pilihan->kota?></option>
+                        <?php }?>
+                    </select>
+                    
                 </div>
                 <hr>
                 <div class="input-wrapper">

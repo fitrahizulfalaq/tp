@@ -36,5 +36,11 @@ class Tampilan extends CI_Controller {
 		$this->templateadmin->load('template/dashboard','kunjungan/draft/kunjungan_edit_ukmkoperasi',$data);
 	}
 
+	public function kunjunganeditkantor()
+	{		
+        $data['title']="Form Edit Kunjungan";
+		$this->templateadmin->load('template/dashboard','kunjungan/draft/kunjungan_edit_kantor',$data);
+	}
+
 }
 	
