@@ -158,10 +158,13 @@
                 <div class="input-wrapper">
                     <label class="label">Skala Usaha <span id="alert-resume" class="error">*</span></label>
                     <select name="skalausaha" class="form-control" >
-                        <option value="MIKRO">MIKRO</option>
-                        <option value="KECIL" >KECIL</option>
-                        <option value="MENENGAH" >MENENGAH</option>
-                        <option value="NASIONAL" >NASIONAL</option>
+                        <option value="MIKRO">MIKRO (UMKM)</option>
+                        <option value="KECIL" >KECIL (UMKM)</option>
+                        <option value="MENENGAH" >MENENGAH (UMKM)</option>
+                        <option value="KOTA/KAB" >KOTA/KABUPATEN (KOPERASI)</option>
+                        <option value="PROVINSI" >PROVINSI (KOPERASI)</option>
+                        <option value="NASIONAL" >NASIONAL (KOPERASI)</option>
+
                     </select>
                 </div>
                 <hr>
