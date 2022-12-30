@@ -56,6 +56,7 @@ class Auth extends CI_Controller {
 					'date_now' => date('Y:m:d H:i:s'),
 				);
 				$this->session->set_userdata($params);
+				$this->validation_m->saveLog();
 				redirect('dashboard');
 			} else {
 				$this->session->set_flashdata('danger','Login Gagal');
@@ -126,6 +127,7 @@ class Auth extends CI_Controller {
 					'date_now' => date('Y:m:d H:i:s'),
 				);
 				$this->session->set_userdata($params);
+				$this->validation_m->saveLog();
 				redirect('dashboard');
 			} else {
 				$this->session->set_flashdata('danger','Kode OTP Tidak Valid. Pastikan KODE OTP	 yang diinputkan benar)');
@@ -190,6 +192,7 @@ class Auth extends CI_Controller {
 					'date_now' => date('Y:m:d H:i:s'),
 				);
 				$this->session->set_userdata($params);
+				$this->validation_m->saveLog();
 				redirect('dashboard');
 			} else {
 				$this->session->set_flashdata('danger','Email Tidak Terdaftar');

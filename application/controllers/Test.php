@@ -217,6 +217,10 @@ class Test extends CI_Controller
 
     function device()
     {
-        test($this->agent->agent_string());
+        echo $this->agent->agent_string()."</br>";
+        echo $this->agent->platform()." </br>";
+        echo $this->agent->browser()."</br>";
+        echo $this->agent->mobile()."</br>";
+        echo $this->agent->referrer()."</br>";
     }
 }

@@ -72,4 +72,18 @@ class Validation_m extends CI_Model
 		return $query;
 	}
 
+	function saveLog()
+	{
+		//Migrasi Gambar Peta dari TMP ke Storage Utama
+		$params['id'] =  "";
+		$params['user_id'] = $this->session->id;
+		$params['ip_address'] = $this->input->ip_address();
+		$params['device_id'] = $this->agent->agent_string();
+		$params['platform'] = $this->agent->platform();
+		$params['browser'] = $this->agent->browser();
+		$params['referrer'] = $this->agent->referrer();
+		$params['created'] =  date("Y-m-d H:i:s");
+		$this->db->insert('tb_log', $params);
+	}
+
 }
