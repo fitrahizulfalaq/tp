@@ -12,6 +12,7 @@ class Test extends CI_Controller
     {
         check_already_login();
         $this->load->view('test/login');
+        $this->load->library('user_agent');
     }
 
     public function getLocation()
@@ -212,5 +213,10 @@ class Test extends CI_Controller
     {
         $post = $this->input->post(null, TRUE);
         test($post);
+    }
+
+    function device()
+    {
+        getMacMobile();
     }
 }
