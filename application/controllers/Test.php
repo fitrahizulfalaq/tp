@@ -217,6 +217,6 @@ class Test extends CI_Controller
 
     function device()
     {
-        getMacMobile();
+        test($this->agent->agent_string());
     }
 }
