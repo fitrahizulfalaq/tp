@@ -66,5 +66,29 @@ class Tampilan extends CI_Controller {
 		$this->templateadmin->load('template/dashboardkoor','koordinator/detailkunjunganukm_data',$data);
 	}
 
+	public function dashboardadmin()
+	{		
+        $data['title']="DASHBOARD ADMIN";
+		$this->templateadmin->load('template/dashboardadmin','page/berandaadmin',$data);
+	}
+
+	public function admindata()
+	{		
+        $data['title']="LAPORAN TENAGA PENDAMPING";
+		$this->templateadmin->load('template/dashboardadmin','admin/admin_data',$data);
+	}
+
+	public function admindetail()
+	{		
+        $data['title']="DETAIL LAPORAN TENAGA PENDAMPING";
+		$this->templateadmin->load('template/dashboardadmin','admin/admin_detail',$data);
+	}
+
+	public function profil()
+	{		
+        $data['title']="PROFIL";
+		$this->templateadmin->load('template/dashboard','page/profil',$data);
+	}
+
 }
 	

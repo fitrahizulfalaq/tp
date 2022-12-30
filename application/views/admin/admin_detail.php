@@ -19,8 +19,8 @@
 									<tr>
 										<th width="5%">No</th>
 										<th width="20%">Tanggal</th>
-                                        <th width="60%">Tujuan</th>
-                                        <th width="20%">Lihat Detail</th>
+                                        <th width="55%">Tujuan</th>
+                                        <th width="30%">Lihat Detail</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -35,7 +35,9 @@
                                             <p>Hari ini tanggal 1 Januari 2023 pukul 10.30 saya melakukan pendampingan kepada UKM/Koperasi bidang Mamin yang bernama Bapak Parlan beralamat di Jl. Mastrip No. 3, Kebonsari Kulon, Probolinggo.</p>
                                         </td>                                        
                                         <td>
-                                            <a href="<?=site_url('tampilan/koordinatordetail')?>" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                                            <a href="<?=site_url('tampilan/koordinatordetail')?>" class="btn btn-success"><i class="fa fa-eye"></i></a>
+                                            <a href="" class="btn btn-warning"><i class="fa fa-download"></i></a>
+                                            <a href="" class="btn btn-danger"><i class="fa fa-print"></i></a>
                                         </td>
                                     </tr>									
 								</tbody>
@@ -43,7 +45,7 @@
                             </div>
 
                             <div class="form-button">
-                                <a href="<?=site_url('tampilan/koordinatorlaporan')?>" class="btn btn-success btn-block btn-lg">APPROVE LAPORAN BULAN : JANUARI</a>
+                                <button type="button" class="btn btn-primary btn-block btn-lg" onclick="history.back()">KEMBALI</button>
                             </div>
 						</div>
 					</div>
