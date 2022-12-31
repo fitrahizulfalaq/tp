@@ -14,7 +14,7 @@ class Pengaturan extends CI_Controller {
 	{
 		$data['title'] = "Set Device";
 		$data['row'] = $this->validation_m->cekDevice();
-		$this->templateadmin->load('template/dashboard','pengaturan/setdevice',$data);
+		$this->templateadmin->load('template/dashboard','pengaturan/setDevice',$data);
 	}
 
 	function saveDevice()
