@@ -16,8 +16,11 @@ class Page extends CI_Controller {
 
 	public function profil()
 	{
-		$data['menu'] = "Profil";
-		$this->templateadmin->load('template/detail','page/profil',$data);
+		$this->load->model("user_m");
+		$data['title'] = "Profil";
+		$data['row'] = $this->user_m->get($this->session->id)->row();
+		// $data['device'] = $this->validation_m->cekDevice();
+		$this->templateadmin->load('template/dashboard','page/profil',$data);
 	}
 
 	public function pembuat()

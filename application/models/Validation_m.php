@@ -34,7 +34,6 @@ class Validation_m extends CI_Model
 		$this->db->where('status', '1');
 		$query = $this->db->get();
 		return $query;
-    
 	}
 
     function insertOTP($post)
@@ -74,16 +73,55 @@ class Validation_m extends CI_Model
 
 	function saveLog()
 	{
-		//Migrasi Gambar Peta dari TMP ke Storage Utama
 		$params['id'] =  "";
 		$params['user_id'] = $this->session->id;
 		$params['ip_address'] = $this->input->ip_address();
-		$params['device_id'] = $this->agent->agent_string();
+		$params['token'] = $this->agent->agent_string();
 		$params['platform'] = $this->agent->platform();
 		$params['browser'] = $this->agent->browser();
 		$params['referrer'] = $this->agent->referrer();
 		$params['created'] =  date("Y-m-d H:i:s");
 		$this->db->insert('tb_log', $params);
+	}
+
+	function cekDevice($token = null, $platform = null, $browser = null, $mobile = null)
+    {	
+        $this->db->select('*');
+		if ($token != null ) { $this->db->where("token", $token);}
+		if ($platform != null ) { $this->db->where("platform", $platform);}
+		if ($mobile != null ) { $this->db->where("mobile", $mobile);}
+		if ($browser != null ) { $this->db->where("browser", $browser);}
+		$this->db->from('tb_device');
+		$this->db->where('user_id', $this->session->id);
+		$query = $this->db->get();
+		return $query;
+    
+	}
+
+	function saveDevice()
+	{
+		$params['id'] =  "";
+		$params['user_id'] = $this->session->id;
+		$params['token'] = $this->agent->agent_string();
+		$params['platform'] = $this->agent->platform();
+		$params['mobile'] = $this->agent->mobile() == null ? "dekstop" : $this->agent->mobile();
+		$params['browser'] = $this->agent->browser();
+		$params['created'] =  date("Y-m-d H:i:s");
+		$this->db->insert('tb_device', $params);
+	}
+
+	/*
+		Untuk keperluan cek
+	*/
+	function getTP($post)
+	{
+		$this->db->select('*');
+		$this->db->from('tb_user');
+		$this->db->where('email',$post['username']);
+		$this->db->where('password',sha1($post['password']));
+		$this->db->where('status','1');
+		$query = $this->db->get();
+		return $query; 
 	}
 
 }

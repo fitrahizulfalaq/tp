@@ -29,12 +29,12 @@
                         <!-- small card -->
                         <div class="card product-card">
                             <div class="inner text-center">
-                                <a href="<?= base_url('laporan') ?>">
+                                <a href="<?= base_url('kunjungan/data') ?>">
                                     <img src="<?= base_url("") ?>/assets/img/icon/folder-link.png" alt="" width="100%">
                                 </a>
                             </div>
                             <p align="center">
-                                <a href="<?= base_url('laporan') ?>">
+                                <a href="<?= base_url('kunjungan/data') ?>">
                                     LAPORAN
                                 </a>
                             </p>
@@ -45,11 +45,11 @@
                         <!-- small card -->
                         <div class="card product-card">
                             <div class="inner text-center">
-                                <a href="<?= base_url('laporan/cetaklaporan') ?>">
+                                <a href="#" onclick="alert('Dalam tahap pengembangan')">
                                     <img src="<?= base_url("") ?>/assets/img/icon/text-folder.png" alt="" width="100%">
                                 </a>
                             <p align="center">
-                                <a href="<?= base_url('laporan/cetaklaporan') ?>">
+                                <a href="#" onclick="alert('Dalam tahap pengembangan')">
                                     CETAK LAPORAN
                                 </a>
                             </p>
@@ -68,6 +68,22 @@
                             <p align="center">
                                 <a href="<?= base_url('target') ?>">
                                     TARGET KERJA
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-4">
+                        <!-- small card -->
+                        <div class="card product-card">
+                            <div class="inner text-center">
+                                <a href="<?= base_url('pengaturan/setDevice') ?>">
+                                    <img src="<?= base_url("") ?>/assets/img/icon/key-folder.png" alt="" width="100%">
+                                </a>
+                            </div>
+                            <p align="center">
+                                <a href="<?= base_url('pengaturan/setDevice') ?>">
+                                    DAFTARKAN PERANGKAT
                                 </a>
                             </p>
                         </div>

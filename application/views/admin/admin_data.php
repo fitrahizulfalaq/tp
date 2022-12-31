@@ -1,7 +1,6 @@
 <!-- App Capsule -->
 <div id="appCapsule">
 
-
 <div class="section full mt-2">
     
     

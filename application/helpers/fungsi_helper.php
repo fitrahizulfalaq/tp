@@ -64,10 +64,10 @@ function previllage($previllage,$tipe_user,$aksi,$redirect)
 	
 }
 
-function isMe($id_login, $user_id)
+function isMe($id, $user_id)
 {
 	$ci = &get_instance();
-	if ($id_login != $user_id) {
+	if ($id != $user_id) {
 		$ci->session->set_flashdata('warning', 'Hanya Bisa mengedit miliknya sendiri');
 		redirect('dashboard');
 	}
@@ -99,15 +99,4 @@ function test($x)
 {
 	var_dump($x);
 	die();
-}
-
-function getMacMobile()
-{
-	$ci =& get_instance();
-	$ci->agent->agent_string();  
-}
-
-function getMacDesktop()
-{
-	echo "Get Desktop";
 }

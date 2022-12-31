@@ -1,4 +1,7 @@
 <?php
+
+use Monolog\Handler\IFTTTHandler;
+
 ob_start();
 defined('BASEPATH') or exit('No direct script access allowed');
 
@@ -86,11 +89,6 @@ class Target extends CI_Controller
 		}
 	}
 	
-	function data()
-	{
-		$data['title'] = "DATA TARGET KINERJA";
-		$this->templateadmin->load('template/dashboard','target/data',$data);
-	}
 	
 	/*
 	Controller untuk membuka, mendownload, dan mencetak laporan akhir
@@ -99,9 +97,10 @@ class Target extends CI_Controller
 	{
 		$data['perintah'] = $_GET['aksi']; 
 		$data['tahun'] = $_GET['tahun']; 
+		$data['user_id'] = base64_decode($_GET['token']); 
 		!isset($data) ? redirect("") : "";
 		// Cek apakah sudah upload atau belum
-		$file = $this->kunjungan_m->getTarget($data['tahun'],$this->session->id);
+		$file = $this->kunjungan_m->getTarget($data['tahun'],$data['user_id']);
 		$filecontents = "/assets/files/target_tahunan/" . $file->row("file");
 		// Buka sesuai metode
 		if ($file->num_rows() > 0){
@@ -117,7 +116,7 @@ class Target extends CI_Controller
 				redirect("target/data");
 			}
 		} else {
-			$this->session->set_flashdata('danger', "Anda belum mengupload file rencana kerja tahunan");
+			$this->session->set_flashdata('danger', "Belum mengupload file rencana kerja tahunan");
 			redirect("target/data");
 		}
 	}

@@ -27,9 +27,9 @@
 												<p>2023</p>                                        
 											</td>    
 											<td>
-												<a href="<?= base_url("target/perintah?aksi=open&tahun=2023")?>" class="btn btn-primary" target="_blank"><i class="fa fa-eye"></i></a>
-												<a href="<?= base_url("target/perintah?aksi=download&tahun=2023")?>" class="btn btn-danger" target="_blank"><i class="fa fa-download"></i></a>
-												<a href="<?= base_url("target/perintah?aksi=print&tahun=2023")?>" class="btn btn-warning"><i class="fa fa-print"></i></a>
+												<a href="<?= base_url("target/perintah?aksi=open&tahun=2023&token=".base64_encode($this->session->id))?>" class="btn btn-primary" target="_blank"><i class="fa fa-eye"></i></a>
+												<a href="<?= base_url("target/perintah?aksi=download&tahun=2023&token=".base64_encode($this->session->id))?>" class="btn btn-danger" target="_blank"><i class="fa fa-download"></i></a>
+												<a href="<?= base_url("target/perintah?aksi=print&tahun=2023&token=".base64_encode($this->session->id))?>" class="btn btn-warning"><i class="fa fa-print"></i></a>
 											</td>
 										</tr>									
 									</tbody>

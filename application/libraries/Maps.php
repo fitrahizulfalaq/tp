@@ -31,8 +31,8 @@ class Maps
         function saveMapsImg($url,$hp)
         {
                 // test($url);
-                $img = FCPATH . $this->storage . date("Ymdh") . rand(0,5). "FIX".$hp.".jpg";
-                $name = date("Ymdh") . "FIX".$hp.".jpg";
+                $img = FCPATH . $this->storage . date("Ymdh") . rand(10,99). "FIX".$hp.".jpg";
+                $name = date("Ymdh") . rand(10,99). "FIX".$hp.".jpg";
                 // test($img);
                 file_put_contents($img, file_get_contents($url));
                 return $name;       

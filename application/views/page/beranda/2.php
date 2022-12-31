@@ -14,17 +14,18 @@
                         <!-- small card -->
                         <div class="card product-card">
                             <div class="inner text-center">
-                                <a href="<?= base_url('laporan/cetaklaporan') ?>">
+                                <a href="<?= base_url('laporan') ?>">
                                     <img src="<?= base_url("") ?>/assets/img/icon/ribbon-badge-folder.png" alt="" width="100%">
                                 </a>
                             <p align="center">
-                                <a href="<?= base_url('laporan/cetaklaporan') ?>">
+                                <a href="<?= base_url('laporan') ?>">
                                     ACC LAPORAN
                                 </a>
                             </p>
                             </div>
                         </div>
-                    </div>  
+                    </div>
+                      
                 </div>
             </div>            
         </div>

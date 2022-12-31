@@ -27,11 +27,12 @@ class User_m extends CI_Model
 
 		$this->user_m->getAllBy("nama kolom","isi variabel kolom");
 	*/
-	function getAllBy($kolom = null, $id = null, $koordinator = null)
+	function getAllBy($kolom = null, $var = null, $koordinator = null)
 	{
 		$this->db->from('tb_user');
-		if ($kolom != null && $id != null) { $this->db->where($kolom, $id); }
+		if ($kolom != null && $var != null) { $this->db->where($kolom, $var); }
 		if ($koordinator != null) { $this->db->where("wilayah_kerja", $koordinator);$this->db->where("tipe_user", "1"); }
+		$this->db->where("status","1");
 		$query = $this->db->get();
 		return $query;
 	}

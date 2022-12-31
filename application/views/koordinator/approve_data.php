@@ -43,8 +43,8 @@
                             </div>
 
                             <div class="form-button">
-                                <a href="<?=site_url('tampilan/koordinatorlaporan')?>" class="btn btn-success btn-block btn-lg">APPROVE LAPORAN BULAN : JANUARI</a>
-                            </div>
+                                <a href="<?=site_url('')?>laporan/approveTP/" class="btn btn-success btn-block btn-lg">APPROVE LAPORAN BULAN : JANUARI</a>
+							</div>
 						</div>
 					</div>
 					<!-- /.card-body -->

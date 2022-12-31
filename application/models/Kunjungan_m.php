@@ -281,22 +281,4 @@ class Kunjungan_m extends CI_Model
         return $query;
     }    
 
-    function addkunjung($post)
-    {
-        //Migrasi Gambar Peta dari TMP ke Storage Utama
-        $params['loc_img'] =  $this->maps->saveMapsImg(FCPATH . $post['loc_img'],$this->session->nik);
-        //Input Data
-        $params['id'] =  "";
-        $params['user_id'] =  $this->session->id;
-        $params['tipe'] =  $post['tipe'];
-        $params['resume'] =  $post['resume'];
-        $params['foto_selfielokasi'] =  $post['foto_selfielokasi'];
-        $params['sppd'] =  $post['sppd'];
-        $params['lat'] =  $post['lat'];
-        $params['lng'] =  $post['lng'];
-        $params['created'] =  date("Y-m-d H:i:s");
-        $parms['ip_address'] = $this->input->ip_address();
-        $this->db->insert('tb_kunjung', $params);
-    }
-
 }

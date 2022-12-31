@@ -15,9 +15,9 @@ class Approval_m extends CI_Model
         Example :
         $this->turus_m->getByDate("tahun","bulan","tanggal");
     */
-    function getByDate($tahun = null, $bulan = null, $tanggal = null, $tp = null,$koordinator = null)
+    function getByDate($tabel = null,$tahun = null, $bulan = null, $tanggal = null, $tp = null,$koordinator = null)
     {
-        $this->db->from('tb_turus');
+        $this->db->from('tb_'.$tabel);
         if ($tp != null) { $this->db->where('tp', $tp); }
         if ($koordinator != null) { $this->db->where('koordinator', $koordinator); }
         $this->db->like('tgl', $tahun . "-" . $bulan . "-" . $tanggal);
@@ -25,9 +25,9 @@ class Approval_m extends CI_Model
         $query = $this->db->get();
         return $query;
     }
-    function getByMonth($tahun = null, $bulan = null, $tp = null,$koordinator = null)
+    function getByMonth($tabel = null, $tahun = null, $bulan = null, $tp = null,$koordinator = null)
     {
-        $this->db->from('tb_turus');
+        $this->db->from('tb_'.$tabel);
         if ($tp != null) { $this->db->where('tp', $tp); }
         if ($koordinator != null) { $this->db->where('koordinator', $koordinator); }
         $this->db->like('tgl', $tahun . "-" . $bulan);
@@ -35,9 +35,9 @@ class Approval_m extends CI_Model
         $query = $this->db->get();
         return $query;
     }
-    function getByYear($tahun = null, $tp = null,$koordinator = null)
+    function getByYear($tabel = null, $tahun = null, $tp = null,$koordinator = null)
     {
-        $this->db->from('tb_turus');
+        $this->db->from('tb_'.$tabel);
         if ($tp != null) { $this->db->where('tp', $tp); }
         if ($koordinator != null) { $this->db->where('koordinator', $koordinator); }
         $this->db->like('tgl', $tahun);
@@ -52,7 +52,7 @@ class Approval_m extends CI_Model
         $params['tp'] =  $this->session->id;
         $params['tgl'] =  $post['tgl'];
         $params['wilayah_kerja'] =  $this->session->wilayah_kerja;
-        $params['created'] =  date("Ymdhmsi");
+        $params['created'] =  date("Y-m-d H:i:s");
         $this->db->insert('tb_turus', $params);
     }
     
@@ -66,7 +66,7 @@ class Approval_m extends CI_Model
         $params['id'] =  $id;
         $params['koordinator'] =  $this->session->id;
         $params['status'] =  "setuju";
-        $params['accepted'] =  date("Ymdhmsi");
+        $params['accepted'] =  date("Y-m-d H:i:s");
         $this->db->where('id', $params['id']);
         $this->db->update('tb_turus', $params);
         //Insert Datasesuai tanggal pada turus
@@ -93,9 +93,9 @@ class Approval_m extends CI_Model
         $params['id'] = "";
         $params['tp'] =  $tp;
         $params['koordinator'] =  $this->session->id;
-        $params['wilayahkerja'] =  $this->session->wilayah_kerja;
+        $params['wilayah_kerja'] =  $this->session->wilayah_kerja;
         $params['tgl'] =  date("Ymd");
-        $params['created'] =  date("Ymdhmsi");
+        $params['created'] =  date("Y-m-d H:i:s");
         $this->db->insert('tb_approval', $params);        
     }
     
