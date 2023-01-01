@@ -24,7 +24,7 @@ class Pengaturan extends CI_Controller {
 		if ($this->agent->mobile() == "Nexus"){
 			$this->session->set_flashdata('danger', 'Tidak Boleh menggunakan emulator');
 			redirect("pengaturan/setDevice");
-		} elseif ($device->num_rows() > 5) {
+		} elseif ($device->num_rows() >= 5) {
 			$this->session->set_flashdata('danger', 'Device Sudah Yang di Daftarkan Telah Melebihi Batas Quota');
 			redirect("pengaturan/setDevice");
 		} elseif ($thisDevice->num_rows() > 0) {
