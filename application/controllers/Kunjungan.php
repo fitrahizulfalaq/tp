@@ -137,14 +137,30 @@ class Kunjungan extends CI_Controller
             $post = $this->input->post(null, TRUE);
 
             //CEK FOTO SELFIE
-            $config['upload_path']          = 'assets/files/foto_selfie/';
+            $config['upload_path']          = 'assets/files/foto_selfie/tmp/';
             $config['allowed_types']        = 'jpg|png|jpeg';
-            $config['max_size']             = 1000;
+            $config['max_size']             = 5000;
             $config['file_name']            = rand(0, 99999) . $this->session->id;
             $this->load->library('upload', $config);
             if (@$_FILES['foto_selfie']['name'] != null) {
                 $this->upload->initialize($config);
                 if ($this->upload->do_upload('foto_selfie')) {
+                    
+                    // KOMPRESS IMAGE BIAR LEBIH RINGAN
+                    $gbr = $this->upload->data();                    
+                    //Compress Image
+                    $config['image_library']='gd2';
+                    $config['source_image']= 'assets/files/foto_selfie/tmp/'.$gbr['file_name'];
+                    $config['create_thumb']= FALSE;
+                    $config['maintain_ratio']= TRUE;
+                    $config['quality']= '50%';
+                    $config['width']= 600;
+                    $config['height']= 400;
+                    $config['new_image']= 'assets/files/foto_selfie/'.$gbr['file_name'];
+                    $this->load->library('image_lib');
+                    $this->image_lib->initialize($config);
+                    $this->image_lib->resize();
+
                     $post['foto_selfie'] = $this->upload->data('file_name');
                 } else {
                     $pesan = $this->upload->display_errors();
@@ -154,7 +170,7 @@ class Kunjungan extends CI_Controller
             }
 
             //CEK GAMBAR
-            $config['upload_path']          = 'assets/files/foto_lokasi/';
+            $config['upload_path']          = 'assets/files/foto_lokasi/tmp';
             $config['allowed_types']        = 'jpg|png|jpeg';
             $config['max_size']             = 5000;
             $config['file_name']            = rand(0, 99999) . $this->session->id;
@@ -163,6 +179,22 @@ class Kunjungan extends CI_Controller
             if (@$_FILES['foto_lokasi']['name'] != null) {
                 $this->upload->initialize($config);
                 if ($this->upload->do_upload('foto_lokasi')) {
+                    
+                    // KOMPRESS IMAGE BIAR LEBIH RINGAN
+                    $gbr = $this->upload->data();                    
+                    //Compress Image
+                    $config['image_library']='gd2';
+                    $config['source_image']= 'assets/files/foto_lokasi/tmp/'.$gbr['file_name'];
+                    $config['create_thumb']= FALSE;
+                    $config['maintain_ratio']= TRUE;
+                    $config['quality']= '50%';
+                    $config['width']= 600;
+                    $config['height']= 400;
+                    $config['new_image']= 'assets/files/foto_lokasi/'.$gbr['file_name'];
+                    $this->load->library('image_lib');
+                    $this->image_lib->initialize($config);
+                    $this->image_lib->resize();
+
                     $post['foto_lokasi'] = $this->upload->data('file_name');
                 } else {
                     $pesan = $this->upload->display_errors();

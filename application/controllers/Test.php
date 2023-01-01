@@ -223,4 +223,6 @@ class Test extends CI_Controller
         echo $this->agent->mobile()."</br>";
         echo $this->agent->referrer()."</br>";
     }
+
+    
 }

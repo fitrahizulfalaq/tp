@@ -7,7 +7,7 @@
             <h4>Klik untuk Mendaftarkan Perangkat</h4>
         </div>
         <div class="section mb-5">
-            <p>Total Device Tersedia <?= 5 - $row->num_rows() ?></p>
+            <p>Kuota Device Tersedia <?= 5 - $row->num_rows() ?></p>
             <?php $this->view("message")?>
             <br>
             <input type="text" value="Token : <?= sha1($this->agent->agent_string()) ?>" class="form-control" readonly>
@@ -21,11 +21,11 @@
             <a href="<?= base_url("pengaturan/saveDevice")?>" onclick="alert('Apakah Anda Yakin Ingin Mendaftarkan Perangkat Ini ?')" class="btn btn-success btn-block btn-lg">
                 <ion-icon name="key-outline"></ion-icon> Daftarkan Perangkat Ini
             </a>
-            <div class="section-title">*Setiap user hanya diperbolehkan mendaftarkan 5 perangkat, baik Laptop maupun Smartphone. Silahkan login pada device yang anda gunakan sampai batas waktu yang ditentukan.</div>
+            <div class="section-title">*Setiap user hanya diperbolehkan mendaftarkan 5 perangkat, baik Laptop maupun Smartphone. Silahkan login pada device yang anda gunakan sampai hingga batas waktu pendaftaran device berakhir.</div>
         </div>
         <div class="section mt-2">
             <h4>List Device</h4>
-            <table class="table table-striped">
+            <table class="table table-striped table-responsive">
                 <thead>
                     <tr>
                         <th scope="col">Device</th>

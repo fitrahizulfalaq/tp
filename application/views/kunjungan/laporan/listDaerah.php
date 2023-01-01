@@ -57,7 +57,7 @@
                                                         <?= $data->nama ?>
                                                     </td>
                                                     <td>
-                                                        <a href="<?= site_url('laporan/detailTP/'.$data->id) ?>" class="btn btn-primary"><i class="fa fa-eye"></i></a>
+                                                        <a href="<?= site_url('laporan/detailTP/'.$data->id) ?>" class="btn btn-primary"><ion-icon name="eye-outline"></ion-icon></a>
                                                         <a href="<?= base_url("target/perintah?aksi=download&tahun=2023&token=".base64_encode($data->id))?>" class="btn btn-info" target="_blank"><i class="fa fa-download"></i> Download Rencana Kerja</a>
                                                     </td>
                                                 </tr>

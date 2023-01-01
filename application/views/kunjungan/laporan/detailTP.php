@@ -38,7 +38,7 @@
                                         <?php } ?>
                                     </select>
                                     <button type="submit" class="btn btn-success">Filter <i class="fa fa-eye"></i></button>
-                                    <a href="<?= base_url("laporan")?>" class="btn btn-info float-ri    ght">Kembali <i class="fa fa-eye"></i></a>
+                                    <a href="<?= base_url("laporan")?>" class="btn btn-info float-right">Kembali <i class="fa fa-eye"></i></a>
                                 </div>
                             </form>
                         </div>
@@ -47,16 +47,16 @@
                     <?php if ($approval->num_rows() > 0) { ?>
                         <div class="card text-white bg-success mb-2">
                             <div class="card-body">
-                                <h5 class="card-title">Laporan Sudah Divalidasi</h5>
+                                <h5 class="card-title"><ion-icon name="checkmark-done-circle-outline"></ion-icon> Laporan Sudah Divalidasi</h5>
                                 <p class="card-text">Laporan atas nama <?= $tp->row("nama")?> telah di validasi pada <?= $approval->row("created")?></p>
                             </div>
                         </div>
                         <?php } else { ?>
                             <div class="card text-white bg-danger mb-2">
                                 <div class="card-body">
-                            <h5 class="card-title">Laporan Belum Divalidasi</h5>
+                            <h5 class="card-title"><ion-icon name="warning-outline"></ion-icon> Laporan Belum Divalidasi</h5>
                             <p class="card-text">
-                                Tenaga Pendamping atas nama <?= $row->row("nama")?> wajib melaporkan hasil kujungannya kepada anda selaku Koordinator. Silahkan cek log laporan tersebut. Setelah merasa benar, silahkan APPROVE. NB: Proses approve hanya bisa dilakukan 1x dan tidak bisa ulang kembali. 
+                                Tenaga Pendamping atas nama <?= $row->row("nama")?> wajib melaporkan hasil kujungannya kepada Koordinator. Koordinator bisa melakukan pengecekan log laporan tersebut. Setelah benar, silahkan APPROVE. NB: Proses approve hanya bisa dilakukan 1x dan tidak bisa ulang kembali. Seluruh aktivitas tercatat oleh sistem. 
                             </p>
                             <?php if ($row->num_rows() != null and $this->session->tipe_user == "2") { ?>
                                 <a href="<?= site_url('laporan/accLaporanTP/'.base64_encode($tp->row("id"))) ?>" class="btn btn-success btn-block btn-sm">APPROVE LAPORAN</a>

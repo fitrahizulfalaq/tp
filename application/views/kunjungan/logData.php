@@ -71,7 +71,7 @@
                                                         <?= $data->tujuan ?>
                                                     </td>
                                                     <td>
-                                                        <a href="<?= site_url('kunjungan/edit/' . $data->id); ?>" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
+                                                        <a href="<?= site_url('kunjungan/edit/' . $data->id); ?>" class="btn btn-info btn-sm"><ion-icon name="eye-outline"></ion-icon></a>
                                                     </td>
                                                 </tr>
                                             <?php } ?>

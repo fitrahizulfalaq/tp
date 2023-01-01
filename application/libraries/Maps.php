@@ -43,4 +43,6 @@ class Maps
                 $url = FCPATH . $this->storage . $file;
                 unlink($url);
         }
+
+        
 }
