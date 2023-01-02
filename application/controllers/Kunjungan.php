@@ -26,6 +26,14 @@ class Kunjungan extends CI_Controller
         akses("tp");
         previllage("1",$this->session->tipe_user,"!=","");
 
+        //Maksimal input 1x per jam
+        $kunjungan_terakhir = $this->kunjungan_m->getByLatest(date("Y-m-d H"),$this->session->id);
+        if ($kunjungan_terakhir->num_rows() > 0) {
+            $this->session->set_flashdata('danger', 'Maksimal Input 1x per jam. Masyarakat lebih senang jika mendapatkan pendampingan berkualitas.');
+            redirect("");
+        }
+
+        // Validasi perangkat yang digunakan
         if ($this->agent->is_mobile() and $this->agent->mobile() != "Nexus") {
             previllage($this->session->tipe_user, "1", "!=", "kunjungan/data");
             $data['title'] = "CHECK IN LOKASI";
@@ -44,9 +52,16 @@ class Kunjungan extends CI_Controller
     function addCheckIn()
     {
         previllage("1",$this->session->tipe_user,"!=","");
-        
+
         $this->load->library("maps");
         $post = $this->input->post(null, TRUE);
+
+        // Agar tidak bisa check in di lokasi yang sama
+        $kunjungan_terakhir = $this->kunjungan_m->getByLocation($post['lat'],$post['lng']);
+        if ($kunjungan_terakhir->num_rows() > 0) {
+            $this->session->set_flashdata('danger', 'Anda Tidak bisa checkin di lokasi yang sama');
+            redirect("");
+        }
 
         // Validasi menghindari injection. Alihkan jika posisi latitude dan longtitude tidak ada
         if ($post['lat'] == null or $post['lng'] == null) {
@@ -83,6 +98,7 @@ class Kunjungan extends CI_Controller
 
                 if ($this->db->affected_rows() > 0) {
                     $this->session->set_flashdata('success', 'Check In Berhasil. Silahkan tambahkan data hasil kunjungan.');
+                    $this->kunjungan_m->addPoin("10","kunjungan");
                 }
                 redirect('kunjungan/data');
             }
@@ -211,7 +227,7 @@ class Kunjungan extends CI_Controller
             }
 
             if ($this->db->affected_rows() > 0) {
-                $this->session->set_flashdata('success', 'Berhasil Di Edit');
+                $this->session->set_flashdata('success', 'Berhasil Di Edit');                
             }
             redirect('kunjungan/data');
         }

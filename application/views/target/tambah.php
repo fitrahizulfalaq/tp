@@ -14,11 +14,12 @@
 				<p class="card-text text-left">Pentunjuk Pengisian Dokumen Target Kerja dalam Setahun.
 				<ol class="text-left">
 					<li>Download Template Dokumen Target Kinerja selama setahun.</li>
-					<li>Download Template Dokumen Target Kinerja selama setahun.</li>
-					<li>Download Template Dokumen Target Kinerja selama setahun.</li>
+					<li>Isikan sesuai rencana kerja yang hendak dilakukan.</li>
+					<li>Simpan dokumen dalam bentuk PDF.</li>
+					<li>Upload pada menu yang telah disediakan.</li>
 				</ol>
 				</p>
-				<a href="#" class="btn btn-primary">Download Template</a>
+				<a href="#" class="btn btn-primary"><ion-icon name="cloud-download-outline"></ion-icon> Download Template Dokumen</a>
 			</div>
 		</div>
 	</div>
@@ -37,7 +38,7 @@
 					</span>
 				</label>
 			</div>
-			<button type="submit" class="btn btn-block btn-info">UPLOAD</button>
+			<button type="submit" class="btn btn-block btn-info"><ion-icon name="cloud-upload-outline"></ion-icon> UPLOAD</button>
 			<?= form_close() ?>
 		</div>
 	</div>

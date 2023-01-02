@@ -8,7 +8,7 @@ class Laporan extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		check_not_login();
+			check_not_login();
 		$this->load->model("kunjungan_m");
 		$this->load->model("approval_m");
 		$this->load->model("user_m");

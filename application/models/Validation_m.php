@@ -123,5 +123,18 @@ class Validation_m extends CI_Model
 		$query = $this->db->get();
 		return $query; 
 	}
+	/*
+		Get Login
+	*/
+	function getLogLogin($id = null,$limit = null)
+	{
+		$this->db->select('*');
+		$this->db->from('tb_log');
+		if ($id != null) { $this->db->where('user_id',$id); }
+		if ($limit != null) { $this->db->limit($limit,'0'); }
+		$this->db->order_by("created","DESC");
+		$query = $this->db->get();
+		return $query; 
+	}
 
 }

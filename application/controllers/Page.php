@@ -17,9 +17,11 @@ class Page extends CI_Controller {
 	public function profil()
 	{
 		$this->load->model("user_m");
+		$this->load->model("validation_m");
 		$data['title'] = "Profil";
 		$data['row'] = $this->user_m->get($this->session->id)->row();
-		// $data['device'] = $this->validation_m->cekDevice();
+		$data['device'] = $this->validation_m->cekDevice();
+		$data['login'] = $this->validation_m->getLogLogin($this->session->id,"6");
 		$this->templateadmin->load('template/dashboard','page/profil',$data);
 	}
 

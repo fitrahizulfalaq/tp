@@ -24,6 +24,22 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="col-lg-2 col-4">
+                            <!-- small card -->
+                            <div class="card product-card">
+                                <div class="inner text-center">
+                                    <a href="<?= base_url('pengaturan/setPassword') ?>">
+                                        <img src="<?= base_url("") ?>/assets/img/icon/user-file.png" alt="" width="100%">
+                                    </a>
+                                </div>
+                                <p align="center">
+                                    <a href="<?= base_url('pengaturan/setPassword') ?>">
+                                        SET PASSWORD
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
                 </div>
             </div>
             <!-- * feed -->

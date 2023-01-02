@@ -141,8 +141,8 @@
                         <div class="in">
                             <strong><?= $this->session->nama ?></strong>
                             <div class="text-muted">
-                                <ion-icon name="location" role="img" class="md hydrated" aria-label="location"></ion-icon>
-                                IP : <?= $this->input->ip_address() ?>
+                                <ion-icon name="person" role="img" class="md hydrated" aria-label="person"></ion-icon><?= $this->fungsi->status($this->session->tipe_user)?><br>
+                                <ion-icon name="location" role="img" class="md hydrated" aria-label="location"></ion-icon>IP : <?= $this->input->ip_address() ?>
                             </div>
                         </div>
                         <a href="javascript:;" class="close-sidebar-button" data-dismiss="modal">
@@ -157,10 +157,10 @@
 
                 <!-- sidebar buttons -->
                 <div class="sidebar-buttons">
-                    <a href="javascript:;" class="button">
+                    <a href="<?= site_url('page/profil'); ?>" class="button bg-success">
                         <ion-icon name="person-outline"></ion-icon>
                     </a>
-                    <a href="<?= site_url('auth/logout'); ?>" class="button">
+                    <a href="<?= site_url('auth/logout'); ?>" class="button bg-danger">
                         <ion-icon name="log-out-outline"></ion-icon>
                     </a>
                 </div>

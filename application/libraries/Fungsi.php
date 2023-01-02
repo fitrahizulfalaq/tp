@@ -42,6 +42,13 @@ class Fungsi {
 		return $query;
 	}
 
+	function nama($id) {
+		$this->ci->db->from('tb_user');
+		$this->ci->db->where('id',$id);
+		$query = $this->ci->db->get()->row("nama");
+		return $query;
+	}
+
 	function timeToStr($tipe = null, $value = null)
     {
         $tanggal = date($tipe,strtotime($value));

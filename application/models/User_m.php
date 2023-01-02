@@ -145,5 +145,14 @@ class User_m extends CI_Model
 		$this->db->update('tb_user', $params);
 	}
 
+	function setPassword($post)
+	{
+		$params['id'] =  $this->session->id;
+		$params['password'] =  sha1($post['password']);
+
+		$this->db->where('id', $params['id']);
+		$this->db->update('tb_user', $params);
+	}
+
 
 }

@@ -64,6 +64,26 @@ class Kunjungan_m extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+    function getByLatest($time = null, $user_id = null)
+    {
+        $this->db->from('tb_kunjungan');
+        if ($user_id != null) {
+            $this->db->where('user_id', $user_id);
+        }
+        $this->db->like('created', $time);
+        $this->db->order_by('created', "desc");
+        $query = $this->db->get();
+        return $query;
+    }
+    function getByLocation($lat,$lng)
+    {
+        $this->db->from('tb_kunjungan');
+        $this->db->like('lat', substr($lat,"0","6"));
+        $this->db->like('lng', substr($lng,"0","7"));
+        $this->db->order_by('created', "desc");
+        $query = $this->db->get();
+        return $query;
+    }
 
     /*
         Tambahkan Kunjungan
@@ -71,7 +91,7 @@ class Kunjungan_m extends CI_Model
     function addCheckInNonLainnya($post)
     {
         //Migrasi Gambar Peta dari TMP ke Storage Utama
-        $params['loc_img'] =  $this->maps->saveMapsImg(FCPATH . $post['loc_img'],$this->session->hp);
+        $params['loc_img'] =  $this->maps->saveMapsImg(FCPATH . $post['loc_img'], $this->session->hp);
         $params['id'] =  "";
         $params['user_id'] =  $this->session->id;
         $params['tipe'] =  $post['tipe'];
@@ -89,7 +109,7 @@ class Kunjungan_m extends CI_Model
     function addCheckInLainnya($post)
     {
         //Migrasi Gambar Peta dari TMP ke Storage Utama
-        $params['loc_img'] =  $this->maps->saveMapsImg(FCPATH . $post['loc_img'],$this->session->hp);
+        $params['loc_img'] =  $this->maps->saveMapsImg(FCPATH . $post['loc_img'], $this->session->hp);
         $params['id'] =  "";
         $params['user_id'] =  $this->session->id;
         $params['tipe'] =  $post['tipe'];
@@ -112,7 +132,7 @@ class Kunjungan_m extends CI_Model
     function addKunjungan($post)
     {
         //Migrasi Gambar Peta dari TMP ke Storage Utama
-        $params['loc_img'] =  $this->maps->saveMapsImg(FCPATH . $post['loc_img'],$this->session->nik);
+        $params['loc_img'] =  $this->maps->saveMapsImg(FCPATH . $post['loc_img'], $this->session->nik);
         //Input Data
         $params['id'] =  "";
         $params['user_id'] =  $this->session->id;
@@ -159,8 +179,12 @@ class Kunjungan_m extends CI_Model
         $params['kebutuhan'] =  $post['kebutuhan'];
         $params['rekomendasi'] =  $post['rekomendasi'];
         //Cek foto
-        if ($post['foto_selfie'] != null) { $params['foto_selfie'] =  $post['foto_selfie']; }
-        if ($post['foto_lokasi'] != null) { $params['foto_lokasi'] =  $post['foto_lokasi']; }
+        if ($post['foto_selfie'] != null) {
+            $params['foto_selfie'] =  $post['foto_selfie'];
+        }
+        if ($post['foto_lokasi'] != null) {
+            $params['foto_lokasi'] =  $post['foto_lokasi'];
+        }
         //End Cek foto
         $params['modified'] =  date("Y-m-d H:i:s");
         $this->db->where('id', $params['id']);
@@ -181,8 +205,12 @@ class Kunjungan_m extends CI_Model
         $params['tindak_lanjut'] =  $post['tindak_lanjut'];
         $params['keterangan'] =  $post['keterangan'];
         //Cek foto
-        if ($post['foto_selfie'] != null) { $params['foto_selfie'] =  $post['foto_selfie']; }
-        if ($post['foto_lokasi'] != null) { $params['foto_lokasi'] =  $post['foto_lokasi']; }
+        if ($post['foto_selfie'] != null) {
+            $params['foto_selfie'] =  $post['foto_selfie'];
+        }
+        if ($post['foto_lokasi'] != null) {
+            $params['foto_lokasi'] =  $post['foto_lokasi'];
+        }
         //End Cek foto
         $params['modified'] =  date("Y-m-d H:i:s");
         $this->db->where('id', $params['id']);
@@ -201,7 +229,11 @@ class Kunjungan_m extends CI_Model
     function updateSPPD($post)
     {
         $params['id'] =  $post['id'];
-        if ($post['sppd'] != null) { $params['file'] =  $post['sppd']; } else { $params['file'] =  ""; }
+        if ($post['sppd'] != null) {
+            $params['file'] =  $post['sppd'];
+        } else {
+            $params['file'] =  "";
+        }
         $params['modified'] =  date("Y-m-d H:i:s");
         $this->db->where('id', $params['id']);
         $this->db->update('tb_sppd', $params);
@@ -232,7 +264,10 @@ class Kunjungan_m extends CI_Model
     function getTarget($tahun = null, $id = null)
     {
         $this->db->from('tb_target');
-        if ($tahun != null && $id != null) { $this->db->where("tahun", $tahun); $this->db->where("user_id", $id);}
+        if ($tahun != null && $id != null) {
+            $this->db->where("tahun", $tahun);
+            $this->db->where("user_id", $id);
+        }
         $query = $this->db->get();
         return $query;
     }
@@ -276,9 +311,33 @@ class Kunjungan_m extends CI_Model
     function getLembaga($id = null)
     {
         $this->db->from('tb_lembaga');
-        if ($id != null) { $this->db->where("id", $id); }
+        if ($id != null) {
+            $this->db->where("id", $id);
+        }
         $query = $this->db->get();
         return $query;
-    }    
+    }
 
+    function addPoin($poin = null, $source = null, $ket = null)
+    {
+        $params['user_id'] = $this->session->id;
+        $params['wilayah_kerja'] = $this->session->wilayah_kerja;
+        $params['tipe'] = "add";
+        $params['source'] = $source;
+        $params['poin'] = $poin;
+        $params['keterangan'] = $ket;
+        $params['created'] =  date("Y-m-d H:i:s");
+        $this->db->insert('tb_leaderboard', $params);
+    }
+
+    function leaderboard($wilayah_kerja)
+    {
+        $query = $this->db->query("
+        SELECT user_id,wilayah_kerja,
+        SUM(poin) AS total_score
+        FROM tb_leaderboard WHERE wilayah_kerja = ".$wilayah_kerja."
+        GROUP BY user_id
+        ORDER BY SUM(poin) DESC");
+        return $query;
+    }
 }

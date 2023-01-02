@@ -30,7 +30,7 @@
         </a>
     </li>
     <li>
-        <a href="<?= site_url('laporan') ?>" class="item">
+        <a href="<?= site_url('kunjungan/laporan') ?>" class="item">
             <div class="icon-box bg-primary">
                 <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
             </div>
