@@ -87,7 +87,7 @@ function timevalidation($start,$end,$redirect)
 	{
 		
 	} else {
-		$ci->session->set_flashdata('danger', 'Waktu Pendaftaran Belum Dimulai atau Sudah Melewati Batas');
+		$ci->session->set_flashdata('danger', 'Waktu Belum Dimulai atau Sudah Melewati Batas');
 		redirect($redirect);
 	}
 }

@@ -3,7 +3,7 @@
     <!-- * App Capsule -->
     <div class="section mt-2">
         <div class="card text-center">
-            <h2 class="text-info">Tenaga Pendamping Teraktif</h2>
+            <h2 class="text-info">Leaderboard Tenaga Pendamping</h2>
             <ul class="listview image-listview">
                 <?php $no = "1";foreach ($leaderboard->result() as $key => $data) { ?>
                     <li>
@@ -64,11 +64,11 @@
                             <!-- small card -->
                             <div class="card product-card">
                                 <div class="inner text-center">
-                                    <a href="#" onclick="alert('Dalam tahap pengembangan')">
+                                    <a href="<?= base_url("kunjungan/addlaporan")?>">
                                         <img src="<?= base_url("") ?>/assets/img/icon/text-folder.png" alt="" width="100%">
                                     </a>
                                     <p align="center">
-                                        <a href="#" onclick="alert('Dalam tahap pengembangan')">
+                                        <a href="<?= base_url("kunjungan/addlaporan")?>">
                                             LAPORAN
                                         </a>
                                     </p>
@@ -86,7 +86,7 @@
                                 </div>
                                 <p align="center">
                                     <a href="<?= base_url('target') ?>">
-                                        TARGET KERJA
+                                        RENCANA KERJA
                                     </a>
                                 </p>
                             </div>

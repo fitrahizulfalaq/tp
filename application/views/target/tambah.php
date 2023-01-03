@@ -10,8 +10,8 @@
 	<div class="section mt-2">
 		<div class="card text-center">
 			<div class="card-body">
-				<h5 class="card-title">Template Dokumen target Kerja</h5>
-				<p class="card-text text-left">Pentunjuk Pengisian Dokumen Target Kerja dalam Setahun.
+				<h5 class="card-title">Template Dokumen Rencana Kerja</h5>
+				<p class="card-text text-left">Pentunjuk Pengisian Dokumen Rencana Kerja dalam Setahun.
 				<ol class="text-left">
 					<li>Download Template Dokumen Target Kinerja selama setahun.</li>
 					<li>Isikan sesuai rencana kerja yang hendak dilakukan.</li>
@@ -19,7 +19,7 @@
 					<li>Upload pada menu yang telah disediakan.</li>
 				</ol>
 				</p>
-				<a href="#" class="btn btn-primary"><ion-icon name="cloud-download-outline"></ion-icon> Download Template Dokumen</a>
+				<a href="#" class="btn btn-primary"><ion-icon name="cloud-download-outline"></ion-icon> Download Template Rencana Kerja</a>
 			</div>
 		</div>
 	</div>
@@ -33,7 +33,7 @@
 					<span>
 						<strong>
 							<ion-icon name="cloud-upload-outline"></ion-icon>
-							<i>Klik Untuk Memilih Dokumen Target Kerja</i>
+							<i>Klik Untuk Memilih Dokumen Rencana Kerja</i>
 						</strong>
 					</span>
 				</label>
