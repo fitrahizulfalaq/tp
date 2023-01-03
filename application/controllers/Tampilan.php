@@ -15,7 +15,7 @@ class Tampilan extends CI_Controller {
 	public function target()
 	{		
         $data['title']="Target Kerja";
-		$this->templateadmin->load('template/dashboard','target/target_input',$data);
+		$this->templateadmin->load('template/dashboard','target/draft/target_input',$data);
 	}
 
     public function targetdata()
@@ -89,6 +89,15 @@ class Tampilan extends CI_Controller {
         $data['title']="PROFIL";
 		$this->templateadmin->load('template/dashboard','page/profil',$data);
 	}
+
+	public function uploadlaporan()
+	{		
+		//contoh SPPD, contoh SPT, Laporan Translok, Surat Keterangan Kunjungan
+		$data['title']="UPLOAD LAPORAN";
+		$this->templateadmin->load('template/dashboardadmin','laporan/tambah_laporan',$data);
+	}
+
+
 
 }
 	
