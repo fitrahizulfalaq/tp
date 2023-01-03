@@ -5,6 +5,7 @@
             <div class="col-12">
                 <div class="col-12">
                     <h3>LAPORAN TENAGA PENDAMPING</h3>
+                    <?php $this->view("message")?>
                     <div class="card">
                         <div class="card-body">
                             <form action="" enctype="multipart/form-data" method="post" accept-charset="utf-8">
@@ -40,7 +41,8 @@
                                         <thead>
                                             <tr>
                                                 <th width="5%">No</th>
-                                                <th width="20%">Nama Tenaga Pendamping</th>
+                                                <th width="30%">Nama Tenaga Pendamping</th>
+                                                <th width="50%">Laporan Bulan Ini</th>
                                                 <th width="20%">Aksi</th>
                                             </tr>
                                         </thead>
@@ -55,6 +57,12 @@
                                                     </td>
                                                     <td>
                                                         <?= $data->nama ?>
+                                                    </td>
+                                                    <td>
+                                                        <a href="<?= base_url("laporan/perintah?aksi=download&tahun=".date("Y")."&bulan=".date("m")."&jenis=surat_tugas&token=".base64_encode($data->id))?>" class="btn btn-warning" ><i class="fa fa-download"></i> Surat Tugas</a>
+                                                        <a href="<?= base_url("laporan/perintah?aksi=download&tahun=".date("Y")."&bulan=".date("m")."&jenis=sppd&token=".base64_encode($data->id))?>" class="btn btn-warning" ><i class="fa fa-download"></i> SPPD</a>
+                                                        <a href="<?= base_url("laporan/perintah?aksi=download&tahun=".date("Y")."&bulan=".date("m")."&jenis=surat_kunjungan&token=".base64_encode($data->id))?>" class="btn btn-warning" ><i class="fa fa-download"></i> Kunjungan</a>
+                                                        <a href="<?= base_url("laporan/perintah?aksi=download&tahun=".date("Y")."&bulan=".date("m")."&jenis=laporan_kunjungan&token=".base64_encode($data->id))?>" class="btn btn-warning" ><i class="fa fa-download"></i> Laporan Kunjungan</a>
                                                     </td>
                                                     <td>
                                                         <a href="<?= site_url('laporan/detailTP/'.$data->id) ?>" class="btn btn-primary"><ion-icon name="eye-outline"></ion-icon></a>

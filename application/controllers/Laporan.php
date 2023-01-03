@@ -90,7 +90,6 @@ class Laporan extends CI_Controller
 	function listDaerah()
 	{
 		akses("admin");
-		
 		$data['title'] = "Data Laporan TP";
 		if (isset($_POST['kota'])) {
 			$this->db->where("tipe_user","1");
@@ -101,5 +100,37 @@ class Laporan extends CI_Controller
 		}
 		
 		$this->templateadmin->load('template/dashboard', 'kunjungan/laporan/listDaerah', $data);
+	}
+
+	/*
+	Controller untuk membuka, mendownload, dan mencetak laporan akhir
+	*/
+	function perintah()
+	{
+		$data['perintah'] = $_GET['aksi']; 
+		$data['tahun'] = $_GET['tahun']; 
+		$data['bulan'] = $_GET['bulan']; 
+		$data['jenis'] = $_GET['jenis']; 
+		$data['user_id'] = base64_decode($_GET['token']); 
+		!isset($data) ? redirect("") : "";
+		// Cek apakah sudah upload atau belum
+		$file = $this->kunjungan_m->getLaporan($data['tahun'],$data['bulan'],$data['user_id']);
+		$filecontents = "/assets/files/laporan/". $data['jenis'] . "/" . $file->row($data['jenis']);
+		// Buka sesuai metode
+		if ($file->num_rows() > 0){
+			if ($data['perintah'] == "open"){
+				$data['title'] = "Open";
+				$data['url'] = base_url().$filecontents;
+				$this->load->view('laporan/open',$data);
+			} elseif ($data['perintah'] == "download"){
+				redirect("".$filecontents);
+			} elseif ($data['perintah'] == "print"){
+				exec(FCPATH . $filecontents);
+				redirect("laporan/listDaerah");
+			}
+		} else {
+			$this->session->set_flashdata('danger', "Belum mengupload");
+			redirect("laporan/listDaerah");
+		}
 	}
 }

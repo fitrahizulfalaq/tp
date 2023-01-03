@@ -307,6 +307,30 @@ class Kunjungan_m extends CI_Model
         $this->db->update('tb_target', $params);
     }
 
+    function getLaporan($tahun = null,$bulan = null, $id = null)
+    {
+        $this->db->from('tb_laporan');
+        $this->db->like("created", $tahun."-".$bulan);
+        $this->db->where("user_id", $id);        
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function addLaporan($post)
+    {
+        $params['id'] = "";
+        $params['user_id'] =  $this->session->id;
+        $params['wilayah_kerja'] =  $this->session->wilayah_kerja;
+        $params['tahun'] =  date("Y");
+        $params['bulan'] =  date("m");
+        $params['surat_tugas'] =  $post['surat_tugas'];
+        $params['sppd'] =  $post['sppd'];
+        $params['surat_kunjungan'] =  $post['surat_kunjungan'];
+        $params['laporan_kunjungan'] =  $post['laporan_kunjungan'];
+        $params['created'] =  date("Y-m-d H:i:s");
+        $this->db->insert('tb_laporan', $params);
+    }
+
     /////// LIST LEMBAGA ///////
     function getLembaga($id = null)
     {
