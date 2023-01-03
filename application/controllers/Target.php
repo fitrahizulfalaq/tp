@@ -58,7 +58,7 @@ class Target extends CI_Controller
 		$this->form_validation->set_error_delimiters('<span class="badge badge-danger">', '</span>');
 		
 		if ($this->form_validation->run() == FALSE) {
-			$data['title'] = "TAMBAH TARGET SETAHUN";
+			$data['title'] = "TAMBAH RENCANA KERJA";
 			$this->templateadmin->load('template/dashboard', 'target/tambah', $data);
 		} else {
 			$post = $this->input->post(null, TRUE);
