@@ -237,7 +237,7 @@ class Kunjungan extends CI_Controller
     function addLaporan()
 	{
 		// Validasi waktu: Format Ymd (Dimulai,Berakhir,Dialihkan kemana)
-		timevalidation("20230101","20230115","kunjungan/data");
+		// timevalidation("20230101","20230115","kunjungan/data");
 		// Khusus untuk TP
 		previllage($this->session->tipe_user,"1","!=","target");
 
