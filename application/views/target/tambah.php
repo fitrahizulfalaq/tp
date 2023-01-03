@@ -19,7 +19,7 @@
 					<li>Upload pada menu yang telah disediakan.</li>
 				</ol>
 				</p>
-				<a href="#" class="btn btn-primary"><ion-icon name="cloud-download-outline"></ion-icon> Download Template Dokumen</a>
+				<a href="<?=base_url('/assets/files/template/Rencana Kerja Pendampingan 2023.docx')?>" class="btn btn-primary"><ion-icon name="cloud-download-outline"></ion-icon> Download Template Dokumen</a>
 			</div>
 		</div>
 	</div>
