@@ -38,7 +38,7 @@ class Target extends CI_Controller
 	function tambah()
 	{
 		// Validasi waktu: Format Ymd (Dimulai,Berakhir,Dialihkan kemana)
-		timevalidation("20220101","20230105","target/data");
+		timevalidation("20220101","20230120","target/data");
 		// Khusus untuk TP
 		previllage($this->session->tipe_user,"1","!=","target");
 

@@ -42,54 +42,71 @@
                         </div>
                     </div>
                     <br>
-                    <div class="card">
-                        <?php $this->view('message'); ?>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <div style="overflow-x:auto;">
-                                    <table class="<table table-striped table-bordered table-hover table-full-width dataTable" id="list">
-                                        <thead>
-                                            <tr>
-                                                <th width="5%">No</th>
-                                                <th width="20%">Tanggal</th>
-                                                <th width="60%">Tujuan</th>
-                                                <th width="20%">Aksi</th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $no = 1;
-                                            foreach ($row->result() as $key => $data) {;
-                                            ?>
-                                                <tr>
-                                                    <td scope="row">
-                                                        <p><?= $no++ ?></p>
-                                                    </td>
-                                                    <td><?= date("d-m-Y G:i:s", strtotime($data->created)) ?></td>
-                                                    <td>
-                                                        <?= $data->tujuan ?>
-                                                    </td>
-                                                    <td>
-                                                        <a href="<?= site_url('kunjungan/edit/' . $data->id); ?>" class="btn btn-info btn-sm"><ion-icon name="eye-outline"></ion-icon></a>
-                                                    </td>
-                                                </tr>
-                                            <?php } ?>
-                                        </tbody>
-                                    </table>
-                                </div>
+                    <?php if ($laporan->num_rows() > 0) { ?>
+                        <div class="card text-white bg-success mb-2">
+                            <div class="card-body">
+                                <h5 class="card-title"><ion-icon name="checkmark-done-circle-outline"></ion-icon> Laporan Terupload</h5>
+                                <p class="card-text">Terima kasih anda telah melakukan upload laporan pada <?= $laporan->row("created")?></p>
                             </div>
                         </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
+                    <?php } else { ?>
+                        <div class="card text-white bg-danger mb-2">
+                            <div class="card-body">
+                                <h5 class="card-title"><ion-icon name="checkmark-done-circle-outline"></ion-icon> Laporan Belum Terupload</h5>
+                                <p class="card-text">Anda belum mengupload laporan bulan ini. Batas akhir upload laporan adalah tanggal 29 setiap bulannya. Silahkan upload pada menu yang telah disediakan.</p>
+                                <a href="<?= site_url('kunjungan/addlaporan/') ?>" class="btn btn-success btn-block btn-sm">UPLOAD LAPORAN</a>
+                            </div>
+                        </div>
                 </div>
-            </div>
-            <!-- /.col -->
-        </div>
-        <!-- /.row -->
+            <?php } ?>
+            <div class="card">
+                <?php $this->view('message'); ?>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div style="overflow-x:auto;">
+                            <table class="<table table-striped table-bordered table-hover table-full-width dataTable" id="list">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">No</th>
+                                        <th width="20%">Tanggal</th>
+                                        <th width="60%">Tujuan</th>
+                                        <th width="20%">Aksi</th>
 
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $no = 1;
+                                    foreach ($row->result() as $key => $data) {;
+                                    ?>
+                                        <tr>
+                                            <td scope="row">
+                                                <p><?= $no++ ?></p>
+                                            </td>
+                                            <td><?= date("d-m-Y G:i:s", strtotime($data->created)) ?></td>
+                                            <td>
+                                                <?= $data->tujuan ?>
+                                            </td>
+                                            <td>
+                                                <a href="<?= site_url('kunjungan/edit/' . $data->id); ?>" class="btn btn-info btn-sm"><ion-icon name="eye-outline"></ion-icon></a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+            </div>
+        </div>
+        <!-- /.col -->
     </div>
+    <!-- /.row -->
+
+</div>
 
 
 
