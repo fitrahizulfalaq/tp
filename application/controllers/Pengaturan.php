@@ -12,7 +12,7 @@ class Pengaturan extends CI_Controller {
 
 	public function setDevice()
 	{
-		// timevalidation("20230106","20230108","");
+		timevalidation("20230106","20230108","");
 
 		$data['title'] = "Set Device";
 		$data['row'] = $this->validation_m->cekDevice();
@@ -21,7 +21,8 @@ class Pengaturan extends CI_Controller {
 
 	function saveDevice()
 	{
-		// timevalidation("20230106","20230108","");
+		timevalidation("20230106","20230108","");
+
 		$device = $this->validation_m->cekDevice();
 		$thisDevice = $this->validation_m->cekDevice($this->agent->agent_string(),$this->agent->platform(),$this->agent->browser());
 		if ($this->agent->mobile() == "Nexus"){
