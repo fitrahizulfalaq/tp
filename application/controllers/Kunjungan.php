@@ -237,13 +237,13 @@ class Kunjungan extends CI_Controller
     function addLaporan()
 	{
 		// Validasi waktu: Format Ymd (Dimulai,Berakhir,Dialihkan kemana)
-		timevalidation("20220101","20230108","kunjungan/data");
+		timevalidation("20230101","20230115","kunjungan/data");
 		// Khusus untuk TP
 		previllage($this->session->tipe_user,"1","!=","target");
 
 		$cek = $this->kunjungan_m->getLaporan(date("Y"),date("m"),$this->session->id);
 		$cek->num_rows() != null ? redirect("kunjungan/data") : "";
-		
+
 		//Load librarynya dulu
 		$this->load->library('form_validation');
 		//Atur validasinya
@@ -261,6 +261,10 @@ class Kunjungan extends CI_Controller
 			$this->templateadmin->load('template/dashboard', 'kunjungan/laporan/addLaporan', $data);
 		} else {
 			$post = $this->input->post(null, TRUE);
+
+            // Tidak bisa tambah laporan jika checkin belum sejumlah 15
+            $kunjungan_terakhir = $this->kunjungan_m->getByMonth($tahun, $bulan, $this->session->id);
+            if ($kunjungan_terakhir < 16) { $this->session->set_flashdata('warning', 'Anda belum checkin sesuai dengan ketentuan'); redirect(""); }
 			
 			// SURAT TUGAS
 			$config['upload_path']          = 'assets/files/laporan/surat_tugas/';

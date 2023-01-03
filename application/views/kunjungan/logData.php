@@ -54,7 +54,9 @@
                             <div class="card-body">
                                 <h5 class="card-title"><ion-icon name="checkmark-done-circle-outline"></ion-icon> Laporan Belum Terupload</h5>
                                 <p class="card-text">Anda belum mengupload laporan bulan ini. Batas akhir upload laporan adalah tanggal 29 setiap bulannya. Silahkan upload pada menu yang telah disediakan.</p>
-                                <a href="<?= site_url('kunjungan/addlaporan/') ?>" class="btn btn-success btn-block btn-sm">UPLOAD LAPORAN</a>
+                                <?php if ($row->num_rows() >= 15) { ?>
+                                    <a href="<?= site_url('kunjungan/addlaporan/') ?>" class="btn btn-success btn-block btn-sm">UPLOAD LAPORAN</a>
+                                <?php } ?>
                             </div>
                         </div>
                 </div>
