@@ -81,8 +81,16 @@
 
             <div class="form-group boxed">
                 <div class="input-wrapper">
-                    <label class="label" for="name3">Permasalan yang dihadapi <span id="alert-resume" class="error">*</span></label>
-                    <input type="text" id="word" name="masalah" class="form-control" placeholder="Permasalahan yang dihadapi" required minlength="10">
+                    <label class="label" for="name3">Kegiatan <span id="alert-resume" class="error">*</span></label>
+                    <input type="text" id="word" name="kegiatan" class="form-control" placeholder="Kegiatan yang dilakukan" required minlength="10">
+                    <i class="clear-input">
+                        <ion-icon name="close-circle"></ion-icon>
+                    </i>
+                </div>
+                <hr>
+                <div class="input-wrapper">
+                    <label class="label" for="name3">Tujuan <span id="alert-resume" class="error">*</span></label>
+                    <input type="text" id="word" name="tujuan" class="form-control" placeholder="Tujuan Kegiatan" required minlength="10">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
@@ -105,16 +113,8 @@
                 </div>
                 <hr>
                 <div class="input-wrapper">
-                    <label class="label" for="name3">Kegiatan <span id="alert-resume" class="error">*</span></label>
-                    <input type="text" id="word" name="kegiatan" class="form-control" placeholder="Kegiatan yang dilakukan" required minlength="10">
-                    <i class="clear-input">
-                        <ion-icon name="close-circle"></ion-icon>
-                    </i>
-                </div>
-                <hr>
-                <div class="input-wrapper">
-                    <label class="label" for="name3">Tujuan <span id="alert-resume" class="error">*</span></label>
-                    <input type="text" id="word" name="tujuan" class="form-control" placeholder="Tujuan Kegiatan" required minlength="10">
+                    <label class="label" for="name3">Permasalan yang dihadapi <span id="alert-resume" class="error">*</span></label>
+                    <input type="text" id="word" name="masalah" class="form-control" placeholder="Permasalahan yang dihadapi" required minlength="10">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
