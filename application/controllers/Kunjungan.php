@@ -23,9 +23,11 @@ class Kunjungan extends CI_Controller
         */
     function checkIn()
     {
+        timevalidation("20230104","20230108","");
+        
         akses("tp");
-        previllage("1",$this->session->tipe_user,"!=","");
-
+        previllage("1",$this->session->tipe_user,"!=","");        
+        
         //Maksimal input 1x per jam
         $kunjungan_terakhir = $this->kunjungan_m->getByLatest(date("Y-m-d H"),$this->session->id);
         if ($kunjungan_terakhir->num_rows() > 0) {
