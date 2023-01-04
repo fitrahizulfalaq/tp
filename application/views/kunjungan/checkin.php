@@ -72,7 +72,7 @@
                 <hr>
                 <div class="input-wrapper">                                     
                     <label class="label" for="name3">Target <span id="alert-resume" class="error">*</span></label>
-                    <input type="tel" id="word" name="target" class="form-control" placeholder="Target yang ingin dicapai" required>
+                    <input type="text" id="word" name="target" class="form-control" placeholder="Target yang ingin dicapai" required>
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>                    
