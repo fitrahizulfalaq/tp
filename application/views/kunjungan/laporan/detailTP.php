@@ -76,6 +76,8 @@
                                                 <th width="15%">Maps</th>
                                                 <th width="10%">Tanggal</th>
                                                 <th width="60%">Tujuan</th>
+                                                <th width="15%">Foto Selfie</th>
+                                                <th width="15%">Foto Lokasi</th>
                                                 <th width="20%">Aksi</th>
 
                                             </tr>
@@ -96,6 +98,12 @@
                                                     <td>
                                                         <strong>Kunjungan ke <?= $data->tipe ?></strong>. Bertujuan untuk 
                                                         <?= $data->tujuan ?>
+                                                    </td>
+                                                    <td>
+                                                        <img src="<?=base_url()?>/assets/files/foto_selfie/<?= $data->foto_selfie ?>" alt="" class="imaged w200">
+                                                    </td>
+                                                    <td>
+                                                        <img src="<?=base_url()?>/assets/files/foto_lokasi/<?= $data->foto_lokasi ?>" alt="" class="imaged w200">
                                                     </td>
                                                     <td>
                                                         <a href="<?= site_url('laporan/detaillaporan/' . $data->id); ?>" class="btn btn-info btn-sm">Detail</a>

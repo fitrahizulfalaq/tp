@@ -23,9 +23,7 @@
                                 </p>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="col-lg-2 col-4">
+                        <div class="col-lg-2 col-4">
                             <!-- small card -->
                             <div class="card product-card">
                                 <div class="inner text-center">
@@ -40,6 +38,7 @@
                                 </p>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
             <!-- * feed -->

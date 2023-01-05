@@ -61,9 +61,9 @@ class Kunjungan extends CI_Controller
         // Agar tidak bisa check in di lokasi yang sama
         $kunjungan_terakhir = $this->kunjungan_m->getByLocation($post['lat'],$post['lng']);
         if ($kunjungan_terakhir->num_rows() > 0) {
-            $this->session->set_flashdata('danger', 'Anda Tidak bisa checkin di lokasi yang sama');
+            $this->session->set_flashdata('danger', 'Anda Tidak bisa checkin di lokasi yang sama dalam sehari');
             redirect("");
-        }
+        }        
 
         // Validasi menghindari injection. Alihkan jika posisi latitude dan longtitude tidak ada
         if ($post['lat'] == null or $post['lng'] == null) {
