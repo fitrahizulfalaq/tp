@@ -235,6 +235,19 @@ class Test extends CI_Controller
         $this->load->model("kunjungan_m");
         $this->kunjungan_m->addPoin("10","kunjungan");
     }
+
+    function monthMaps()
+    {
+        $this->load->model("kunjungan_m");
+        $dataMonth = $this->kunjungan_m->getByMonth(date("Y"),date("m"),"66");
+        $data['center'] = $dataMonth->row("lat").",".$row->row("lng");
+        $datamarker = "";
+        foreach ($dataMonth->result() as $key => $x) {
+            $datamarker = $datamarker."markers=size:mid%7Ccolor:0xff0000%7Clabel:0%7C".$x->lat."%2C".$x->lng."|&";
+        }
+        $data['markers'] = $datamarker;
+        $this->load->view("test/mapsMonth",$data);
+    }
     
     
 }

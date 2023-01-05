@@ -18,7 +18,7 @@
                     </li>
                 <?php } ?>
             </ul>
-        </div>
+        </div>        
     </div>
     <!-- tab content -->
     <div class="section full mb-2">
@@ -126,6 +126,10 @@
 
                     </div>
                 </div>
+                <div class="card text-center">
+        <h2>Log Harian</h2>
+        <img class="imaged w250" src="https://maps.googleapis.com/maps/api/staticmap?center=<?=$center?>&zoom=12&scale=10&size=1200x500&maptype=roadmap&format=jpg&key=AIzaSyBulTatyUv6oR6ykvWU-QDzp-wYQXNWV7A&<?=$markers?>" alt="Google map of -7.8081176,112.0413752" />
+        </div>
             </div>
             <!-- * feed -->
         </div>

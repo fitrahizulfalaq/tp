@@ -18,6 +18,15 @@ class Dashboard extends CI_Controller {
 		$this->load->model("kunjungan_m");
 		$data['leaderboard'] = $this->kunjungan_m->leaderboard($this->session->wilayah_kerja);
 		// test($data['leaderboard']->result());
+
+		// Data Rekam Trayek Harian
+		$dataMonth = $this->kunjungan_m->getByMonth(date("Y"),date("m"),$this->session->id);
+        $data['center'] = $dataMonth->row("lat").",".$dataMonth->row("lng");
+        $datamarker = "";
+        foreach ($dataMonth->result() as $key => $x) {
+            $datamarker = $datamarker."markers=size:mid%7Ccolor:0xff0000%7Clabel:0%7C".$x->lat."%2C".$x->lng."|&";
+        }
+        $data['markers'] = $datamarker;
 		$data['title'] = "KITAPKU APPS";
 		$this->templateadmin->load('template/dashboard','page/beranda/'.$this->session->tipe_user,$data);
 	}
