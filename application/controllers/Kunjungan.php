@@ -140,6 +140,12 @@ class Kunjungan extends CI_Controller
             $query = $this->kunjungan_m->getAllBy("id", $id);
             isMe($query->row("user_id"), $this->session->id);
 
+            $tanggal = date("Ymd",strtotime($query->row("created")));
+            if ($tanggal != date("Ymd")) {
+                $this->session->set_flashdata('danger', 'Mohon maaf waktu edit sudah berakhir');
+                redirect("kunjungan/data");
+            }
+            
             if ($query->num_rows() > 0) {
                 $data['row'] = $query->row();
                 $data['title'] = "HASIL KUNJUNGAN";
@@ -231,6 +237,9 @@ class Kunjungan extends CI_Controller
             }
 
             if ($this->db->affected_rows() > 0) {
+                if ($post['foto_lokasi'] != null){
+                    $this->kunjungan_m->addPoin("5","melengkapifoto");
+                }
                 $this->session->set_flashdata('success', 'Berhasil Di Edit');                
             }
             redirect('kunjungan/data');
