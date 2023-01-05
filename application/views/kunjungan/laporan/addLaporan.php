@@ -19,6 +19,7 @@
                     <li>Upload pada menu yang telah disediakan.</li>
                 </ol>
                 </p>
+                <a href="<?=base_url('/assets/files/template/1. Format Laporan Bulanan.rtf')?>" class="btn btn-danger"><ion-icon name="cloud-download-outline"></ion-icon> Download Template Laporan Bulanan</a>
                 <a href="<?= base_url('/assets/files/template/LAPORAN TRANSLOK.docx') ?>" class="btn btn-primary"><ion-icon name="cloud-download-outline"></ion-icon> Download Template Laporan Translok</a></hr>
                 <a href="<?= base_url('/assets/files/template/SURAT KETERANGAN KUNJUNGAN_Lampiran Translok.rtf') ?>" class="btn btn-warning"><ion-icon name="cloud-download-outline"></ion-icon> Download Template Surat Keterangan Kunjungan</a>
             </div>
