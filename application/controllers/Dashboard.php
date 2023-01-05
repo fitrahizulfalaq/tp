@@ -29,7 +29,7 @@ class Dashboard extends CI_Controller {
 			}
 			$data['markers'] = $datamarker;
 		}
-		
+		$data['kunjungan'] = $dataMonth;
 		$data['title'] = "KITAPKU APPS";
 		$this->templateadmin->load('template/dashboard','page/beranda/'.$this->session->tipe_user,$data);
 	}

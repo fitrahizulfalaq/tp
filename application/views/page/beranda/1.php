@@ -12,7 +12,7 @@
                             <!-- <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image"> -->
                             <h3><?= $no++ ?></h3>
                             <div class="in">
-                                <div><?= $this->fungsi->nama($data->user_id) ?></div>
+                                <div><?= $this->fungsi->nama($data->user_id)?></div>
                                 <span class="badge badge-primary">Poin : <?= $data->total_score ?></span>
                             </div>
                         </div>
@@ -127,7 +127,7 @@
 
                     </div>
                 </div>
-                <?php if (!isset($center)) { ?>
+                <?php if ($kunjungan->num_rows() > 0) { ?>
                 <div class="card text-center">
                     <h2>Log Harian</h2>
                     <img class="imaged w250" src="https://maps.googleapis.com/maps/api/staticmap?center=<?= $center ?>&zoom=12&scale=10&size=1200x500&maptype=roadmap&format=jpg&key=AIzaSyBulTatyUv6oR6ykvWU-QDzp-wYQXNWV7A&<?= $markers ?>" alt="Google map of -7.8081176,112.0413752" />
