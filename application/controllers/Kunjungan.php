@@ -94,13 +94,14 @@ class Kunjungan extends CI_Controller
                 //Input database sesuai tipe
                 if ($post['tipe'] == "UKM" or $post['tipe'] == "KOPERASI" or $post['tipe'] == "CALON WIRAUSAHA") {
                     $this->kunjungan_m->addCheckInNonLainnya($post);
+                    $this->kunjungan_m->addPoin("10","kunjungan");
                 } elseif ($post['tipe'] == "LAINNYA") {
                     $this->kunjungan_m->addCheckInLainnya($post);
+                    $this->kunjungan_m->addPoin("5","kekantor");
                 }
 
                 if ($this->db->affected_rows() > 0) {
                     $this->session->set_flashdata('success', 'Check In Berhasil. Silahkan tambahkan data hasil kunjungan.');
-                    $this->kunjungan_m->addPoin("10","kunjungan");
                 }
                 redirect('kunjungan/data');
             }
