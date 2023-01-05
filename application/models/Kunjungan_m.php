@@ -80,7 +80,7 @@ class Kunjungan_m extends CI_Model
         $this->db->from('tb_kunjungan');
         $this->db->like('lat', substr($lat,"0","6"));
         $this->db->like('lng', substr($lng,"0","7"));
-        $this->db->like('created', date("Y")."-".date("m"));
+        $this->db->like('created', date("Y")."-".date("m")."-".date("d"));
         $this->db->where('user_id',$this->session->id);
         $this->db->order_by('created', "desc");
         $query = $this->db->get();
