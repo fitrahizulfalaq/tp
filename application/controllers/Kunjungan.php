@@ -23,7 +23,7 @@ class Kunjungan extends CI_Controller
         */
     function checkIn()
     {
-        timevalidation("20230103","20230108","");
+        // timevalidation("20230103","20230108","");
         
         akses("tp");
         previllage("1",$this->session->tipe_user,"!=","");        
