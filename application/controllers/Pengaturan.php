@@ -21,6 +21,7 @@ class Pengaturan extends CI_Controller {
 
 	function saveDevice()
 	{
+		//Set waktu untuk aktif
 		timevalidation("20230103","20230109","");
 
 		$device = $this->validation_m->cekDevice();
