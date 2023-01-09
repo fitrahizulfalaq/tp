@@ -12,6 +12,7 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 		$this->load->model("user_m");
+		$this->load->model("validation_m");
 		$password = $this->user_m->getAllBy("id",$this->session->id)->row("password");
 		if ($password == "7c222fb2927d828af22f592134e8932480637c0d") { redirect("pengaturan/setPassword");}
 		
@@ -29,6 +30,7 @@ class Dashboard extends CI_Controller {
 			}
 			$data['markers'] = $datamarker;
 		}
+		$data['device'] = $this->validation_m->cekDevice($this->agent->agent_string(), $this->agent->platform(), $this->agent->browser());
 		$data['kunjungan'] = $dataMonth;
 		$data['title'] = "KITAPKU APPS";
 		$this->templateadmin->load('template/dashboard','page/beranda/'.$this->session->tipe_user,$data);
