@@ -43,7 +43,7 @@
                                 <p><?= $data->platform ?></p>
                             </td>
                             <td>
-                                <?= sha1($data->token) ?>
+                                <?= md5($data->token) ?>
                             </td>
                             <td>
                                 <?= $data->browser ?>
