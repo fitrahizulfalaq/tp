@@ -10,7 +10,7 @@
             <p>Kuota Device Tersedia <?= 5 - $row->num_rows() ?></p>
             <?php $this->view("message")?>
             <br>
-            <input type="text" value="Token : <?= sha1($this->agent->agent_string()) ?>" class="form-control" readonly>
+            <input type="text" value="Token : <?= md5($this->agent->agent_string()) ?>" class="form-control" readonly>
             <br>
             <input type="text" value="Platform : <?= $this->agent->platform() ?>" class="form-control" readonly>
             <br>
