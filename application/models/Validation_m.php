@@ -89,8 +89,8 @@ class Validation_m extends CI_Model
         $this->db->select('*');
 		if ($token != null ) { $this->db->where("token", $token);}
 		if ($platform != null ) { $this->db->where("platform", $platform);}
-		if ($mobile != null ) { $this->db->where("mobile", $mobile);}
 		if ($browser != null ) { $this->db->where("browser", $browser);}
+		if ($mobile != null ) { $this->db->where("mobile", $mobile);}
 		$this->db->from('tb_device');
 		$this->db->where('user_id', $this->session->id);
 		$query = $this->db->get();
