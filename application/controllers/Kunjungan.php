@@ -26,7 +26,16 @@ class Kunjungan extends CI_Controller
         // timevalidation("20230103","20230108","");
         
         akses("tp");
-        previllage("1",$this->session->tipe_user,"!=","");        
+        previllage("1",$this->session->tipe_user,"!=","");
+        
+        // Cek Device Terdaftar
+        $this->load->model("validation_m");
+        $cekDevice = $this->validation_m->cekDevice($this->agent->agent_string(), $this->agent->platform(), $this->agent->browser());
+        // test($cekDevice);
+        if ($cekDevice->num_rows() == null and $this->session->tipe_user == "1") {
+        	$this->session->set_flashdata('danger', 'Hanya bisa update kunjungan di device terdaftar');
+        	redirect('');
+        }
         
         //Maksimal input 1x per jam
         $kunjungan_terakhir = $this->kunjungan_m->getByLatest(date("Y-m-d H"),$this->session->id);
