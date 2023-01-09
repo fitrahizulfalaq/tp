@@ -61,13 +61,13 @@ class Auth extends CI_Controller
 
 				// Cek Device (Matikan Jika Pada Masa Pendaftaran)
 				// Jika kode bawah diaktfikan, maka hanya perangkat terdaftar yang bisa login 
-				$cekDevice = $this->validation_m->cekDevice($this->agent->agent_string(), $this->agent->platform(), $this->agent->browser());
-				if ($cekDevice->num_rows() == "0" and $this->session->tipe_user == "1") {
-					$params = array('id', 'username', 'tipe_user', 'date_now');
-					$this->session->set_flashdata('danger', 'Device Tidak Terdaftar');
-					$this->session->unset_userdata($params);
-					redirect('auth/login');
-				}
+				// $cekDevice = $this->validation_m->cekDevice($this->agent->agent_string(), $this->agent->platform(), $this->agent->browser());
+				// if ($cekDevice->num_rows() == "0" and $this->session->tipe_user == "1") {
+				// 	$params = array('id', 'username', 'tipe_user', 'date_now');
+				// 	$this->session->set_flashdata('danger', 'Device Tidak Terdaftar');
+				// 	$this->session->unset_userdata($params);
+				// 	redirect('auth/login');
+				// }
 
 				$this->validation_m->saveLog();
 				redirect('dashboard');
@@ -143,13 +143,13 @@ class Auth extends CI_Controller
 				$this->session->set_userdata($params);
 				// Cek Device (Matikan Jika Pada Masa Pendaftaran)
 				// Jika kode bawah diaktfikan, maka hanya perangkat terdaftar yang bisa login 
-				$cekDevice = $this->validation_m->cekDevice($this->agent->agent_string(), $this->agent->platform(), $this->agent->browser());
-				if ($cekDevice->num_rows() == "0" and $this->session->tipe_user == "1") {
-					$params = array('id', 'username', 'tipe_user', 'date_now');
-					$this->session->set_flashdata('danger', 'Device Tidak Terdaftar');
-					$this->session->unset_userdata($params);
-					redirect('auth/login');
-				}
+				// $cekDevice = $this->validation_m->cekDevice($this->agent->agent_string(), $this->agent->platform(), $this->agent->browser());
+				// if ($cekDevice->num_rows() == "0" and $this->session->tipe_user == "1") {
+				// 	$params = array('id', 'username', 'tipe_user', 'date_now');
+				// 	$this->session->set_flashdata('danger', 'Device Tidak Terdaftar');
+				// 	$this->session->unset_userdata($params);
+				// 	redirect('auth/login');
+				// }
 
 				$this->validation_m->saveLog();
 				redirect('dashboard');
@@ -219,13 +219,13 @@ class Auth extends CI_Controller
 
 				// Cek Device (Matikan Jika Pada Masa Pendaftaran)
 				// Jika kode bawah diaktfikan, maka hanya perangkat terdaftar yang bisa login 
-				$cekDevice = $this->validation_m->cekDevice($this->agent->agent_string(), $this->agent->platform(), $this->agent->browser());
-				if ($cekDevice->num_rows() == "0" and $this->session->tipe_user == "1") {
-					$params = array('id', 'username', 'tipe_user', 'date_now');
-					$this->session->set_flashdata('danger', 'Device Tidak Terdaftar');
-					$this->session->unset_userdata($params);
-					redirect('auth/login');
-				}
+				// $cekDevice = $this->validation_m->cekDevice($this->agent->agent_string(), $this->agent->platform(), $this->agent->browser());
+				// if ($cekDevice->num_rows() == "0" and $this->session->tipe_user == "1") {
+				// 	$params = array('id', 'username', 'tipe_user', 'date_now');
+				// 	$this->session->set_flashdata('danger', 'Device Tidak Terdaftar');
+				// 	$this->session->unset_userdata($params);
+				// 	redirect('auth/login');
+				// }
 
 				$this->validation_m->saveLog();
 				redirect('dashboard');
