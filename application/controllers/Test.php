@@ -249,6 +249,15 @@ class Test extends CI_Controller
         $data['markers'] = $datamarker;
         $this->load->view("test/mapsMonth",$data);
     }
+
+    function exportDoc()
+    {
+        $id = $_GET['id'];
+        $this->load->model("kunjungan_m");
+        $dataMonth = $this->kunjungan_m->getByMonth(date("Y"),date("m"),$id);
+        $data['row'] = $dataMonth;
+        $this->load->view("test/halaman",$data);
+    }
     
     
 }
