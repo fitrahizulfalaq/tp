@@ -12,7 +12,7 @@ class Pengaturan extends CI_Controller {
 
 	public function setDevice()
 	{
-		timevalidation("20230103","20230109","");
+		// timevalidation("20230103","20230109","");
 
 		$data['title'] = "Set Device";
 		$data['row'] = $this->validation_m->cekDevice();
@@ -22,7 +22,7 @@ class Pengaturan extends CI_Controller {
 	function saveDevice()
 	{
 		//Set waktu untuk aktif
-		timevalidation("20230103","20230109","");
+		// timevalidation("20230103","20230109","");
 
 		$device = $this->validation_m->cekDevice();
 		$thisDevice = $this->validation_m->cekDevice($this->agent->agent_string(),$this->agent->platform(),$this->agent->browser());
