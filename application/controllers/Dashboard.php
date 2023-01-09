@@ -31,6 +31,7 @@ class Dashboard extends CI_Controller {
 			$data['markers'] = $datamarker;
 		}
 		$data['device'] = $this->validation_m->cekDevice($this->agent->agent_string(), $this->agent->platform(), $this->agent->browser());
+		// test($data['device']->num_rows());
 		$data['kunjungan'] = $dataMonth;
 		$data['title'] = "KITAPKU APPS";
 		$this->templateadmin->load('template/dashboard','page/beranda/'.$this->session->tipe_user,$data);
