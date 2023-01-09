@@ -238,9 +238,10 @@ class Test extends CI_Controller
 
     function monthMaps()
     {
+        $id = $_GET['id'];
         $this->load->model("kunjungan_m");
-        $dataMonth = $this->kunjungan_m->getByMonth(date("Y"),date("m"),"66");
-        $data['center'] = $dataMonth->row("lat").",".$row->row("lng");
+        $dataMonth = $this->kunjungan_m->getByMonth(date("Y"),date("m"),$id);
+        $data['center'] = $dataMonth->row("lat").",".$dataMonth->row("lng");
         $datamarker = "";
         foreach ($dataMonth->result() as $key => $x) {
             $datamarker = $datamarker."markers=size:mid%7Ccolor:0xff0000%7Clabel:0%7C".$x->lat."%2C".$x->lng."|&";

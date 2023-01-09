@@ -285,7 +285,7 @@ class Kunjungan extends CI_Controller
 
             // Tidak bisa tambah laporan jika checkin belum sejumlah 15
             $kunjungan_terakhir = $this->kunjungan_m->getByMonth($tahun, $bulan, $this->session->id);
-            if ($kunjungan_terakhir < 16) { $this->session->set_flashdata('warning', 'Anda belum checkin sesuai dengan ketentuan'); redirect(""); }
+            if ($kunjungan_terakhir < 10) { $this->session->set_flashdata('warning', 'Anda belum bisa upload Laporan Translok karena belum memenuhi syarat kunjungan minimal.'); redirect(""); }
 			
 			// SURAT TUGAS
 			$config['upload_path']          = 'assets/files/laporan/surat_tugas/';
