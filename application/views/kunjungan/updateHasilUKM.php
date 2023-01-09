@@ -83,7 +83,7 @@
                 <hr>
                 <div class="input-wrapper">
                     <label class="label">No. Telepon (WhatsApp) <span id="alert-resume" class="error">*</span></label>
-                    <input type="number" name="hp" class="form-control" placeholder="No. Telp/WhatsApp Pelaku Usaha/Koperasi yang dikunjungi" required minlength="10" maxlength="16" value="<?= $row->hp ?>">
+                    <input type="text" name="hp" class="form-control" placeholder="No. Telp/WhatsApp Pelaku Usaha/Koperasi yang dikunjungi" required minlength="10" maxlength="16" value="<?= $row->hp ?>">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
@@ -91,7 +91,7 @@
                 <hr>
                 <div class="input-wrapper">
                     <label class="label">Email <span id="alert-resume" class="error">*</span></label>
-                    <input type="email" name="email" class="form-control" placeholder="Email WhatsApp Pelaku Usaha/Koperasi yang dikunjungi" required minlength="5" value="<?= $row->email ?>">
+                    <input type="text" name="email" class="form-control" placeholder="Email WhatsApp Pelaku Usaha/Koperasi yang dikunjungi" required value="<?= $row->email ?>">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
@@ -133,7 +133,7 @@
                 </div>
                 <hr>
                 <div class="input-wrapper">
-                    <label class="label">Tahun Pendirian Koperasi <span id="alert-resume" class="error">*</span></label>
+                    <label class="label">Tahun Pendirian Koperasi (isi "-" jika tidak ada) <span id="alert-resume" class="error">*</span></label>
                     <input type="text" name="tahun_berdiri" class="form-control" placeholder="Ex: 2022" required maxlength="4" value="<?= $row->tahun_berdiri ?>">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
@@ -141,7 +141,7 @@
                 </div>
                 <hr>
                 <div class="input-wrapper">
-                    <label class="label">Nomor Induk Koperasi <span id="alert-resume" class="error">*</span></label>
+                    <label class="label">Nomor Induk Koperasi (isi "-" jika tidak ada) <span id="alert-resume" class="error">*</span></label>
                     <input type="text" name="nik_koperasi" class="form-control" placeholder="Nomor Induk Koperasi yang dikunjungi" required value="<?= $row->nik_koperasi ?>">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
@@ -204,7 +204,7 @@
                 <hr>
                 <div class="input-wrapper">
                     <label class="label">Kebutuhan Diklat <span id="alert-resume" class="error">*</span></label>
-                    <input type="text" name="kebutuhan" class="form-control" placeholder="Kebutuhan Diklat" required minlength="5" value="<?= $row->kebutuhan ?>">
+                    <input type="text" name="kebutuhan" class="form-control" placeholder="Kebutuhan Diklat" required value="<?= $row->kebutuhan ?>">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
@@ -212,7 +212,7 @@
                 <hr>
                 <div class="input-wrapper">
                     <label class="label">Rekomendasi <span id="alert-resume" class="error">*</span></label>
-                    <input type="text" name="rekomendasi" class="form-control" placeholder="Rekomendasi" required minlength="10" value="<?= $row->rekomendasi ?>">
+                    <input type="text" name="rekomendasi" class="form-control" placeholder="Rekomendasi" required value="<?= $row->rekomendasi ?>">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
