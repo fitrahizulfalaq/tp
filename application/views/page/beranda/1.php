@@ -1,5 +1,7 @@
 <!-- App Capsule -->
 <div id="appCapsule">
+<script src="https://cdn.logwork.com/widget/countdown.js"></script>
+<a href="https://logwork.com/countdown-x6ge" class="countdown-timer" data-style="flip3" data-timezone="Asia/Jakarta" data-date="2023-01-10 00:00">Waktu Pendaftaran Device</a>
     <!-- * App Capsule -->
     <div class="section mt-2">
         <div class="card text-center">
