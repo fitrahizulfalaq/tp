@@ -57,6 +57,7 @@
                                                     </td>
                                                     <td>
                                                         <?= $data->nama ?>
+                                                        <?= $this->fungsi->pilihan_advanced("tb_device","user_id",$data->id)->num_rows() == null ? "<span class='badge badge-danger'>Belum mendaftarkan Device</span>" : "<span class='badge badge-success'>Sudah Daftar</span>"?>
                                                     </td>
                                                     <td>
                                                         <a href="<?= base_url("laporan/perintah?aksi=download&tahun=".date("Y")."&bulan=".date("m")."&jenis=surat_tugas&token=".base64_encode($data->id))?>" class="btn btn-warning" ><i class="fa fa-download"></i> Surat Tugas</a>
