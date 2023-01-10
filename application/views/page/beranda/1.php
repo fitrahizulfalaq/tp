@@ -148,7 +148,7 @@
     </div>
     <!-- * tab content -->
     <div class="section full mt-2 mb-2">
-        <div class="section-title"><h1>Statistik Kunjungan Saya</h1></div>
+        <div class="section-title"><h1>Statistik Kunjungan</h1></div>
         <ul class="listview image-listview media mb-2">
             <li>
                 <a href="#" class="item">                    
@@ -179,6 +179,5 @@
             </li>            
         </ul>
     </div>
-
 </div>
 <!-- * App Capsule -->
