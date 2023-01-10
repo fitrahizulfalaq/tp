@@ -23,6 +23,19 @@ class Kunjungan_m extends CI_Model
         return $query;
     }
 
+    function getAllByType($type = null,$date = null, $id = null)
+    {
+        $this->db->from('tb_kunjungan');
+        if ($date != null && $id != null) {
+            $this->db->like("created",$date);
+            $this->db->where("user_id",$id);
+
+        }
+        $this->db->where("tipe",$type);
+        $query = $this->db->get();
+        return $query;
+    }
+
     /* 
         Ambil data berdasarkan Tahun Bulan dan Tanggal, kondisi tambahan bisa untuk masing-masing TP (User_id)
             1. getByDate (Tanggal) - ("tahun","bulan","tanggal","user_id | opsional")

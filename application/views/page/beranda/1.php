@@ -22,7 +22,7 @@
                 <?php } ?>
             </ul>
         </div>
-    </div>
+    </div>    
     <!-- tab content -->
     <div class="section full mb-2">
         <div class="tab-content">
@@ -147,6 +147,38 @@
         </div>
     </div>
     <!-- * tab content -->
+    <div class="section full mt-2 mb-2">
+        <div class="section-title"><h1>Statistik Kunjungan Saya</h1></div>
+        <ul class="listview image-listview media mb-2">
+            <li>
+                <a href="#" class="item">                    
+                    <div class="in">
+                        <div>
+                            <h3>Kunjungan Ke Lainnya : <?= $k_lainnya->num_rows()?></h3>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="item">
+                    <div class="in">
+                        <div>
+                            <h3>Kunjungan Ke Koperasi : <?= $k_koperasi->num_rows()?></h3>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="item">
+                    <div class="in">
+                        <div>
+                            <h3>Kunjungan Ke UKM : <?= $k_ukm->num_rows()?></h3>
+                        </div>
+                    </div>
+                </a>
+            </li>            
+        </ul>
+    </div>
 
 </div>
 <!-- * App Capsule -->

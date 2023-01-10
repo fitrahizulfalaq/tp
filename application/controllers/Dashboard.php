@@ -12,15 +12,17 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 		$this->load->model("user_m");
+
+		// Redirect jika password masih default
 		$this->load->model("validation_m");
 		$password = $this->user_m->getAllBy("id",$this->session->id)->row("password");
-		if ($password == "7c222fb2927d828af22f592134e8932480637c0d") { redirect("pengaturan/setPassword");}
+		if ($password == sha1("12345678")) { redirect("pengaturan/setPassword");}
 		
+		// Menampilkan data Leaderboard
 		$this->load->model("kunjungan_m");
 		$data['leaderboard'] = $this->kunjungan_m->leaderboard($this->session->wilayah_kerja);
-		// test($data['leaderboard']->result());
 
-		// Data Rekam Trayek Harian
+		// Data Rekam Trayek Harian (Untuk Keperluan Maps Titik per Lokasi)
 		$dataMonth = $this->kunjungan_m->getByMonth(date("Y"),date("m"),$this->session->id);
 		if ($dataMonth != null){
 			$data['center'] = $dataMonth->row("lat").",".$dataMonth->row("lng");
@@ -30,9 +32,14 @@ class Dashboard extends CI_Controller {
 			}
 			$data['markers'] = $datamarker;
 		}
-		$data['device'] = $this->validation_m->cekDevice($this->agent->agent_string(), $this->agent->platform(), $this->agent->browser());
-		// test($data['device']->num_rows());
+		$data['device'] = $this->validation_m->cekDevice($this->agent->agent_string(), $this->agent->platform(), $this->agent->browser());		
 		$data['kunjungan'] = $dataMonth;
+
+		// Data Statistik
+		$data['k_lainnya'] = $this->kunjungan_m->getAllByType("lainnya",date("Y")."-".date("m"),$this->session->id);
+		$data['k_ukm'] = $this->kunjungan_m->getAllByType("ukm",date("Y")."-".date("m"),$this->session->id);
+		$data['k_koperasi'] = $this->kunjungan_m->getAllByType("koperasi",date("Y")."-".date("m"),$this->session->id);
+
 		$data['title'] = "KITAPKU APPS";
 		$this->templateadmin->load('template/dashboard','page/beranda/'.$this->session->tipe_user,$data);
 	}

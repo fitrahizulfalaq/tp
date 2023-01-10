@@ -23,15 +23,12 @@ class Kunjungan extends CI_Controller
         */
     function checkIn()
     {
-        // timevalidation("20230103","20230108","");
-        
         akses("tp");
         previllage("1",$this->session->tipe_user,"!=","");
         
         // Cek Device Terdaftar
         $this->load->model("validation_m");
-        $cekDevice = $this->validation_m->cekDevice($this->agent->agent_string(), $this->agent->platform(), $this->agent->browser());
-        // test($cekDevice);
+        $cekDevice = $this->validation_m->cekDevice($this->agent->agent_string(), $this->agent->platform(), $this->agent->browser());        
         if ($cekDevice->num_rows() == null and $this->session->tipe_user == "1") {
         	$this->session->set_flashdata('danger', 'Hanya bisa update kunjungan di device terdaftar');
         	redirect('');
@@ -149,6 +146,7 @@ class Kunjungan extends CI_Controller
             $query = $this->kunjungan_m->getAllBy("id", $id);
             isMe($query->row("user_id"), $this->session->id);
 
+            // Ini perintah untuk Hanya Bisa di Edit di Hari yang sama
             // $tanggal = date("Ymd",strtotime($query->row("created")));
             // if ($tanggal != date("Ymd")) {
             //     $this->session->set_flashdata('danger', 'Mohon maaf waktu edit sudah berakhir');
