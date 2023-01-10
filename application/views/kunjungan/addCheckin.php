@@ -14,9 +14,9 @@
                     <select name="tipe" class="form-control" onchange="pilihForm()" id="pilihtipe">
                         <option value="">--PILIH KUNJUNGAN--</option>
                         <option value="UKM">UKM</option>
-                        <option value="KOPERASI">KOPERASI</option>
+                        <option value="KOPERASI">KOPERASI/PRA KOPERASI</option>
                         <option value="CALON WIRAUSAHA">CALON WIRAUSAHA</option>
-                        <option value="LAINNYA">LAINNYA</option>
+                        <option value="LAINNYA">DINAS/KANTOR/ZOOM MEETING</option>
                     </select>
                 </div>
             </div>
