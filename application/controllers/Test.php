@@ -259,5 +259,14 @@ class Test extends CI_Controller
         $this->load->view("test/halaman",$data);
     }
     
+    function datatables()
+    {
+        $id = $_GET['id'];
+        $this->load->model("kunjungan_m");
+        $dataMonth = $this->kunjungan_m->getByMonth(date("Y"),date("m"),$id);
+        $data['row'] = $dataMonth;
+        $this->load->view("test/datatables",$data);
+    }
+    
     
 }

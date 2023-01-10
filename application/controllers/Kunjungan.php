@@ -127,6 +127,14 @@ class Kunjungan extends CI_Controller
         $this->templateadmin->load('template/dashboard', 'kunjungan/logData', $data);
     }
 
+    function dataKunjungan()
+    {        
+        $this->load->model("kunjungan_m");
+        $dataMonth = $this->kunjungan_m->getByMonth(date("Y"),date("m"),$this->session->id);
+        $data['row'] = $dataMonth;
+        $this->load->view("kunjungan/laporan/datatables",$data);
+    }
+
     public function edit($id)
     {
         //Load librarynya dulu

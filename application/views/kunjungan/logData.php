@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="col-12">
-                    <h3>DATA LAPORAN</h3>
+                    <h3>DATA LAPORAN</h3> <a href="<?=base_url("kunjungan/dataKunjungan")?>" target="blank" class="btn btn-secondary btn-sm">Export Data Kunjungan (DEMO) <i class="fa fa-print"></i></a>
                     <div class="card">
                         <div class="card-body">
                             <form action="<?= site_url() ?>/kunjungan/data/" enctype="multipart/form-data" method="get" accept-charset="utf-8">
