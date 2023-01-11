@@ -99,7 +99,7 @@
                 <hr>
                 <div class="input-wrapper">
                     <label class="label">Nama UMKM/KOPERASI <span id="alert-resume" class="error">*</span></label>
-                    <input type="text" name="brand" class="form-control" placeholder="Nama UMKM/ KOPERASI yang dikunjungi" required minlength="10" value="<?= $row->brand ?>">
+                    <input type="text" name="brand" class="form-control" placeholder="Nama UMKM/ KOPERASI yang dikunjungi" required value="<?= $row->brand ?>">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
@@ -107,7 +107,7 @@
                 <hr>
                 <div class="input-wrapper">
                     <label class="label">Alamat UMKM/KOPERASI <span id="alert-resume" class="error">*</span></label>
-                    <input type="text" name="alamat" class="form-control" placeholder="Alamat Pelaku Usaha/Koperasi yang dikunjungi" required minlength="10" value="<?= $row->alamat ?>">
+                    <input type="text" name="alamat" class="form-control" placeholder="Alamat Pelaku Usaha/Koperasi yang dikunjungi" required value="<?= $row->alamat ?>">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
@@ -115,7 +115,7 @@
                 <hr>
                 <div class="input-wrapper">
                     <label class="label">Produk yang dihasilkan <span id="alert-resume" class="error">*</span></label>
-                    <input type="text" name="produk" class="form-control" placeholder="Produk yang dihasilkan oleh Pelaku Usaha/Koperasi yang dikunjungi" required minlength="5" value="<?= $row->produk ?>">
+                    <input type="text" name="produk" class="form-control" placeholder="Produk yang dihasilkan oleh Pelaku Usaha/Koperasi yang dikunjungi" required value="<?= $row->produk ?>">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
@@ -158,7 +158,7 @@
                 <hr>
                 <div class="input-wrapper">
                     <label class="label">Jabatan di Koperasi/UMKM <span id="alert-resume" class="error">*</span></label>
-                    <input type="text" name="jabatan" class="form-control" placeholder="Jabatan Pelaku Usaha/ Koperasi yang dikunjungi" required minlength="5" value="<?= $row->jabatan ?>">
+                    <input type="text" name="jabatan" class="form-control" placeholder="Jabatan Pelaku Usaha/ Koperasi yang dikunjungi" required value="<?= $row->jabatan ?>">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
