@@ -83,7 +83,7 @@
                 <hr>
                 <div class="input-wrapper">
                     <label class="label">No. Telepon (WhatsApp) <span id="alert-resume" class="error">*</span></label>
-                    <input type="text" name="hp" class="form-control" placeholder="No. Telp/WhatsApp Pelaku Usaha/Koperasi yang dikunjungi" required minlength="10" maxlength="16" value="<?= $row->hp ?>">
+                    <input type="text" name="hp" class="form-control" placeholder="No. Telp/WhatsApp Pelaku Usaha/Koperasi yang dikunjungi" required minlength="10" value="<?= $row->hp ?>">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
@@ -99,7 +99,7 @@
                 <hr>
                 <div class="input-wrapper">
                     <label class="label">Nama UMKM/KOPERASI <span id="alert-resume" class="error">*</span></label>
-                    <input type="text" name="brand" class="form-control" placeholder="Nama UMKM/ KOPERASI yang dikunjungi" required minlength="10" maxlength="30" value="<?= $row->brand ?>">
+                    <input type="text" name="brand" class="form-control" placeholder="Nama UMKM/ KOPERASI yang dikunjungi" required minlength="10" value="<?= $row->brand ?>">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>

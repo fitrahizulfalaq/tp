@@ -28,7 +28,7 @@
 		<div class="wide-block pb-2 pt-2">
 			<?= form_open_multipart('') ?>
 			<div class="custom-file-upload">
-				<input type="file" name="file" id="fileuploadInput" accept=".pdf">
+				<input type="file" name="file" id="fileuploadInput" accept=".pdf" required>
 				<label for="fileuploadInput">
 					<span>
 						<strong>
