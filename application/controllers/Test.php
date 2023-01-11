@@ -267,6 +267,13 @@ class Test extends CI_Controller
         $data['row'] = $dataMonth;
         $this->load->view("test/datatables",$data);
     }
+
+    function kirimWA()
+    {
+        $no = $_GET['no'];
+        $kalimat = "*[KAMU BELUM CHECK IN KUNJUNGAN HARI INI]* \n\nTerhitung pada ".date("d-m-Y H:i:s")." kamu belum melakukan checkin kunjungan. Segera melaporkan kegiatan hari ini, terima kasih. \n\n\n https://tp.upktukm.id\nProvide by TIM IT UPT";
+        $this->wa->send($no,$kalimat);
+    }
     
     
 }
