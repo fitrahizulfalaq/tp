@@ -48,7 +48,7 @@
                 <hr>
                 <div class="input-wrapper">
                     <label class="label">No. Telepon (WhatsApp) <span id="alert-resume" class="error">*</span></label>
-                    <input type="text" id="word" name="hp" class="form-control" placeholder="No. Telp/WhatsApp Pelaku Usaha/Koperasi yang dikunjungi" required minlength="10" maxlength="16">
+                    <input type="text" id="word" name="hp" class="form-control" placeholder="No. Telp/WhatsApp Pelaku Usaha/Koperasi yang dikunjungi" required minlength="10">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
