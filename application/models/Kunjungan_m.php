@@ -36,6 +36,16 @@ class Kunjungan_m extends CI_Model
         return $query;
     }
 
+    function getAllByTable($table = null,$kolom = null, $id = null)
+    {
+        $this->db->from($table);
+        if ($kolom != null && $id != null) {
+            $this->db->where($kolom, $id);
+        }
+        $query = $this->db->get();
+        return $query;
+    }
+
     /* 
         Ambil data berdasarkan Tahun Bulan dan Tanggal, kondisi tambahan bisa untuk masing-masing TP (User_id)
             1. getByDate (Tanggal) - ("tahun","bulan","tanggal","user_id | opsional")
@@ -378,5 +388,13 @@ class Kunjungan_m extends CI_Model
         GROUP BY user_id
         ORDER BY SUM(poin) DESC");
         return $query;
+    }
+
+    function saveLate($id = null,$ket = null)
+    {
+        $params['user_id'] = $id;
+        $params['keterangan'] = $ket;
+        $params['created'] =  date("Y-m-d H:i:s");
+        $this->db->insert('tb_late', $params);
     }
 }

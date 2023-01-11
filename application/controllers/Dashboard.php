@@ -39,6 +39,7 @@ class Dashboard extends CI_Controller {
 		$data['k_lainnya'] = $this->kunjungan_m->getAllByType("lainnya",date("Y")."-".date("m"),$this->session->id);
 		$data['k_ukm'] = $this->kunjungan_m->getAllByType("ukm",date("Y")."-".date("m"),$this->session->id);
 		$data['k_koperasi'] = $this->kunjungan_m->getAllByType("koperasi",date("Y")."-".date("m"),$this->session->id);
+		$data['k_terlambat'] = $this->kunjungan_m->getAllByTable("tb_late","user_id",$this->session->id);
 
 		$data['title'] = "KITAPKU APPS";
 		$this->templateadmin->load('template/dashboard','page/beranda/'.$this->session->tipe_user,$data);

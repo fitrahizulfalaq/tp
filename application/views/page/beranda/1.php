@@ -176,6 +176,15 @@
                         </div>
                     </div>
                 </a>
+            </li>
+            <li>
+                <a href="#" class="item">
+                    <div class="in">
+                        <div>
+                            <h3>Terlambat : <?= $k_terlambat->num_rows()?></h3>
+                        </div>
+                    </div>
+                </a>
             </li>            
         </ul>
     </div>
