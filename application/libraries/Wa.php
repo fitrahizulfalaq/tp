@@ -12,6 +12,35 @@ class WA
 
 	function send($hp = null, $pesan = null)
 	{
+		// Nanti dirapikan lagi, telat kantor gara2 ini.
+		// kadang ada penulisan no hp 0811 239 345
+		$hp = str_replace(" ","",$hp);
+		// kadang ada penulisan no hp (0274) 778787
+		$hp = str_replace("(","",$hp);
+		// kadang ada penulisan no hp (0274) 778787
+		$hp = str_replace(")","",$hp);
+		// kadang ada penulisan no hp 0811.239.345
+		$hp = str_replace(".","",$hp);
+		
+		// cek apakah no hp mengandung karakter + dan 0-9
+		if(!preg_match('/[^+0-9]/',trim($hp))){
+			// cek apakah no hp karakter 1-3 adalah +62
+			if(substr(trim($hp), 0, 3)=='+62'){
+				$hp = trim($hp);
+			}
+			// cek apakah no hp karakter 1 adalah 0
+			elseif(substr(trim($hp), 0, 1)=='0'){
+				$hp = '0'.substr(trim($hp), 1);
+			}
+			elseif(substr(trim($hp), 0, 1)!='0' and substr(trim($hp), 0, 2)!='62'){
+				$hp = '0'.trim($hp);
+			}
+			elseif(substr(trim($hp), 0, 2)!='62'){
+				$hp = '0'.substr(trim($hp), 2);
+			}
+			test($hp);
+		}
+
 		//API dari Whacenter
 		$device_id = 'f75a80b9d2b38921c6134f029d3e8c71'; // Token dari Whacenter
 		$no_hp = $hp; // No.HP yang dikirim (No.HP Penerima)
