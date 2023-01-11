@@ -16,12 +16,12 @@ function __construct(){
     {
         $this->load->model("user_m");
         $this->load->model("kunjungan_m");
-    $dataUser = $this->user_m->getAllby("tipe_user","1");
+        $dataUser = $this->user_m->getAllby("tipe_user","1");
         foreach ($dataUser->result() as $key => $data) {
             $dataLogin = $this->kunjungan_m->getByDate(date("Y"),date("m"),date("d"),$data->id);
             if ($dataLogin->num_rows() == null) {
-                $kalimat = "*[KAMU BELUM CHECK IN KUNJUNGAN HARI INI]* \n\nHalo, ".$data->nama.$data->hp." Terhitung pada ".date("d-m-Y H:i:s")." kamu belum melakukan checkin kunjungan. Segera melaporkan kegiatan hari ini, terima kasih. \n\n\n https://tp.upktukm.id\n_Sistem Otomatis oleh TIM IT UPT_";
-                echo $kalimat."<br>";
+                // $kalimat = "*[KAMU BELUM CHECK IN KUNJUNGAN HARI INI]* \n\nHalo, ".$data->nama.$data->hp." Terhitung pada ".date("d-m-Y H:i:s")." kamu belum melakukan checkin kunjungan. Segera melaporkan kegiatan hari ini, terima kasih. \n\n\n https://tp.upktukm.id\n_Sistem Otomatis oleh TIM IT UPT_";
+                // echo $kalimat."<br>";
                 $this->kunjungan_m->saveLate($data->id,"telat check in");
                 // $this->wa->send($data->hp,$kalimat);
                 // sleep(4); // this should halt for 3 seconds for every loop
@@ -31,14 +31,19 @@ function __construct(){
         }
     }
 
-    function jarak() {
-        $point1 = array("lat" => -7.8763715, "long" => 112.5195452);
-        $point2 = array("lat" => -7.866504, "long" => 112.525668);
+    function getJarak()
+    {
+        $this->load->model("validation_m");
+        // Dapatkan Latitude dan Longtitude dari Data
+        $point1 = array("lat" => -7.9750924, "lng" => 112.6616627);         
+        // Dapatkan Latitude dan Longtitude dari Inputan Text Alamat
+        $data = $this->validation_m->getLocationByAddress("Jl. Raya Ki Ageng Gribig Perumahan BTU Kota Malang");
+        $point2 = $data['results']['0']['geometry']['location'];
 
         $lat1 = $point1['lat'];
-        $lon1 = $point1['long'];
+        $lon1 = $point1['lng'];
         $lat2 = $point2['lat'];
-        $lon2 = $point2['long'];
+        $lon2 = $point2['lng'];
 
         $theta = $lon1 - $lon2;
         $miles = (sin(deg2rad($lat1)) * sin(deg2rad($lat2))) + (cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)));
@@ -52,14 +57,6 @@ function __construct(){
         $str = compact('miles','feet','yards','kilometers','meters');
 
         test($str);
-    }
-
-    function getJarak()
-    {
-        $this->load->model("validation_m");
-        $data = $this->validation_m->getLocationByAddress("Jl KH. Abd. Hamid Gg. No. 943, Kota Probolinggo");
-        $data = $data['results']['0']['geometry']['location'];
-        var_dump($data['lat']);
     }
     
 }
