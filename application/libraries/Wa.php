@@ -38,7 +38,6 @@ class WA
 			elseif(substr(trim($hp), 0, 2)!='62'){
 				$hp = '0'.substr(trim($hp), 2);
 			}
-			test($hp);
 		}
 
 		//API dari Whacenter
