@@ -140,8 +140,9 @@
                     <br>
                     <div class="card text-white bg-info mb-2">
                 <div class="card-body">
-                    <h5 class="card-title">Estimasi Total Jarak Pendampingan <?= $total_jarak ?> km </h5>
-                    <p class="card-text">Terima kasih anda telah melakukan pendampingan Koperasi / UKM dengan setulus hati.</p>
+                    <h5 class="card-title">Terima Kasih, <?= $this->session->nama?></h5>
+                    <h6 class="card-title">Bulan ini, anda telah melakukan perjalan pendampingan dengan estimasi sejauh <?= $total_jarak ?> km </h6>
+                    <p class="card-text">Sebuah kebanggan bagi Indonesia memilihmu yang senantiasa berjuang melakukan pendampingan Koperasi / UKM dengan setulus hati. Semoga menjadi amal dan jariyah dari kita untuk bangsa dan negara.</p>
                 </div>
             </div>
                     <div class="card text-center">
