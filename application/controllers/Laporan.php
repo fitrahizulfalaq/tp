@@ -140,7 +140,8 @@ class Laporan extends CI_Controller
         $dataUser = $this->user_m->getAllby("tipe_user","1");
         foreach ($dataUser->result() as $key => $data) {
             $dataLogin = $this->kunjungan_m->getByDate(date("Y"),date("m"),date("d"),$data->id);
-            if ($dataLogin->num_rows() == null) {
+			$dataIzin = $this->kunjungan_m->getAllByTable("tb_izin","user_id",$this->session->id,date("Y-m-d"));
+            if ($dataLogin->num_rows() == null and $dataIzin->num_rows() == null) {
                 $kalimat = $data->nama.$data->hp." Belum login pada ".date("d-m-Y H:i:s")."<br>";
                 echo $kalimat."<br>";
             }
