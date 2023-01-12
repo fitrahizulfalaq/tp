@@ -36,12 +36,15 @@ class Kunjungan_m extends CI_Model
         return $query;
     }
 
-    function getAllByTable($table = null,$kolom = null, $id = null)
+    function getAllByTable($table = null,$kolom = null, $id = null,$tgl = null)
     {
         $this->db->from($table);
         if ($kolom != null && $id != null) {
             $this->db->where($kolom, $id);
         }
+        
+        if ($tgl != null){ $this->db->like("created",$tgl);}
+
         $query = $this->db->get();
         return $query;
     }
@@ -396,5 +399,12 @@ class Kunjungan_m extends CI_Model
         $params['keterangan'] = $ket;
         $params['created'] =  date("Y-m-d H:i:s");
         $this->db->insert('tb_late', $params);
+    }
+
+    function saveIzin()
+    {
+        $params['user_id'] = $this->session->id;
+        $params['created'] =  date("Y-m-d H:i:s");
+        $this->db->insert('tb_izin', $params);
     }
 }

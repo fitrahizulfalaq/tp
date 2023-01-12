@@ -24,16 +24,23 @@ class Kunjungan extends CI_Controller
     function checkIn()
     {
         akses("tp");
-        previllage("1",$this->session->tipe_user,"!=","");
+        previllage("1",$this->session->tipe_user,"!=","");        
         
         // Cek Device Terdaftar
         $this->load->model("validation_m");
         $cekDevice = $this->validation_m->cekDevice($this->agent->agent_string(), $this->agent->platform(), $this->agent->browser());        
         if ($cekDevice->num_rows() == null and $this->session->tipe_user == "1") {
-        	$this->session->set_flashdata('danger', 'Hanya bisa update kunjungan di device terdaftar');
-        	redirect('');
+            $this->session->set_flashdata('danger', 'Hanya bisa update kunjungan di device terdaftar');
+            redirect('');
         }
         
+        // Cek Izin
+        $cekIzin = $this->kunjungan_m->getAllByTable("tb_izin","user_id",$this->session->id,date("Y-m-d"));
+        if ($cekIzin->num_rows() > 0) {
+            $this->session->set_flashdata('danger', 'Anda sudah melakukan mengajukan izin hari ini. Selamat beristirahat.');
+            redirect('');            
+        }
+
         //Maksimal input 1x per jam
         $kunjungan_terakhir = $this->kunjungan_m->getByLatest(date("Y-m-d H"),$this->session->id);
         if ($kunjungan_terakhir->num_rows() > 0) {
@@ -372,4 +379,18 @@ class Kunjungan extends CI_Controller
 			redirect('kunjungan/data');
 		}
 	}
+
+    function izin()
+    {
+        // Cek sudah melakukan izin atau belum
+        $cekIzin = $this->kunjungan_m->getAllByTable("tb_izin","user_id",$this->session->id,date("Y-m-d"));
+        if ($cekIzin->num_rows() > 0) {
+            $this->session->set_flashdata('danger', 'Anda sudah melakukan mengajukan izin hari ini. Selamat beristirahat.');
+            redirect('');            
+        }
+
+        $this->kunjungan_m->saveIzin();
+        $this->session->set_flashdata('success', 'Izin anda telah kami terima. Terima Kasih. Selamat beristirahat, semoga harimu menyenangkan.');
+        redirect("kunjungan/data");
+    }
 }

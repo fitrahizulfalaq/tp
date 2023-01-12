@@ -133,4 +133,17 @@ class Laporan extends CI_Controller
 			redirect("laporan/listDaerah");
 		}
 	}
+
+	function belumLogin()
+    {
+        $this->load->model("user_m");
+        $dataUser = $this->user_m->getAllby("tipe_user","1");
+        foreach ($dataUser->result() as $key => $data) {
+            $dataLogin = $this->kunjungan_m->getByDate(date("Y"),date("m"),date("d"),$data->id);
+            if ($dataLogin->num_rows() == null) {
+                $kalimat = $data->nama.$data->hp." Belum login pada ".date("d-m-Y H:i:s")."<br>";
+                echo $kalimat."<br>";
+            }
+        }
+    }
 }

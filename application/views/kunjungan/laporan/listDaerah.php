@@ -28,6 +28,7 @@
                                         <?php } ?>
                                     </select>
                                     <button type="submit" class="btn btn-success">Filter <i class="fa fa-eye"></i></button>
+                                    <a href="<?=base_url("laporan/belumLogin")?>" class="btn btn-info" target="_blank">Lihat yang belum login <i class="fa fa-eye"></i></a>
                                 </div>
                             </form>
                         </div>
