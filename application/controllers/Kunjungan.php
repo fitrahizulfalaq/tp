@@ -86,7 +86,7 @@ class Kunjungan extends CI_Controller
             //Load librarynya form
             $this->load->library('form_validation');
             //Atur validasinya
-            $this->form_validation->set_rules('hp', 'hp', 'min_length[10]|max_length[15]');
+            $this->form_validation->set_rules('hp', 'hp', 'min_length[10]|max_length[18]');
             //Pesan yang ditampilkan
             $this->form_validation->set_message('is_unique', 'Data sudah ada');
             //Tampilan pesan error

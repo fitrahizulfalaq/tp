@@ -18,7 +18,7 @@
             <br>
             <input type="text" value="Basis Browser : <?= $this->agent->browser() ?>" class="form-control" readonly>
             <br>
-            <a href="<?= base_url("pengaturan/saveDevice")?>" onclick="alert('Apakah Anda Yakin Ingin Mendaftarkan Perangkat Ini ?')" class="btn btn-success btn-block btn-lg">
+            <a href="<?= base_url("pengaturan/saveDevice")?>" onclick="return confirm('Apakah Anda Yakin Ingin Mendaftarkan Perangkat Ini ?')" class="btn btn-success btn-block btn-lg">
                 <ion-icon name="key-outline"></ion-icon> Daftarkan Perangkat Ini
             </a>
             <div class="section-title">*Setiap user hanya diperbolehkan mendaftarkan 5 perangkat, baik Laptop maupun Smartphone. Silahkan login pada device yang anda gunakan sampai hingga batas waktu pendaftaran device berakhir.</div>
