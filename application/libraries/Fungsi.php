@@ -95,7 +95,7 @@ class Fungsi {
             $point1 = $point2;
         }
 		
-		$estimasiJarak = number_format($totalJarak,5,'.','');
+		$estimasiJarak = number_format($totalJarak,5,',','');
 		return $estimasiJarak;
 	}
 	
