@@ -138,6 +138,12 @@
                 </div>
                 <?php if ($kunjungan->num_rows() > 0) { ?>
                     <br>
+                    <div class="card text-white bg-info mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">Estimasi Total Jarak Pendampingan <?= $total_jarak ?> km </h5>
+                    <p class="card-text">Terima kasih anda telah melakukan pendampingan Koperasi / UKM dengan setulus hati.</p>
+                </div>
+            </div>
                     <div class="card text-center">
                         <img class="imaged w250" src="https://maps.googleapis.com/maps/api/staticmap?center=<?= $center ?>&zoom=12&scale=10&size=1200x500&maptype=roadmap&format=jpg&key=AIzaSyBulTatyUv6oR6ykvWU-QDzp-wYQXNWV7A&<?= $markers ?>" alt="Google map of -7.8081176,112.0413752" />
                     </div>
@@ -145,7 +151,7 @@
             </div>
             <!-- * feed -->
         </div>
-    </div>
+    </div>    
     <!-- * tab content -->
     <div class="section full mt-2 mb-2">
         <div class="section-title"><h1>Statistik Kunjungan</h1></div>

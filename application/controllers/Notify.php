@@ -56,23 +56,31 @@ function __construct(){
         $data = $this->validation_m->getLocationByAddress("Jl. Raya Ki Ageng Gribig Perumahan BTU Kota Malang");
         $point2 = $data['results']['0']['geometry']['location'];
 
-        $lat1 = $point1['lat'];
-        $lon1 = $point1['lng'];
-        $lat2 = $point2['lat'];
-        $lon2 = $point2['lng'];
-
-        $theta = $lon1 - $lon2;
-        $miles = (sin(deg2rad($lat1)) * sin(deg2rad($lat2))) + (cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)));
-        $miles = acos($miles);
-        $miles = rad2deg($miles);
-        $miles = $miles * 60 * 1.1515;
-        $feet  = $miles * 5280;
-        $yards = $feet / 3;
-        $kilometers = $miles * 1.609344;
-        $meters = $kilometers * 1000;
-        $str = compact('miles','feet','yards','kilometers','meters');
-
-        test($str);
+        $data = $this->validation_m->hitungJarak($point1['lat'],$point1['lng'],$point2['lat'],$point2['lng']);
+        test($data['kilometers']);
+    }
+    
+    function totalJarak()
+    {
+        $this->load->model("validation_m");
+        $this->load->model("kunjungan_m");
+        
+        $data = $this->kunjungan_m->getByMonth(date("Y"), date("m"), "226");
+        
+        $totalJarak = 0;
+        $point1 = array("lat" => $data->row('lat'), "lng" => $data->row('lng'));
+        
+        foreach ($data->result() as $key => $data) {
+            $point2 = array("lat" => $data->lat, "lng" => $data->lng);
+            $perbedaanJarak = $this->validation_m->hitungJarak($point1['lat'],$point1['lng'],$point2['lat'],$point2['lng']);
+            $totalJarak = $totalJarak + $perbedaanJarak['kilometers'];
+            echo $perbedaanJarak['kilometers']." Total Jarak Kunjungan ". $totalJarak . "<br>";
+            $point1 = $point2;
+        }
+        
+        echo "<br> Total Keseluruhan Jarak Kunjungan <br>";
+        echo $totalJarak;
+        
     }
     
 }

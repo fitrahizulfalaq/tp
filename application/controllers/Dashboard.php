@@ -42,6 +42,7 @@ class Dashboard extends CI_Controller {
 		$data['k_terlambat'] = $this->kunjungan_m->getAllByTable("tb_late","user_id",$this->session->id);
 		$data['k_izin'] = $this->kunjungan_m->getAllByTable("tb_izin","user_id",$this->session->id);
 
+		$data['total_jarak'] = $this->fungsi->totalJarak($this->session->id);
 		$data['title'] = "KITAPKU APPS";
 		$this->templateadmin->load('template/dashboard','page/beranda/'.$this->session->tipe_user,$data);
 	}

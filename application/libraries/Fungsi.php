@@ -80,6 +80,25 @@ class Fungsi {
 		return $query;
 	}
 	
+	function totalJarak($id = null)
+	{
+		$this->ci->load->model("kunjungan_m");
+		$this->ci->load->model("validation_m");
+		// Total Jarak
+		$data = $this->ci->kunjungan_m->getByMonth(date("Y"), date("m"), $id);        
+        $totalJarak = 0;
+        $point1 = array("lat" => $data->row('lat'), "lng" => $data->row('lng'));        
+        foreach ($data->result() as $key => $data) {
+            $point2 = array("lat" => $data->lat, "lng" => $data->lng);
+            $perbedaanJarak = $this->ci->validation_m->hitungJarak($point1['lat'],$point1['lng'],$point2['lat'],$point2['lng']);
+			$totalJarak = $totalJarak + $perbedaanJarak['kilometers'];
+            $point1 = $point2;
+        }
+		
+		$estimasiJarak = number_format($totalJarak,5,'.','');
+		return $estimasiJarak;
+	}
+	
 }
 
 ?>
