@@ -62,22 +62,30 @@ function __construct(){
     
     function totalJarak()
     {
+        $id = $_GET['id'];
         $this->load->model("validation_m");
         $this->load->model("kunjungan_m");
         
-        $data = $this->kunjungan_m->getByMonth(date("Y"), date("m"), "226");
+        $this->db->order_by("created","ASC");
+        $data = $this->kunjungan_m->getByMonth(date("Y"), date("m"), $id);
         
-        $totalJarak = 0;
+        $no = null;
+        $totalJarak = null;
         $point1 = array("lat" => $data->row('lat'), "lng" => $data->row('lng'));
         
         foreach ($data->result() as $key => $data) {
-            $point2 = array("lat" => $data->lat, "lng" => $data->lng);
-            $perbedaanJarak = $this->validation_m->hitungJarak($point1['lat'],$point1['lng'],$point2['lat'],$point2['lng']);
-            $totalJarak = $totalJarak + $perbedaanJarak['kilometers'];
-            echo $perbedaanJarak['kilometers']." Total Jarak Kunjungan ". $totalJarak . "<br>";
-            $point1 = $point2;
+            if ($no != null){
+                $point2 = array("lat" => $data->lat, "lng" => $data->lng);
+                $perbedaanJarak = $this->validation_m->hitungJarak($point1['lat'],$point1['lng'],$point2['lat'],$point2['lng']);
+                $totalJarak = $totalJarak + $perbedaanJarak['kilometers'];
+                echo "Poin 1: ".$point1['lat'].",".$point1['lng']." - Poin 2: ".$point2['lat'].",".$point2['lng']." ---- ";
+                echo $perbedaanJarak['kilometers']." Total Jarak Kunjungan ". $totalJarak . "<br>";
+                $point1 = $point2;
+            }
+            $no++;
         }
         
+        test($totalJarak);
         echo "<br> Total Keseluruhan Jarak Kunjungan <br>";
         echo $totalJarak;
         

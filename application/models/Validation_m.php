@@ -154,7 +154,7 @@ class Validation_m extends CI_Model
 	function hitungJarak($lat1,$lng1,$lat2,$lng2)
 	{
 		$point1 = array("lat" => $lat1, "long" => $lng1);
-        $point2 = array("lat" => $lat1, "long" => $lng2);
+        $point2 = array("lat" => $lat2, "long" => $lng2);
 
         $lat1 = $point1['lat'];
         $lon1 = $point1['long'];
