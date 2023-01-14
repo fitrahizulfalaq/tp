@@ -30,7 +30,7 @@
     <link rel="icon" type="image/png" href="<?= base_url() ?>/assets/img/favicon.png" sizes="32x32">
     <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url() ?>/assets/img/icon/kitapku.png">
     <link rel="stylesheet" href="<?= base_url() ?>/assets/css/style.css">
-    <link rel="manifest" href="__manifest.json">
+    <link rel="manifest" href="manifest.json">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?= base_url() ?>/assets/plugins/fontawesome-free/css/all.min.css">
 </head>
