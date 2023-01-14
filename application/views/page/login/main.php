@@ -67,7 +67,7 @@
                         Cara Install Aplikasi Kitapku di Android
                     </div>
                     <div>
-                        Tekan Tombol <ion-icon name="ellipsis-vertical"></ion-icon> pada Pojok Kanan Atas kemudian Tekan Install App. WAJIB MENGGUNAKAN <font color="red">Android</font>
+                        Tekan Tombol <ion-icon name="ellipsis-vertical"></ion-icon> pada Pojok Kanan Atas kemudian Tekan Install App / Tambahkan ke Halaman Utama. WAJIB MENGGUNAKAN <font color="red">Android</font>
                     </div>
                 </div>
             </div>
