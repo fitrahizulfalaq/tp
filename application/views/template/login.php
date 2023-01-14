@@ -30,7 +30,7 @@
     <link rel="icon" type="image/png" href="<?= base_url() ?>/assets/img/favicon.png" sizes="32x32">
     <link rel="apple-touch-icon" sizes="180x180" href="<?= base_url() ?>/assets/img/icon/kitapku.png">
     <link rel="stylesheet" href="<?= base_url() ?>/assets/css/style.css">
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="/manifest.json">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?= base_url() ?>/assets/plugins/fontawesome-free/css/all.min.css">
 </head>
@@ -44,70 +44,13 @@
     <!-- * loader -->
 
     <!-- App Capsule -->
-    <?= $contents ?>
+    <?=$contents?>
     <!-- * App Capsule -->
 
 
     <!-- ///////////// Js Files ////////////////////  -->
-    <script>
-        let installEvent = null;
-        let installButton = document.getElementById("install");
-        let enableButton = document.getElementById("enable");
+    <script src="<?= base_url() ?>/assets/plugins/pwa/pwa.js"></script>
 
-        enableButton.addEventListener("click", function() {
-            this.disabled = true;
-            startPwa(true);
-        });
-
-        if (localStorage["pwa-enabled"]) {
-            startPwa();
-        }
-
-        function startPwa(firstStart) {
-            localStorage["pwa-enabled"] = true;
-
-            if (firstStart) {
-                location.reload();
-            }
-
-            window.addEventListener("load", () => {
-                navigator.serviceWorker.register("/service-worker.js")
-                    .then(registration => {
-                        console.log("Service Worker is registered", registration);
-                        enableButton.parentNode.remove();
-                    })
-                    .catch(err => {
-                        console.error("Registration failed:", err);
-                    });
-            });
-
-            window.addEventListener("beforeinstallprompt", (e) => {
-                e.preventDefault();
-                console.log("Ready to install...");
-                installEvent = e;
-                document.getElementById("install").style.display = "initial";
-            });
-
-            setTimeout(cacheLinks, 500);
-
-            function cacheLinks() {
-                caches.open("pwa").then(function(cache) {
-                    let linksFound = [];
-                    document.querySelectorAll("a").forEach(function(a) {
-                        linksFound.push(a.href);
-                    });
-
-                    cache.addAll(linksFound);
-                });
-            }
-
-            if (installButton) {
-                installButton.addEventListener("click", function() {
-                    installEvent.prompt();
-                });
-            }
-        }
-    </script>
     <!-- Jquery -->
     <script src="<?= base_url() ?>/assets/js/lib/jquery-3.4.1.min.js"></script>
     <!-- Bootstrap-->
