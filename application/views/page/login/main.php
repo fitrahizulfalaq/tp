@@ -35,9 +35,43 @@
                         <hr>
                         <a href="<?= base_url("auth/loginOTP") ?>" class="btn btn-warning btn-block"><ion-icon name="logo-whatsapp"></ion-icon> Login Via No HP</a>
                         <a href="<?= base_url("auth/google") ?>" class="btn btn-danger btn-block"><ion-icon name="logo-google"></ion-icon> Login With Google</a>
+                        <?php if ($this->agent->platform() == "Android") {?>
+                        <button type="button" class="btn btn-outline-secondary btn-block btn-sm" onclick="$('#android-add-to-home-screen').modal();">
+                            <ion-icon name="logo-android"></ion-icon>
+                            Install Aplikasi KITAPKU
+                        </button>
+                        <?php } ?>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<!-- Android Add to Home Action Sheet -->
+<div class="modal inset fade action-sheet android-add-to-home" id="android-add-to-home-screen" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cara Install Aplikasi KITAPKU</h5>
+                <a href="javascript:;" class="close-button" data-dismiss="modal">
+                    <ion-icon name="close"></ion-icon>
+                </a>
+            </div>
+            <div class="modal-body">
+                <div class="action-sheet-content text-center">
+                    <div class="mb-1"><img src="/assets/icon-192.png" alt="image" class="imaged w48">
+                    </div>
+                    <h4>KITAPKU APPS</h4>
+                    <div>
+                        Cara Install Aplikasi Kitapku di Android
+                    </div>
+                    <div>
+                        Tekan Tombol <ion-icon name="ellipsis-vertical"></ion-icon> pada Pojok Kanan Atas kemudian Tekan Install App. WAJIB MENGGUNAKAN <font color="red">Android</font>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- * Android Add to Home Action Sheet -->
