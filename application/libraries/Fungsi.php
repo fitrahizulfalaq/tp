@@ -80,6 +80,15 @@ class Fungsi {
 		return $query;
 	}
 	
+	function loadDataLike1($tabel,$kode,$id,$user_id = null) {		
+		$this->ci->db->like($kode,$id);
+		if ($user_id != null){$this->ci->db->where("user_id",$user_id);};
+		$query = $this->ci->db->get($tabel);
+		return $query;
+	}
+
+
+	
 	function totalJarak($id = null)
 	{
 		$this->ci->load->model("kunjungan_m");
