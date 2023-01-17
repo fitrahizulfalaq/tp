@@ -98,7 +98,8 @@ class Laporan extends CI_Controller
 			$this->db->where("status","1");
 			$data['row'] = $this->user_m->getAllBy("tipe_user","1");
 		}
-		
+		$data['header_script'] = "header/datatables-default";
+		$data['footer_script'] = "footer/datatables-default";
 		$this->templateadmin->load('template/dashboard', 'kunjungan/laporan/listDaerah', $data);
 	}
 

@@ -71,6 +71,12 @@
             position: relative;
         }
     </style>
+    
+    <?php
+	if (isset($header_script)) {
+		$this->load->view("script/" . $header_script);
+	}
+	?>
 </head>
 
 <body class="bg-white">
@@ -186,6 +192,11 @@
     <script src="<?= base_url() ?>/assets/js/plugins/jquery-circle-progress/circle-progress.min.js"></script>
     <!-- Base Js File -->
     <script src="<?= base_url() ?>/assets/js/base.js"></script>
+    <?php
+	if (isset($footer_script)) {
+		$this->load->view("script/" . $footer_script);
+	}
+	?>
 
 
 
