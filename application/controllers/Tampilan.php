@@ -99,6 +99,8 @@ class Tampilan extends CI_Controller {
 
 	function datatarget()
     {        
+		check_not_login();
+		akses("admin");
         $this->load->model("tampilan_m");
         // $dataMonth = $this->kunjungan_m->getByMonth(date("Y"),date("m"),$this->session->id);
         $data['row'] = $this->tampilan_m->gettarget();
