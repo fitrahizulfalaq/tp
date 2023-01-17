@@ -14,11 +14,16 @@
 <script>
     $(document).ready(function() {
         $('#full').DataTable({
-            dom: 'Bfrtip',
+            dom: 'Blfrtip',
+            columnDefs: [ {
+                targets: [0], /* column index */
+                orderable: true, /* true or false */
+                lengthchange: true,
+            }],
+            lengthMenu: [[10,25,50,100, 150, 200, -1], [10,25,50,100, 150, 200, "All"]],
             buttons: [
                 'copy', 'excel', 'print', 'colvis'
             ],
-            "lengthMenu": [[100, "All", 50, 25], [100, "All", 50, 25]],
         });
     });
 </script>
