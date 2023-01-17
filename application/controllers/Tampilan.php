@@ -97,6 +97,14 @@ class Tampilan extends CI_Controller {
 		$this->templateadmin->load('template/dashboardadmin','laporan/tambah_laporan',$data);
 	}
 
+	function datatarget()
+    {        
+        $this->load->model("tampilan_m");
+        // $dataMonth = $this->kunjungan_m->getByMonth(date("Y"),date("m"),$this->session->id);
+        $data['row'] = $this->tampilan_m->gettarget();
+        $this->load->view("test/datatarget",$data);
+    }
+
 
 
 }
