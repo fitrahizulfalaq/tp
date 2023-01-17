@@ -41,7 +41,15 @@ class Dashboard extends CI_Controller {
 		$data['k_koperasi'] = $this->kunjungan_m->getAllByType("koperasi",date("Y")."-".date("m"),$this->session->id);
 		$data['k_terlambat'] = $this->kunjungan_m->getAllByTable("tb_late","user_id",$this->session->id);
 		$data['k_izin'] = $this->kunjungan_m->getAllByTable("tb_izin","user_id",$this->session->id);
+		
+		// Data Postingan Instagram Terbaru
+		$this->db->order_by("created","DESC");
+		$this->db->limit("5","0");
+		$data['ig'] = $this->fungsi->pilihan("tb_ig");
 
+		// test($data['ig']->row("url"));
+
+		$data['k_izin'] = $this->kunjungan_m->getAllByTable("tb_izin","user_id",$this->session->id);
 		$data['total_jarak'] = $this->fungsi->totalJarak($this->session->id);
 		$data['title'] = "KITAPKU APPS";
 		$this->templateadmin->load('template/dashboard','page/beranda/'.$this->session->tipe_user,$data);
