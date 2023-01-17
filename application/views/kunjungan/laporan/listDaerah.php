@@ -63,7 +63,7 @@
                                                         <?= $this->fungsi->pilihan_advanced("tb_device", "user_id", $data->id)->num_rows() == null ? "<span class='badge badge-danger'>Belum mendaftarkan Device</span>" : "<span class='badge badge-success'>Sudah Daftar</span>" ?>
                                                     </td>
                                                     <td>
-                                                        <?= $this->fungsi->totalJarak($data->id) ?> km
+                                                        <?= $this->fungsi->totalJarak($data->id) ?>
                                                     </td>
                                                     <td>
                                                         <?php if ($this->fungsi->loadDataLike1("tb_target", "created", date("Y") . "-" . date("m"), $data->id)->num_rows() != null) { ?>
