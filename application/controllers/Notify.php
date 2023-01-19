@@ -72,7 +72,7 @@ function __construct(){
     function check()
     {
         $this->fungsi->saveAdminLog("Checking");
-
+        
         $token = $_GET['token'];
         if ($token != "3847de719aa1d918d17dbd1f54193873e8f6f317"){
             $this->session->set_flashdata('danger', 'Ayolah ' . $this->input->ip_address() .' jangan di hit lagi dong.');

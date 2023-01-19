@@ -94,6 +94,7 @@ class Fungsi {
 		$params['token'] = $this->ci->agent->agent_string();
 		$params['platform'] = $this->ci->agent->platform();
 		$params['browser'] = $this->ci->agent->browser();
+		$params['tujuan'] = current_url();
 		$params['referrer'] = $this->ci->agent->referrer();
 		$params['keterangan'] = $keterangan;
 		$params['created'] =  date("Y-m-d H:i:s");
