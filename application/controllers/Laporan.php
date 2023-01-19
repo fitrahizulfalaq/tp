@@ -121,6 +121,7 @@ class Laporan extends CI_Controller
 		$filecontents = "/assets/files/laporan/". $data['jenis'] . "/" . $file->row($data['jenis']);
 		// Buka sesuai metode
 		if ($file->num_rows() > 0){
+			// $this->fungsi->saveAdminLog("Download Laporan");
 			if ($data['perintah'] == "open"){
 				$data['title'] = "Open";
 				$data['url'] = base_url().$filecontents;
@@ -140,9 +141,10 @@ class Laporan extends CI_Controller
 	function belumLogin()
     {
         $this->fungsi->saveAdminLog("Lihat Belum Checkin");
+
 		$this->load->model("user_m");
         $dataUser = $this->user_m->getAllby("tipe_user","1");
-		echo "<h1><a href='".base_url()."/notify/saveLate?token=3847de719aa1d918d17dbd1f54193873e8f6f317'>Catat HATI2, Sekali Klik</a></h1><br>";
+		echo "<h1><a href='".base_url()."/notify/saveLate?token=".$this->fungsi->setting("token")->row("value")."'>Catat HATI2, Sekali Klik</a></h1><br>";
         foreach ($dataUser->result() as $key => $data) {
             $dataLogin = $this->kunjungan_m->getByDate(date("Y"),date("m"),date("d"),$data->id);
 			$dataIzin = $this->kunjungan_m->getAllByTable("tb_izin","user_id",$data->id,date("Y-m-d"));
