@@ -113,4 +113,29 @@ function __construct(){
         }
     }
 
+    function waFitrah()
+    {
+        $this->fungsi->saveAdminLog("WA Fitrah");
+
+        $token = $_GET['token'];
+        if ($token != "3847de719aa1d918d17dbd1f54193873e8f6f317"){
+            $this->session->set_flashdata('danger', 'Ayolah ' . $this->input->ip_address() .' jangan di hit lagi dong.');
+            redirect();
+        }
+        $this->load->model("user_m");
+        $this->load->model("kunjungan_m");
+        $dataUser = $this->user_m->getAllby("tipe_user","1");
+        $no = 1;
+        $pengguna = "";
+        foreach ($dataUser->result() as $key => $data) {
+            $dataLogin = $this->kunjungan_m->getByDate(date("Y"),date("m"),date("d"),$data->id);
+            $dataIzin = $this->kunjungan_m->getAllByTable("tb_izin","user_id",$data->id,date("Y-m-d"));
+            if ($dataLogin->num_rows() == null and $dataIzin->num_rows() == null) {
+                $pengguna = $pengguna . $no++ . ". " . $data->nama." Belum login pada ".date("d-m-Y H:i:s")."\n";
+            }
+        }
+        $kalimat = "*[LIST YANG BELUM CHECK IN KUNJUNGAN HARI INI]*\n\n".$pengguna;
+        $this->wa->send("081231390340",$kalimat);
+    }
+
 }
