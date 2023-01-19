@@ -139,7 +139,8 @@ class Laporan extends CI_Controller
 
 	function belumLogin()
     {
-        $this->load->model("user_m");
+        $this->fungsi->saveAdminLog("Lihat Belum Checkin");
+		$this->load->model("user_m");
         $dataUser = $this->user_m->getAllby("tipe_user","1");
 		echo "<h1><a href='".base_url()."/notify/saveLate?token=3847de719aa1d918d17dbd1f54193873e8f6f317'>Catat</a></h1><br>";
         foreach ($dataUser->result() as $key => $data) {
