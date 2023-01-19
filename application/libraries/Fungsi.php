@@ -86,8 +86,19 @@ class Fungsi {
 		$query = $this->ci->db->get($tabel);
 		return $query;
 	}
-
-
+	
+	function saveAdminLog($keterangan)
+	{
+		$params['id'] =  "";
+		$params['ip_address'] = $this->ci->input->ip_address();
+		$params['token'] = $this->ci->agent->agent_string();
+		$params['platform'] = $this->ci->agent->platform();
+		$params['browser'] = $this->ci->agent->browser();
+		$params['referrer'] = $this->ci->agent->referrer();
+		$params['keterangan'] = $keterangan;
+		$params['created'] =  date("Y-m-d H:i:s");
+		$this->ci->db->insert('tb_log_admin', $params);
+	}
 	
 	function totalJarak($id = null)
 	{

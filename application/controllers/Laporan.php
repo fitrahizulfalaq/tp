@@ -77,6 +77,8 @@ class Laporan extends CI_Controller
 
 	function accLaporanTP($id)
 	{
+		$this->fungsi->saveAdminLog("Acc Laporan");
+		
 		$tp = base64_decode($id);
 		// Validation		
 		akses("koordinator");
@@ -139,6 +141,7 @@ class Laporan extends CI_Controller
     {
         $this->load->model("user_m");
         $dataUser = $this->user_m->getAllby("tipe_user","1");
+		echo "<h1><a href='".base_url()."/notify/saveLate?token=3847de719aa1d918d17dbd1f54193873e8f6f317'>Catat</a></h1><br>";
         foreach ($dataUser->result() as $key => $data) {
             $dataLogin = $this->kunjungan_m->getByDate(date("Y"),date("m"),date("d"),$data->id);
 			$dataIzin = $this->kunjungan_m->getAllByTable("tb_izin","user_id",$data->id,date("Y-m-d"));
