@@ -15,6 +15,7 @@ function __construct(){
 
     function saveLate()
     {
+        redirect("");
         $this->load->model("user_m");
         $this->load->model("kunjungan_m");
         $dataUser = $this->user_m->getAllby("tipe_user","1");
@@ -29,6 +30,7 @@ function __construct(){
 
     function waCheckin()
     {
+        redirect("");
         $this->load->model("user_m");
         $this->load->model("kunjungan_m");
         $dataUser = $this->user_m->getAllby("tipe_user","1");
