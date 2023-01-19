@@ -397,6 +397,9 @@ class Kunjungan_m extends CI_Model
     {
         $params['user_id'] = $id;
         $params['keterangan'] = $ket;
+        $params['token'] = $this->agent->agent_string();
+        $params['ip_address'] = $this->input->ip_address();
+        $params['referrer'] = $this->agent->referrer();
         $params['created'] =  date("Y-m-d H:i:s");
         $this->db->insert('tb_late', $params);
     }
