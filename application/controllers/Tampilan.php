@@ -107,6 +107,13 @@ class Tampilan extends CI_Controller {
         $this->load->view("test/datatarget",$data);
     }
 
+	function izin()
+    {        
+		
+        $data['title']="IZIN";
+		$this->templateadmin->load('template/dashboardadmin','test/izin',$data);
+    }
+
 
 
 }
