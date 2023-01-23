@@ -14,8 +14,9 @@
                                             <tr>
                                                 <th width="5%">No</th>
                                                 <th width="20%">Nama Tenaga Pendamping</th>
-                                                <th width="20%">Aksi</th>
+                                                <th width="20%">Rencana Kerja</th>
                                                 <th width="40%">Laporan Bulan Ini</th>
+                                                <th width="10%">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -45,6 +46,7 @@
                                                             <span class='badge badge-danger'>Belum Upload</span>
                                                         <?php } ?>
                                                     </td>
+                                                    <td><a href="<?= site_url('laporan/detailTP/'.$data->id) ?>" class="btn btn-primary"><i class="fa fa-eye"></i></a></td>
                                                 </tr>
                                             <?php } ?>
                                         </tbody>
