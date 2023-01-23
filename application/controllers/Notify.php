@@ -16,6 +16,7 @@ function __construct(){
 
     function saveLate()
     {
+        redirect();
         $this->fungsi->saveAdminLog("Simpan Telat");
 
         if (date("H") < $this->fungsi->setting("jamTelat")->row("value"))
@@ -51,6 +52,7 @@ function __construct(){
 
     function waLate()
     {
+        redirect();
         $this->fungsi->saveAdminLog("Chat Telat");
 
         if (date("H") < $this->fungsi->setting("jamWa")->row("value"))
