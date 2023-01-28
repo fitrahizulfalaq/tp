@@ -30,7 +30,7 @@
         <div class="wide-block pb-2 pt-2">
             <?= form_open_multipart('') ?>
             <div class="custom-file-upload">
-                <input type="file" name="surat_tugas" id="surat_tugas" accept=".pdf">
+                <input type="file" name="surat_tugas" id="surat_tugas" accept=".pdf" required>
                 <label for="surat_tugas">
                     <span>
                         <strong>
@@ -41,7 +41,7 @@
                 </label>
             </div>
             <div class="custom-file-upload">
-                <input type="file" name="sppd" id="sppd" accept=".pdf">
+                <input type="file" name="sppd" id="sppd" accept=".pdf" required>
                 <label for="sppd">
                     <span>
                         <strong>
@@ -52,7 +52,7 @@
                 </label>
             </div>
             <div class="custom-file-upload">
-                <input type="file" name="surat_kunjungan" id="surat_kunjungan" accept=".pdf">
+                <input type="file" name="surat_kunjungan" id="surat_kunjungan" accept=".pdf" required>
                 <label for="surat_kunjungan">
                     <span>
                         <strong>
@@ -63,7 +63,7 @@
                 </label>
             </div>
             <div class="custom-file-upload">
-                <input type="file" name="laporan_kunjungan" id="laporan_kunjungan" accept=".pdf">
+                <input type="file" name="laporan_kunjungan" id="laporan_kunjungan" accept=".pdf" required>
                 <label for="laporan_kunjungan">
                     <span>
                         <strong>

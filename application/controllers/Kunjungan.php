@@ -272,6 +272,11 @@ class Kunjungan extends CI_Controller
 	{
 		// Validasi waktu: Format Ymd (Dimulai,Berakhir,Dialihkan kemana)
 		// timevalidation("20230101","20230115","kunjungan/data");
+        if (date("d") > $this->fungsi->setting("addLaporanTP")->row("value"))
+        {
+            $this->session->set_flashdata('danger', 'Waktu penyimpanan yang telat belum dimulai');
+            redirect();
+        }
         
 		// Khusus untuk TP
 		previllage($this->session->tipe_user,"1","!=","target");
