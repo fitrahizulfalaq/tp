@@ -43,6 +43,7 @@
                                             <tr>
                                                 <th width="5%">No</th>
                                                 <th width="30%">Nama Tenaga Pendamping</th>
+                                                <th width="10%">Asal</th>
                                                 <th width="10%">Estimasi Jarak</th>
                                                 <th width="10%">Total Kunjungan</th>
                                                 <th width="15%">Rencana Kerja</th>
@@ -62,6 +63,9 @@
                                                     <td>
                                                         <?= $data->nama ?>
                                                         <?= $this->fungsi->pilihan_advanced("tb_device", "user_id", $data->id)->num_rows() == null ? "<span class='badge badge-danger'>Belum mendaftarkan Device</span>" : "<span class='badge badge-success'>Sudah Daftar</span>" ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $this->fungsi->pilihan("tb_lembaga",$data->wilayah_kerja)->row("kota") ?>
                                                     </td>
                                                     <td>
                                                         <?= $this->fungsi->totalJarak($data->id) ?>
