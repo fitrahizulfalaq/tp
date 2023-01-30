@@ -44,6 +44,7 @@
                                                 <th width="5%">No</th>
                                                 <th width="30%">Nama Tenaga Pendamping</th>
                                                 <th width="10%">Estimasi Jarak</th>
+                                                <th width="10%">Total Kunjungan</th>
                                                 <th width="15%">Rencana Kerja</th>
                                                 <th width="20%">Laporan Bulan Ini</th>
                                                 <th width="20%">Aksi</th>
@@ -64,6 +65,9 @@
                                                     </td>
                                                     <td>
                                                         <?= $this->fungsi->totalJarak($data->id) ?>
+                                                    </td>
+                                                    <td>
+                                                        <?= $this->fungsi->totalKunjunganBulanIni($data->id) ?>
                                                     </td>
                                                     <td>
                                                         <?php if ($this->fungsi->loadDataLike1("tb_target", "created", date("Y") . "-" . date("m"), $data->id)->num_rows() != null) { ?>

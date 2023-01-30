@@ -9,12 +9,14 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <div style="overflow-x:auto;">
-                                    <table class="<table table-striped table-bordered table-hover table-full-width dataTable" id="list">
+                                    <table id="full" class="<table table-striped table-bordered table-hover table-full-width dataTable" id="list">
                                         <thead>
                                             <tr>
                                                 <th width="5%">No</th>
                                                 <th width="20%">Nama Tenaga Pendamping</th>
                                                 <th width="20%">Rencana Kerja</th>
+                                                <th width="10%">Estimasi Jarak</th>
+                                                <th width="10%">Total Kunjungan</th>
                                                 <th width="40%">Laporan Bulan Ini</th>
                                                 <th width="10%">Action</th>
                                             </tr>
@@ -28,7 +30,7 @@
                                                     <td scope="row">
                                                         <p><?= $no++ ?></p>
                                                     </td>
-                                                    <td><?= $data->nama ?></td>
+                                                    <td><?= $data->nama ?></td>                                                    
                                                     <td>
                                                     <?php if ($this->fungsi->loadDataLike1("tb_target", "created", date("Y") . "-" . date("m"), $data->id)->num_rows() != null) { ?>
                                                             <a href="<?= base_url("target/perintah?aksi=download&tahun=2023&token=" . base64_encode($data->id)) ?>" class="btn btn-info btn-sm" target="_blank"><i class="fa fa-download"></i> Download RK</a>
@@ -36,6 +38,8 @@
                                                             <span class='badge badge-danger'>Belum Upload</span>
                                                         <?php } ?>
                                                     </td>
+                                                    <td><?= $this->fungsi->totalJarak($data->id) ?></td>
+                                                    <td><?= $this->fungsi->totalKunjunganBulanIni($data->id) ?></td>
                                                     <td>
                                                     <?php if ($this->fungsi->loadDataLike1("tb_laporan", "created", date("Y") . "-" . date("m"), $data->id)->num_rows() != null) { ?>
                                                             <a href="<?= base_url("laporan/perintah?aksi=download&tahun=" . date("Y") . "&bulan=" . date("m") . "&jenis=surat_tugas&token=" . base64_encode($data->id)) ?>" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> Surat Tugas</a>

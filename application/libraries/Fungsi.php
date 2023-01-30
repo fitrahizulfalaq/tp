@@ -123,6 +123,14 @@ class Fungsi {
 		$estimasiJarak = number_format($totalJarak,3,',','');
 		return $estimasiJarak;
 	}
+
+	function totalKunjunganBulanIni($id = null)
+	{
+		$this->ci->load->model("kunjungan_m");
+		// Total Jarak
+		$data = $this->ci->kunjungan_m->getByMonth(date("Y"), date("m"), $id);        
+		return $data->num_rows();
+	}
 	
 }
 

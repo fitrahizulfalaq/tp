@@ -34,6 +34,8 @@ class Laporan extends CI_Controller
 	{
 		$data['title'] = "DATA TENAGA PENDAMPING";
 		$data['row'] = $this->user_m->getAllBy("wilayah_kerja", "", $this->session->wilayah_kerja);
+		$data['header_script'] = "header/datatables-default";
+		$data['footer_script'] = "footer/datatables-default";
 		$this->templateadmin->load('template/dashboard', 'kunjungan/laporan/listTp', $data);
 	}
 
