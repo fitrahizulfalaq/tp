@@ -65,7 +65,7 @@
                                                         <?= $this->fungsi->pilihan_advanced("tb_device", "user_id", $data->id)->num_rows() == null ? "<span class='badge badge-danger'>Belum mendaftarkan Device</span>" : "<span class='badge badge-success'>Sudah Daftar</span>" ?>
                                                     </td>
                                                     <td>
-                                                        <?= $this->fungsi->pilihan_selected("tb_lembaga",$data->wilayah_kerja)->row("kota") ?>
+                                                        <?= $this->fungsi->pilihan_selected("tb_lembaga", $data->wilayah_kerja)->row("kota") ?>
                                                     </td>
                                                     <td>
                                                         <?= $this->fungsi->totalJarak($data->id) ?>

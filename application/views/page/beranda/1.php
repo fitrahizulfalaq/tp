@@ -270,9 +270,10 @@
                     </a>
                 </li>
             </ul>
-            <?php if ($k_izin->num_rows() == null) { ?>
+            <?php if ($s_izin->num_rows() == null) { ?>
                 <a onclick="return confirm('Apakah Anda Yakin Ingin Izin Hari Ini ?')" href="<?= base_url("kunjungan/izin") ?>" id="btn-izin" class="btn btn-danger btn-block"><ion-icon name="medkit-outline"></ion-icon> IZIN UNTUK HARI INI</a>
             <?php } ?>
         </div>
     </div>
     <!-- * App Capsule -->
+</div>

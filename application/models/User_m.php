@@ -104,20 +104,20 @@ class User_m extends CI_Model
 	function updateProfil($post)
 	{
 		//Id	  
-		$params['id'] =  $post['id'];
+		$params['id'] =  $this->session->id;
 		// Kebutuhan User
-		$params['username'] =  $post['username'];
-		if ($post['password'] != null) { $params['password'] =  sha1($post['password']);}
 		$params['nama'] =  $post['nama'];
+		$params['nik'] =  $post['nik'];
 		$params['tempat_lahir'] =  $post['tempat_lahir'];
 		$params['tgl_lahir'] =  $post['tgl_lahir'];
 		$params['kelamin'] =  $post['kelamin'];
-		$params['hp'] =  $post['hp'];
 		$params['agama'] =  $post['agama'];
 		$params['domisili'] =  $post['domisili'];
 		$params['pernikahan'] =  $post['pernikahan'];
-		$params['pendidikan_terakhir'] =  $post['pendidikan_terakhir'];
 		$params['tahun_bergabung'] =  $post['tahun_bergabung'];
+		$params['pendidikan_terakhir'] =  $post['pendidikan_terakhir'];
+		if ($post['email'] != null) { $params['email'] =  $post['email']; }
+		if ($post['hp'] != null) { $params['hp'] =  $post['hp']; }
 		if ($post['foto'] != null) { $params['foto'] =  $post['foto']; } else { $params['foto'] =  ""; }
 
 		$this->db->where('id', $params['id']);

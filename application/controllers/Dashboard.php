@@ -49,7 +49,7 @@ class Dashboard extends CI_Controller {
 
 		// test($data['ig']->row("url"));
 
-		$data['k_izin'] = $this->kunjungan_m->getAllByTable("tb_izin","user_id",$this->session->id);
+		$data['s_izin'] = $this->kunjungan_m->getIzinByDate(date("Y"),date("m"),date("d"),$this->session->id);
 		$data['total_jarak'] = $this->fungsi->totalJarak($this->session->id);
 		$data['title'] = "KITAPKU APPS";
 		$this->templateadmin->load('template/dashboard','page/beranda/'.$this->session->tipe_user,$data);

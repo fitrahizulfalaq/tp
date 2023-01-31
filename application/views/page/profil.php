@@ -8,11 +8,10 @@
             </div>
             <div class="in">
                 <h3 class="name"><?= $row->nama ?></h3>
-                <h5 class="subtext"><ion-icon name="person" role="img" class="md hydrated" aria-label="person"></ion-icon><?= $this->fungsi->status($this->session->tipe_user)?></h5>
+                <h5 class="subtext"><ion-icon name="person" role="img" class="md hydrated" aria-label="person"></ion-icon><?= $this->fungsi->status($this->session->tipe_user) ?></h5>
             </div>
         </div>
     </div>
-
 
     <div class="section mt-2">
         <div class="section full">
@@ -40,7 +39,7 @@
                     <hr>
                     <div class="input-wrapper">
                         <label class="label">Tempat, Tanggal Lahir <span id="alert-resume" class="error">*</span></label>
-                        <input class="form-control" value="<?= $row->tempat_lahir ?>, <?= date("d M Y",strtotime($row->tgl_lahir)) ?>" readonly>
+                        <input class="form-control" value="<?= $row->tempat_lahir ?>, <?= date("d M Y", strtotime($row->tgl_lahir)) ?>" readonly>
                     </div>
                     <hr>
                     <div class="input-wrapper">
@@ -65,7 +64,7 @@
                     <hr>
                     <div class="input-wrapper">
                         <label class="label">Pernikahan <span id="alert-resume" class="error">*</span></label>
-                        <input class="form-control" value="<?= $row->pernikahan ?>" readonly>
+                        <input class="form-control" value="<?= strtoupper($row->pernikahan) ?>" readonly>
                     </div>
                     <hr>
                     <div class="input-wrapper">
@@ -95,7 +94,9 @@
                                 foreach ($device->result() as $key => $data) {;
                                 ?>
                                     <tr>
-                                        <td scope="row"><p><?= $data->platform ?></p></td>
+                                        <td scope="row">
+                                            <p><?= $data->platform ?></p>
+                                        </td>
                                         <td><?= sha1($data->token) ?></td>
                                         <td><?= $data->browser ?></td>
                                     </tr>
@@ -121,8 +122,12 @@
                                 foreach ($login->result() as $key => $data) {;
                                 ?>
                                     <tr>
-                                        <td scope="row"><p><?= $data->created ?></p></td>
-                                        <td><p><?= $data->ip_address ?></p></td>
+                                        <td scope="row">
+                                            <p><?= $data->created ?></p>
+                                        </td>
+                                        <td>
+                                            <p><?= $data->ip_address ?></p>
+                                        </td>
                                         <td><?= $data->platform ?> | <?= $data->browser ?></td>
                                     </tr>
                                 <?php } ?>
@@ -130,14 +135,12 @@
                         </table>
                         <br>
                     </div>
-
+                    <div>
+                        <a href="<?= base_url("profil/edit/" . $this->session->id) ?>" class="btn btn-block btn-success"><ion-icon name="create-outline"></ion-icon> Edit Profile</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
 </div>
 <!-- * App Capsule -->

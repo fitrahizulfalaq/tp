@@ -49,6 +49,21 @@ class Kunjungan_m extends CI_Model
         return $query;
     }
 
+    /*
+        Get Izin
+    */
+    function getIzinByDate($tahun = null, $bulan = null, $tanggal = null, $user_id = null)
+    {
+        $this->db->from('tb_izin');
+        if ($user_id != null) {
+            $this->db->where('user_id', $user_id);
+        }
+        $this->db->like('created', $tahun . "-" . $bulan . "-" . $tanggal);
+        $this->db->order_by('created', "desc");
+        $query = $this->db->get();
+        return $query;
+    }
+
     /* 
         Ambil data berdasarkan Tahun Bulan dan Tanggal, kondisi tambahan bisa untuk masing-masing TP (User_id)
             1. getByDate (Tanggal) - ("tahun","bulan","tanggal","user_id | opsional")
