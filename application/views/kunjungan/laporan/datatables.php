@@ -95,10 +95,11 @@
                         <td><?= $data->tindak_lanjut ?></td>
                         <td><?= $data->keterangan ?></td>
                         <td>
+                            <font class="invisible"><?= $data->lat ?></font>
                             <a href="https://maps.google.com/maps?q=<?= $data->lat ?>,<?= $data->lng ?>" target="blank">
                                 <img src="https://tp.uptkukm.id/assets/files/maps/<?= $data->loc_img ?>" alt="" class="img-thumbnail">
+                            </a>
                         </td>
-
                         <td>
                             <img src="https://tp.uptkukm.id/assets/files/foto_selfie/<?= $data->foto_selfie ?>" alt="" class="img-thumbnail">
                         </td>

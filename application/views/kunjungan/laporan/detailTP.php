@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="col-12">
-                    <h2>LAPORAN <br><?= strtoupper($tp->row("nama")) ?></h2>
+                    <h2>LAPORAN <br><?= strtoupper($tp->row("nama")) ?> (<?=$tahun?>/<?=$bulan?>) </h2>
                     <div class="card">
                         <div class="card-body">
                             <form action="<?= site_url() ?>/laporan/detailTP/<?=$tp->row("id")?>" enctype="multipart/form-data" method="post" accept-charset="utf-8">
@@ -38,7 +38,7 @@
                                         <?php } ?>
                                     </select>
                                     <button type="submit" class="btn btn-success">Filter <i class="fa fa-eye"></i></button>
-                                    <a href="<?= base_url("laporan")?>" class="btn btn-info float-right">Kembali <i class="fa fa-eye"></i></a>
+                                    <a href="<?= base_url("laporan")?>" class="btn btn-info float-right">Kembali <i class="fa fa-eye"></i></a><a href="<?=base_url("laporan/exportLaporanTP?tahun=".$tahun."&bulan=".$bulan."&tp=".$this->uri->segment("3"))?>" target="blank" class="btn btn-secondary btn-sm">Export Data Kunjungan (DEMO) <i class="fa fa-print"></i></a>
                                 </div>
                             </form>
                         </div>

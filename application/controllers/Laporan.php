@@ -54,6 +54,8 @@ class Laporan extends CI_Controller
 		$data['row'] = $this->kunjungan_m->getByMonth($tahun, $bulan, $id);
 		$data['tp'] = $this->user_m->get($id);
 		$data['approval'] = $this->approval_m->getByMonth("approval", $tahun, $bulan, $id);
+		$data['tahun'] = $tahun;
+		$data['bulan'] = $bulan;
 		// test($data['approval']->result());
 		$this->templateadmin->load('template/dashboard', 'kunjungan/laporan/detailTP', $data);
 	}
@@ -156,4 +158,17 @@ class Laporan extends CI_Controller
             }
         }
     }
+
+	function exportLaporanTP()
+	{
+		akses("admin");
+		$tahun = $_GET['tahun'];
+		$bulan = $_GET['bulan'];
+		$id = $_GET['tp'];
+
+		$this->load->model("kunjungan_m");
+        $dataMonth = $this->kunjungan_m->getByMonth($tahun,$bulan,$id);
+        $data['row'] = $dataMonth;
+        $this->load->view("kunjungan/laporan/datatables",$data);
+	}
 }
