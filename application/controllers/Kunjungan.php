@@ -129,6 +129,8 @@ class Kunjungan extends CI_Controller
 
         $data['title'] = "Kegiatan BULAN " . $bulan . " / " . $tahun;
         $data['row'] = $this->kunjungan_m->getByMonth($tahun, $bulan, $this->session->id);
+        $data['tahun'] = $tahun;
+        $data['bulan'] = $bulan;
         $data['laporan'] = $this->kunjungan_m->getLaporan($tahun, $bulan, $this->session->id);
 
         $this->templateadmin->load('template/dashboard', 'kunjungan/logData', $data);
@@ -136,8 +138,12 @@ class Kunjungan extends CI_Controller
 
     function dataKunjungan()
     {        
-        $this->load->model("kunjungan_m");
-        $dataMonth = $this->kunjungan_m->getByMonth(date("Y"),date("m"),$this->session->id);
+        $this->load->model("kunjungan_m");        
+        previllage("1", $this->session->tipe_user, "!=", "laporan");
+        !isset($_GET['tahun']) ? $tahun = date("Y") : $tahun = $_GET['tahun'];
+        !isset($_GET['bulan']) ? $bulan = date("m") : $bulan = $_GET['bulan'];
+
+        $dataMonth = $this->kunjungan_m->getByMonth($tahun,$bulan,$this->session->id);
         $data['row'] = $dataMonth;
         $this->load->view("kunjungan/laporan/datatables",$data);
     }
