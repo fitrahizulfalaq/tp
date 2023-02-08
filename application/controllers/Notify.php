@@ -141,7 +141,7 @@ class Notify extends CI_Controller
         }
         $kalimat = "*[LIST YANG BELUM CHECK IN KUNJUNGAN HARI INI]*\n\n" . $pengguna;
         $this->wa->send("081231390340", $kalimat);
-        if (date("H") < "18") {
+        if (date("H") > "18") {
             $this->wa->send("085235142348", $kalimat);
             $this->wa->send("085746706296", $kalimat);
         }
