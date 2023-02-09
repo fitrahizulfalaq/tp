@@ -84,7 +84,7 @@
             animationEnabled: true,
             theme: "light2", // "light1", "light2", "dark1", "dark2"
             title: {
-                text: "Berdasarkan Jumlah Kunjungan ke Kantor"
+                text: "Berdasarkan Jumlah Kunjungan"
             },
             axisY: {
                 title: "Jumlah"
