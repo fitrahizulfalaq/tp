@@ -114,6 +114,11 @@ class Tampilan extends CI_Controller {
 		$this->templateadmin->load('template/dashboardadmin','test/izin',$data);
     }
 
+	function stats(){
+		$data['title']="STATISTIK";
+		$this->templateadmin->load('template/dashboardadmin','test/stats',$data);
+	}
+
 
 
 }
