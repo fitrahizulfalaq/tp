@@ -203,14 +203,14 @@
                 },
                 {
                     type: "column",
-                    name: "Kunjungan Ke Koperasi",
-                    legendText: "Kunjungan Ke Koperasi",
+                    name: "Kunjungan Ke UKM",
+                    legendText: "Kunjungan Ke UKM",
                     axisYType: "secondary",
                     showInLegend: true,
                     dataPoints: [
                         <?php foreach ($row->result() as $key => $data) {; ?> 
                             {
-                                y: <?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "koperasi", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?>,
+                                y: <?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "ukm", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?>,
                                 label: "<?= $data->nama ?>"
                             },
                         <?php } ?>
