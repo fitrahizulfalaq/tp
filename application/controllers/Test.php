@@ -20,4 +20,33 @@ class Test extends CI_Controller
             }
         }
     }
+
+    function statistik()
+    {
+        // Berdasarkan kesuaian jurusan
+        $this->load->model("statistik_m");
+        $data['leaderboard'] = $this->statistik_m->leaderboardAll();
+        
+        $data['tahun'] = $_GET['tahun'];
+        $data['bulan'] = $_GET['bulan'];
+        $data['user_id'] = $_GET['token'];
+
+
+        // isset($tahun) ? redirect("") : "";
+        // isset($bulan) ? redirect("") : "";
+        // isset($user_id) ? redirect("") : "";
+
+        // $tahun = "2023";
+        // $bulan = "01";
+        // $user_id = "112";
+        
+        // Berdasarkan Jumlah Kunjungan Koperasi / UKM
+        // $koperasi = $this->fungsi->loadDataLike2("tb_kunjungan","tipe","koperasi","created",date($tahun)."-".date($bulan),$user_id);
+        // $ukm = $this->fungsi->loadDataLike2("tb_kunjungan","tipe","ukm","created",date($tahun)."-".date($bulan),$user_id);
+        // Berdasarkan jumlah Kunjungan ke Kantor
+        // $lainnya = $this->fungsi->loadDataLike2("tb_kunjungan","created",date($tahun)."-".date($bulan),"tipe","lainnya",$user_id);
+
+        $this->load->view("test/statistik",$data);
+
+    }
 }

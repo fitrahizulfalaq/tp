@@ -87,37 +87,6 @@ class Notify extends CI_Controller
         }
     }
 
-    function check()
-    {
-        $this->fungsi->saveAdminLog("Checking");
-
-        $token = $_GET['token'];
-        if ($token != "3847de719aa1d918d17dbd1f54193873e8f6f317") {
-            $this->session->set_flashdata('danger', 'Ayolah ' . $this->input->ip_address() . ' jangan di hit lagi dong.');
-            redirect();
-        }
-        $this->load->model("user_m");
-        $this->load->model("kunjungan_m");
-        $dataUser = $this->user_m->getAllby("tipe_user", "1");
-        foreach ($dataUser->result() as $key => $data) {
-            sleep(1); // this should halt for 3 seconds for every loop
-            $kalimat = "*[KAMU BELUM CHECK IN KUNJUNGAN HARI INI]* \n\nHalo, " . $data->nama . " Terhitung pada " . date("d-m-Y H:i:s") . " kamu belum melakukan checkin kunjungan. Segera melaporkan kegiatan hari ini, terima kasih. \n\n\n https://tp.upktukm.id\n_Sistem Otomatis oleh TIM IT UPT_";
-            echo $kalimat . "</br>";
-            ob_flush();
-            flush();
-
-            // $dataLogin = $this->kunjungan_m->getByDate(date("Y"),date("m"),date("d"),$data->id);
-            // $dataIzin = $this->kunjungan_m->getAllByTable("tb_izin","user_id",$data->id,date("Y-m-d"));
-            // if ($dataLogin->num_rows() == null and $dataIzin->num_rows() == null) {
-            //     sleep(4); // this should halt for 3 seconds for every loop
-            //     $kalimat = "*[KAMU BELUM CHECK IN KUNJUNGAN HARI INI]* \n\nHalo, ".$data->nama." Terhitung pada ".date("d-m-Y H:i:s")." kamu belum melakukan checkin kunjungan. Segera melaporkan kegiatan hari ini, terima kasih. \n\n\n https://tp.upktukm.id\n_Sistem Otomatis oleh TIM IT UPT_";
-            //     echo $kalimat . "</br>";
-            // }
-            // ob_flush();
-            // flush();
-        }
-    }
-
     function waFitrah()
     {
         $this->fungsi->saveAdminLog("WA Fitrah");
