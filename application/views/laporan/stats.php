@@ -8,10 +8,10 @@
                 <div class="mt-2 pr-2 pl-2">
                     <div class="row">
                         <div class="col-6 mb-2">
-                            <div id="chartContainer" style="height: 300px; max-width: 920px; margin: 0px auto;"></div>
+                            <div id="grafikKunjungan" style="height: 300px; max-width: 920px; margin: 0px auto;"></div>
                         </div>
                         <div class="col-6 mb-2">
-                            <div id="chartContainer2" style="height: 300px; max-width: 920px; margin: 0px auto;"></div>
+                            <div id="grafikKunjungan2" style="height: 300px; max-width: 920px; margin: 0px auto;"></div>
                         </div>
                     </div>
                 </div>
@@ -37,19 +37,19 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                    <?php $no = "1"; foreach ($leaderboard->result() as $key => $data) { ?>
                                                     <tr>
                                                         <td scope="row">
-                                                            <p>1</p>
+                                                            <p><?= $no++ ?></p>
                                                         </td>
                                                         <td>
-                                                            <p>nama</p>
+                                                            <p><?= $this->fungsi->nama($data->user_id) ?></p>
                                                         </td>
                                                         <td>
-                                                            <p>1500</p>
+                                                            <p><?= $data->total_score ?></p>
                                                         </td>
                                                     </tr>
-
+                                                    <?php } ?> 
                                                 </tbody>
                                             </table>
 
@@ -75,18 +75,20 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    <?php $no = "1"; foreach ($row->result() as $key => $data) { ?>
                                                     <tr>
                                                         <td scope="row">
-                                                            <p>1</p>
+                                                            <p><?= $no++ ?></p>
                                                         </td>
                                                         <td>
-                                                            <p>nama</p>
+                                                            <p><?= $this->fungsi->nama($data->id) ?></p>
                                                         </td>
                                                         <td>
-                                                            <p>1500</p>
+                                                            <p><?= $this->fungsi->totalJarak($data->id) ?></p>
                                                         </td>
                                                     </tr>
-                                                </tbody>
+                                                    <?php } ?>
+                                                </tbody>                                                
                                             </table>
                                         </div>
                                     </div>
@@ -101,7 +103,7 @@
 
             <hr>
 
-            <div class="section full mt-2">
+            <!-- <div class="section full mt-2">
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
@@ -136,10 +138,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
@@ -150,7 +150,7 @@
 <script>
     window.onload = function() {
 
-        var chart = new CanvasJS.Chart("chartContainer", {
+        var chart = new CanvasJS.Chart("grafikKunjungan", {
             exportEnabled: true,
             animationEnabled: true,
             theme: "light2",
@@ -163,22 +163,21 @@
             data: [{
                 type: "pie",
                 showInLegend: true,
-                toolTipContent: "{name}: <strong>{y}%</strong>",
+                toolTipContent: "{name}: <strong>{y} kunjungan Koperasi / UKM</strong>",
                 indexLabel: "{name} - {y}",
-                dataPoints: [{
-                        y: 26,
-                        name: "UKM : ANAS"
-                    },
+                dataPoints: [
+                    <?php foreach ($row->result() as $key => $data) {; ?>
                     {
-                        y: 20,
-                        name: "KOPERASI : DEDY"
-                    }
+                        y: <?= $this->fungsi->loadDataLike2("tb_kunjungan","tipe","koperasi","created",date($tahun)."-".date($bulan),$data->id)->num_rows() + $this->fungsi->loadDataLike2("tb_kunjungan","tipe","koperasi","created",date($tahun)."-".date($bulan),$data->id)->num_rows() ?>,
+                        name: "<?= $data->nama ?>"
+                    },
+                    <?php } ?>
                 ]
             }]
         });
         chart.render();
 
-        var chart = new CanvasJS.Chart("chartContainer2", {
+        var chart = new CanvasJS.Chart("grafikKunjungan2", {
             animationEnabled: true,
             theme: "light2", // "light1", "light2", "dark1", "dark2"
             title: {
@@ -193,30 +192,13 @@
                 // showInLegend: true, 
                 // legendMarkerColor: "grey",
                 // legendText: "MMbbl = one million barrels",
-                dataPoints: [{
-                        y: 100,
-                        label: "Venezuela"
-                    },
+                dataPoints: [
+                    <?php foreach ($row->result() as $key => $data) {; ?>
                     {
-                        y: 90,
-                        label: "Saudi"
+                        y: <?= $this->fungsi->loadDataLike2("tb_kunjungan","tipe","lainnya","created",date($tahun)."-".date($bulan),$data->id)->num_rows()?>,
+                        label: "<?= $data->nama ?>"
                     },
-                    {
-                        y: 80,
-                        label: "Canada"
-                    },
-                    {
-                        y: 70,
-                        label: "Iran"
-                    },
-                    {
-                        y: 60,
-                        label: "Iraq"
-                    },
-                    {
-                        y: 50,
-                        label: "Kuwait"
-                    }
+                    <?php } ?>
                 ]
             }]
         });

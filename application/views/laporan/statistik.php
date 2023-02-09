@@ -37,19 +37,19 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                    <?php $no = "1"; foreach ($leaderboard->result() as $key => $data) { ?>
                                                     <tr>
                                                         <td scope="row">
-                                                            <p>1</p>
+                                                            <p><?= $no++ ?></p>
                                                         </td>
                                                         <td>
-                                                            <p>nama</p>
+                                                            <p><?= $this->fungsi->nama($data->user_id) ?></p>
                                                         </td>
                                                         <td>
-                                                            <p>1500</p>
+                                                            <p><?= $data->total_score ?></p>
                                                         </td>
                                                     </tr>
-
+                                                    <?php } ?> 
                                                 </tbody>
                                             </table>
 

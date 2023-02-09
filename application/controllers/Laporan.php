@@ -171,4 +171,26 @@ class Laporan extends CI_Controller
         $data['row'] = $dataMonth;
         $this->load->view("kunjungan/laporan/datatables",$data);
 	}
+
+	function statistik()
+	{
+		akses("admin");
+
+		$data['title'] = "STATISTIK";
+		// isset($_GET['tahun']) ? redirect("") : "";
+        // isset($_GET['bulan']) ? redirect("") : "";
+        // isset($$_GET['user_id']) ? redirect("") : "";
+		
+		$data['tahun'] = $_GET['tahun'];
+		$data['bulan'] = $_GET['bulan'];
+		$data['wilayah_kerja'] = $_GET['wilayah_kerja'];
+		
+		$this->db->where("tipe_user","1");
+		$data['row'] = $this->user_m->getAllBy("wilayah_kerja", $data['wilayah_kerja']);
+
+		$this->load->model("statistik_m");
+		$data['leaderboard'] = $this->statistik_m->leaderboardDaerah($data['wilayah_kerja']);
+
+		$this->templateadmin->load('template/dashboard', 'laporan/stats', $data);
+	}
 }
