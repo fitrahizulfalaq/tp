@@ -37,19 +37,20 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php $no = "1"; foreach ($leaderboard->result() as $key => $data) { ?>
-                                                    <tr>
-                                                        <td scope="row">
-                                                            <p><?= $no++ ?></p>
-                                                        </td>
-                                                        <td>
-                                                            <p><?= $this->fungsi->nama($data->user_id) ?></p>
-                                                        </td>
-                                                        <td>
-                                                            <p><?= $data->total_score ?></p>
-                                                        </td>
-                                                    </tr>
-                                                    <?php } ?> 
+                                                    <?php $no = "1";
+                                                    foreach ($leaderboard->result() as $key => $data) { ?>
+                                                        <tr>
+                                                            <td scope="row">
+                                                                <p><?= $no++ ?></p>
+                                                            </td>
+                                                            <td>
+                                                                <p><?= $this->fungsi->nama($data->user_id) ?></p>
+                                                            </td>
+                                                            <td>
+                                                                <p><?= $data->total_score ?></p>
+                                                            </td>
+                                                        </tr>
+                                                    <?php } ?>
                                                 </tbody>
                                             </table>
 
@@ -75,20 +76,21 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php $no = "1"; foreach ($row->result() as $key => $data) { ?>
-                                                    <tr>
-                                                        <td scope="row">
-                                                            <p><?= $no++ ?></p>
-                                                        </td>
-                                                        <td>
-                                                            <p><?= $this->fungsi->nama($data->id) ?></p>
-                                                        </td>
-                                                        <td>
-                                                            <p><?= $this->fungsi->totalJarak($data->id) ?></p>
-                                                        </td>
-                                                    </tr>
+                                                    <?php $no = "1";
+                                                    foreach ($row->result() as $key => $data) { ?>
+                                                        <tr>
+                                                            <td scope="row">
+                                                                <p><?= $no++ ?></p>
+                                                            </td>
+                                                            <td>
+                                                                <p><?= $this->fungsi->nama($data->id) ?></p>
+                                                            </td>
+                                                            <td>
+                                                                <p><?= $this->fungsi->totalJarak($data->id) ?></p>
+                                                            </td>
+                                                        </tr>
                                                     <?php } ?>
-                                                </tbody>                                                
+                                                </tbody>
                                             </table>
                                         </div>
                                     </div>
@@ -166,11 +168,10 @@
                 toolTipContent: "{name}: <strong>{y} kunjungan Koperasi / UKM</strong>",
                 indexLabel: "{name} - {y}",
                 dataPoints: [
-                    <?php foreach ($row->result() as $key => $data) {; ?>
-                    {
-                        y: <?= $this->fungsi->loadDataLike2("tb_kunjungan","tipe","koperasi","created",date($tahun)."-".date($bulan),$data->id)->num_rows() + $this->fungsi->loadDataLike2("tb_kunjungan","tipe","koperasi","created",date($tahun)."-".date($bulan),$data->id)->num_rows() ?>,
-                        name: "<?= $data->nama ?>"
-                    },
+                    <?php foreach ($row->result() as $key => $data) {; ?> {
+                            y: <?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "koperasi", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() + $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "koperasi", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?>,
+                            name: "<?= $data->nama ?>"
+                        },
                     <?php } ?>
                 ]
             }]
@@ -187,20 +188,50 @@
                 title: "Jumlah"
             },
             data: [{
-                type: "column",
-                color: "teal",
-                // showInLegend: true, 
-                // legendMarkerColor: "grey",
-                // legendText: "MMbbl = one million barrels",
-                dataPoints: [
-                    <?php foreach ($row->result() as $key => $data) {; ?>
-                    {
-                        y: <?= $this->fungsi->loadDataLike2("tb_kunjungan","tipe","lainnya","created",date($tahun)."-".date($bulan),$data->id)->num_rows()?>,
-                        label: "<?= $data->nama ?>"
-                    },
-                    <?php } ?>
-                ]
-            }]
+                    type: "column",
+                    name: "Kunjungan ke Kantor",
+                    legendText: "Kunjungan Ke Koperasi",
+                    showInLegend: true,
+                    dataPoints: [
+                        <?php foreach ($row->result() as $key => $data) {; ?> 
+                            {
+                                y: <?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "koperasi", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?>,
+                                label: "<?= $data->nama ?>"
+                            },
+                        <?php } ?>
+                    ]
+                },
+                {
+                    type: "column",
+                    name: "Kunjungan Ke Koperasi",
+                    legendText: "Kunjungan Ke Koperasi",
+                    axisYType: "secondary",
+                    showInLegend: true,
+                    dataPoints: [
+                        <?php foreach ($row->result() as $key => $data) {; ?> 
+                            {
+                                y: <?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "koperasi", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?>,
+                                label: "<?= $data->nama ?>"
+                            },
+                        <?php } ?>
+                    ]
+                },
+                {
+                    type: "column",
+                    name: "Kunjungan Ke Lainnya",
+                    legendText: "Kunjungan Ke Lainnya",
+                    axisYType: "secondary",
+                    showInLegend: true,
+                    dataPoints: [
+                        <?php foreach ($row->result() as $key => $data) {; ?> 
+                            {
+                                y: <?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "lainnya", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?>,
+                                label: "<?= $data->nama ?>"
+                            },
+                        <?php } ?>
+                    ]
+                }
+            ]
         });
         chart.render();
     }
