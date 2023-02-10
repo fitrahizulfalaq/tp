@@ -22,6 +22,11 @@ class Dashboard extends CI_Controller
 			redirect("pengaturan/setPassword");
 		}
 
+		$bidang = $this->user_m->get($this->session->id)->row("bidang");
+		if (!isset($bidang) and $this->session->tipe_user == "1") {
+			redirect("pengaturan/setBidang");
+		}
+
 		// Menampilkan data Leaderboard
 		$this->load->model("kunjungan_m");
 		$data['leaderboard'] = $this->kunjungan_m->leaderboard($this->session->wilayah_kerja);

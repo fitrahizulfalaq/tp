@@ -55,6 +55,7 @@ class Auth extends CI_Controller
 					'nik' => $row->nik,
 					'wilayah_kerja' => $row->wilayah_kerja,
 					'tipe_user' => $row->tipe_user,
+					'bidang' => $row->bidang,
 					'date_now' => date('Y:m:d H:i:s'),
 				);
 				$this->session->set_userdata($params);
@@ -138,6 +139,7 @@ class Auth extends CI_Controller
 					'nik' => $row->nik,
 					'wilayah_kerja' => $row->wilayah_kerja,
 					'tipe_user' => $row->tipe_user,
+					'bidang' => $row->bidang,
 					'date_now' => date('Y:m:d H:i:s'),
 				);
 				$this->session->set_userdata($params);
@@ -213,6 +215,7 @@ class Auth extends CI_Controller
 					'nik' => $row->nik,
 					'wilayah_kerja' => $row->wilayah_kerja,
 					'tipe_user' => $row->tipe_user,
+					'bidang' => $row->bidang,
 					'date_now' => date('Y:m:d H:i:s'),
 				);
 				$this->session->set_userdata($params);

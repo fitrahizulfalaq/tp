@@ -37,6 +37,16 @@ class User_m extends CI_Model
 		return $query;
 	}
 
+	function getAttrBy($kolom = null, $var = null, $user_id = null)
+	{
+		$this->db->from('tb_user');
+		if ($kolom != null && $var != null) { $this->db->where($kolom, $var); }
+		if ($user_id != null) { $this->db->where("id", $user_id);$this->db->where("tipe_user", "1"); }
+		$this->db->where("status","1");
+		$query = $this->db->get();
+		return $query;
+	}
+
 	/*
 		Fungsi menambahkan data pengguna
 		1. TP harus mengisi lengkap dan terbuka untuk umum
@@ -149,6 +159,15 @@ class User_m extends CI_Model
 	{
 		$params['id'] =  $this->session->id;
 		$params['password'] =  sha1($post['password']);
+
+		$this->db->where('id', $params['id']);
+		$this->db->update('tb_user', $params);
+	}
+
+	function setBidang($post)
+	{
+		$params['id'] =  $this->session->id;
+		$params['bidang'] =  $post['bidang'];
 
 		$this->db->where('id', $params['id']);
 		$this->db->update('tb_user', $params);

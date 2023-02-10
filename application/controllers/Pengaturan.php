@@ -73,4 +73,36 @@ class Pengaturan extends CI_Controller {
             redirect('dashboard');
         }
 	}
+
+	function setBidang()
+	{
+		$this->load->model("user_m");
+		//Load librarynya dulu
+        $this->load->library('form_validation');
+        //Atur validasinya
+        $this->form_validation->set_rules('nama', 'nama', 'min_length[8]|max_length[50]');
+        //Pesan yang ditampilkan
+        $this->form_validation->set_message('is_unique', 'Data sudah ada');
+        //Tampilan pesan error
+        $this->form_validation->set_error_delimiters('<span class="badge badge-danger">', '</span>');
+        if ($this->form_validation->run() == FALSE) {
+            $query = $this->user_m->getAllBy("id", $this->session->id);
+            if ($query->num_rows() > 0) {
+                $data['row'] = $query->row();
+                $data['title'] = "PILIH BIDANG";
+				$this->templateadmin->load('template/dashboard', 'pengaturan/setBidang', $data);
+            } else {
+                echo "<script>alert('Data Tidak Ditemukan');</script>";
+                echo "<script>window.location='" . site_url('dashboard') . "';</script>";
+            }
+        } else {
+            $post = $this->input->post(null, TRUE);
+            $this->user_m->setBidang($post);
+
+            if ($this->db->affected_rows() > 0) {
+                $this->session->set_flashdata('success', 'Anda telah berhasil memilih bidang');
+            }
+            redirect('dashboard');
+        }
+	}
 }
