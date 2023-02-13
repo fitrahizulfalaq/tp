@@ -7,9 +7,15 @@
                     <form action="" enctype="multipart/form-data" method="post" accept-charset="utf-8">
                         <input type="hidden" readonly value="<?= $row->row("user_id") ?>">
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                            </div>
+                            <select name="kota" class="btn btn-outline-primary " required>
+                                <option value="">Pilih Kabupaten / Kota</option>
+                                <?php
+                                $this->db->order_by('id', 'ASC');
+                                foreach ($this->fungsi->pilihan("tb_lembaga")->result() as $key => $pilihan) {;
+                                ?>
+                                    <option value="<?= $pilihan->id ?>"><?= $pilihan->kota ?></option>
+                                <?php } ?>
+                            </select>                            
 
                             <select name="bulan" class="btn btn-outline-primary " required>
                                 <option value="">Pilih Bulan</option>
@@ -35,7 +41,7 @@
                                 <?php } ?>
                             </select>
                             <button type="submit" class="btn btn-success">Filter <i class="fa fa-eye"></i></button>
-                            <a href="<?= base_url("laporan") ?>" class="btn btn-info float-right">Kembali <i class="fa fa-fw fa-angle-double-left" aria-hidden="true"></i></a>
+                            <a href="<?= base_url("dashboard") ?>" class="btn btn-info float-right">Kembali <i class="fa fa-fw fa-angle-double-left" aria-hidden="true"></i></a>
                         </div>
                     </form>
                 </div>
@@ -45,10 +51,10 @@
             <div class="tab-pane fade show active" id="feed" role="tabpanel">
                 <div class="mt-2 pr-2 pl-2">
                     <div class="row">
-                        <div class="col-6 mb-2">
+                        <div class="col-lg-6 col-md-6 col-xs-12 mb-2">
                             <div id="grafikKunjungan" style="height: 300px; max-width: 920px; margin: 0px auto;"></div>
                         </div>
-                        <div class="col-6 mb-2">
+                        <div class="col-lg-6 col-md-6 col-xs-12 mb-2">
                             <div id="grafikKunjungan2" style="height: 300px; max-width: 920px; margin: 0px auto;"></div>
                         </div>
                     </div>
@@ -60,7 +66,7 @@
             <div class="tab-pane fade show active" id="feed" role="tabpanel">
                 <div class="mt-2 pr-2 pl-2">
                     <div class="row">
-                        <div class="col-6 mb-2">
+                        <div class="col-lg-6 col-md-6 col-xs-12 mb-2">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -99,7 +105,7 @@
                             </div>
                             <!-- /.card -->
                         </div>
-                        <div class="col-6 mb-2">
+                        <div class="col-lg-6 col-md-6 col-xs-12 mb-2">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -136,41 +142,62 @@
                                 <!-- /.card-body -->
                             </div>
                             <!-- /.card -->
-                        </div>
+                        </div>                        
                     </div>
                 </div>
             </div>
 
             <hr>
 
-            <!-- <div class="section full mt-2">
+            <!-- Extra Header -->
+            <div class="section full mt-2">
                 <div class="card">
                     <div class="card-body">
+                        <h2>Berdasarkan Lokasi Kunjungan</h2>
+                        <ul class="nav nav-tabs lined" role="tablist"> 
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#photos" role="tab">
+                                    TP1
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#videos" role="tab">
+                                    TP2
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#sounds" role="tab">
+                                    TP3
+                                </a>
+                            </li>
+                        </ul>
+
+                        <hr>
+            
                         <div class="table-responsive">
                             <div style="overflow-x:auto;">
                                 <table id="full" class="table-striped table-bordered table-hover table-full-width dataTable">
-                                    <h2>Berdasarkan Lokasi Kunjungan</h2>
                                     <thead>
                                         <tr>
-                                            <th width="5%">No</th>
-                                            <th width="40">Maps</th>
-                                            <th width="40%">Nama</th>
-                                            <th width="30%">Keperluan</th>
+                                            <th width="20%">MAPS</th>
+                                            <th width="30%">NAMA</th>
+                                            <th width="30%">KEPERLUAN</th>
+                                            <th width="30%">REALISASI</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td scope="row">
-                                                <p>1</p>
-                                            </td>
                                             <td>
                                                 <p>Maps</p>
                                             </td>
                                             <td>
-                                                <p>Dian</p>
+                                                <p>nama</p>
                                             </td>
                                             <td>
-                                                <p>Pembuatan NIB</P>
+                                                <p>keperluan</P>
+                                            </td>
+                                            <td>
+                                                <p>realisasi</P>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -179,7 +206,7 @@
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>
