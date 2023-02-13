@@ -175,15 +175,17 @@ class Laporan extends CI_Controller
 	function statistik()
 	{
 		akses("admin");
-
-		$data['title'] = "STATISTIK";
-		// isset($_GET['tahun']) ? redirect("") : "";
-        // isset($_GET['bulan']) ? redirect("") : "";
-        // isset($$_GET['user_id']) ? redirect("") : "";
+		$this->input->get();
 		
-		$data['tahun'] = $_GET['tahun'];
-		$data['bulan'] = $_GET['bulan'];
-		$data['wilayah_kerja'] = $_GET['wilayah_kerja'];
+		$data['title'] = "STATISTIK";
+		!isset($_GET['tahun']) ? $tahun = date("Y") : $tahun = $_GET['tahun'];
+        !isset($_GET['bulan']) ? $bulan = date("m") : $bulan = $_GET['bulan'];
+        !isset($_GET['wilayah_kerja']) ? $wilayah_kerja = "40" : $wilayah_kerja = $_GET['wilayah_kerja'];
+		
+		$data['tahun'] = $tahun;
+		$data['bulan'] = $bulan;
+		$data['wilayah_kerja'] = $wilayah_kerja;
+		$data['k_kota'] = $this->fungsi->pilihan_selected("tb_lembaga",$wilayah_kerja)->row("kota");
 		
 		$this->db->where("tipe_user","1");
 		$data['row'] = $this->user_m->getAllBy("wilayah_kerja", $data['wilayah_kerja']);

@@ -94,6 +94,15 @@ class Fungsi {
 		$query = $this->ci->db->get($tabel);
 		return $query;
 	}
+
+	function loadDataLike3($tabel,$kode,$id,$kode2,$id2,$kode3,$id3,$user_id = null) {		
+		$this->ci->db->like($kode3,$id3);
+		if ($user_id != null){$this->ci->db->where("user_id",$user_id);};
+		$this->ci->db->where($kode,$id);
+		$this->ci->db->where($kode2,$id2);
+		$query = $this->ci->db->get($tabel);
+		return $query;
+	}
 	
 	function saveAdminLog($keterangan)
 	{

@@ -149,7 +149,7 @@
                             <div class="text-muted">
                                 <ion-icon name="person" role="img" class="md hydrated" aria-label="person"></ion-icon><?= $this->fungsi->status($this->session->tipe_user)?><br>
                                 <ion-icon name="location" role="img" class="md hydrated" aria-label="location"></ion-icon>IP : <?= $this->input->ip_address() ?><br>
-                                <ion-icon name="location" role="img" class="md hydrated" aria-label="location"></ion-icon>IP : <?= $this->session->bidang ?>
+                                <!-- <ion-icon name="location" role="img" class="md hydrated" aria-label="location"></ion-icon>IP : <?= $this->session->bidang ?> -->
 
                             </div>
                         </div>

@@ -3,11 +3,12 @@
     <div class="section full mb-2">
         <div class="tab-content">
             <div class="card">
+
                 <div class="card-body">
-                    <form action="" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+                    <form action="<?= base_url() ?>/laporan/statistik/" enctype="multipart/form-data" method="get" accept-charset="utf-8">
                         <input type="hidden" readonly value="<?= $row->row("user_id") ?>">
                         <div class="input-group mb-3">
-                            <select name="kota" class="btn btn-outline-primary " required>
+                            <select name="wilayah_kerja" class="btn btn-outline-primary " required>
                                 <option value="">Pilih Kabupaten / Kota</option>
                                 <?php
                                 $this->db->order_by('id', 'ASC');
@@ -15,7 +16,7 @@
                                 ?>
                                     <option value="<?= $pilihan->id ?>"><?= $pilihan->kota ?></option>
                                 <?php } ?>
-                            </select>                            
+                            </select>
 
                             <select name="bulan" class="btn btn-outline-primary " required>
                                 <option value="">Pilih Bulan</option>
@@ -48,16 +49,75 @@
             </div>
 
             <!-- feed -->
+            <div class="text-center">
+                <h1>Statistik <?= $k_kota ?> <?= $bulan ?>/<?= $tahun ?></h1>
+            </div>
             <div class="tab-pane fade show active" id="feed" role="tabpanel">
                 <div class="mt-2 pr-2 pl-2">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-xs-12 mb-2">
+                        <div class="col-12 mb-2">
                             <div id="grafikKunjungan" style="height: 300px; max-width: 920px; margin: 0px auto;"></div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-xs-12 mb-2">
+                        <hr>
+                        <div class="col-12 mb-2">
                             <div id="grafikKunjungan2" style="height: 300px; max-width: 920px; margin: 0px auto;"></div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="section full mt-2">
+                <div class="col-12 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div style="overflow-x:auto;">
+                                    <table id="full" class="table-striped table-bordered table-hover table-full-width dataTable">
+                                        <h2>Detail Berdasarkan Jumlah Kunjungan</h2>
+                                        <thead>
+                                            <tr>
+                                                <th width="5%">No</th>
+                                                <th width="40%">Nama</th>
+                                                <th width="10%">Koperasi</th>
+                                                <th width="10%">UKM</th>
+                                                <th width="10%">Lainnya</th>
+                                                <th width="15%">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $no = "1";
+                                            foreach ($row->result() as $key => $data) { ?>
+                                                <tr>
+                                                    <td scope="row">
+                                                        <p><?= $no++ ?></p>
+                                                    </td>
+                                                    <td>
+                                                        <p><?= $this->fungsi->nama($data->id) ?></p>
+                                                    </td>
+                                                    <td>
+                                                        <p><?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "koperasi", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows()?></p>
+                                                    </td>
+                                                    <td>
+                                                        <p><?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "ukm", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows()?></p>
+                                                    </td>
+                                                    <td>
+                                                        <p><?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "lainnya", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows()?></p>
+                                                    </td>
+                                                    <td>
+                                                        <p><?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "koperasi", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() + $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "ukm", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() + $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "lainnya", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows()?></p>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
                 </div>
             </div>
 
@@ -142,7 +202,7 @@
                                 <!-- /.card-body -->
                             </div>
                             <!-- /.card -->
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>
@@ -153,56 +213,63 @@
             <div class="section full mt-2">
                 <div class="card">
                     <div class="card-body">
-                        <h2>Berdasarkan Lokasi Kunjungan</h2>
-                        <ul class="nav nav-tabs lined" role="tablist"> 
-                            <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#photos" role="tab">
-                                    TP1
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#videos" role="tab">
-                                    TP2
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#sounds" role="tab">
-                                    TP3
-                                </a>
-                            </li>
+                        <h2>Berdasarkan Kegiatan Kunjungan</h2>
+                        <small>*Klik nama untuk melihat detail kunjungan</small>
+                        <ul class="nav nav-tabs lined" role="tablist">
+                            <?php $no = "1";
+                            foreach ($row->result() as $key => $data) { ?>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#tabKe<?= $no++ ?>" role="tab">
+                                        <?= $data->nama ?>
+                                    </a>
+                                </li>
+                            <?php } ?>
                         </ul>
 
                         <hr>
-            
-                        <div class="table-responsive">
-                            <div style="overflow-x:auto;">
-                                <table id="full" class="table-striped table-bordered table-hover table-full-width dataTable">
-                                    <thead>
-                                        <tr>
-                                            <th width="20%">MAPS</th>
-                                            <th width="30%">NAMA</th>
-                                            <th width="30%">KEPERLUAN</th>
-                                            <th width="30%">REALISASI</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <p>Maps</p>
-                                            </td>
-                                            <td>
-                                                <p>nama</p>
-                                            </td>
-                                            <td>
-                                                <p>keperluan</P>
-                                            </td>
-                                            <td>
-                                                <p>realisasi</P>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+
+                        <div class="tab-content mt-1">
+                            <?php
+                            $no = "1";
+                            foreach ($row->result() as $key => $data) {
+                                $this->db->where("tipe !=", "lainnya");
+                                $item = $this->fungsi->loadDataLike2("tb_kunjungan", "user_id", $data->id, "created", $tahun . "-" . $bulan);
+                            ?>
+                                <!-- <?= $data->nama ?> -->
+                                <div class="tab-pane fade show" id="tabKe<?= $no++ ?>" role="tabpanel">
+                                    <div class="section full mt-1">
+                                        <div class="table-responsive">
+                                            <div style="overflow-x:auto;">
+                                                <table id="full" class="table-striped table-bordered table-hover table-full-width dataTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th width="20%">MAPS</th>
+                                                            <th width="30%">NAMA</th>
+                                                            <th width="30%">KEPERLUAN</th>
+                                                            <th width="30%">REALISASI</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php foreach ($item->result() as $key => $items) { ?>
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="https://maps.google.com/maps?q=<?= $items->lat ?>,<?= $items->lng ?>" target="blank"><img src="<?= base_url() ?>/assets/files/maps/<?= $items->loc_img ?>" alt="" class="imaged w200">
+                                                                </td>
+                                                                <td>
+                                                                    <?= $items->nama ?> / <a href="https://wa.me/+62<?= $items->hp ?>" target="blank"><?= $items->hp ?></a>
+                                                                </td>
+                                                                <td><?= $items->tujuan ?></td>
+                                                                <td><?= $items->rekomendasi ?><br><?= $items->realisasi ?></td>
+                                                            </tr>
+                                                        <?php } ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- * <?= $data->nama ?> -->
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -234,7 +301,7 @@
                 indexLabel: "{name} - {y}",
                 dataPoints: [
                     <?php foreach ($row->result() as $key => $data) {; ?> {
-                            y: <?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "koperasi", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() + $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "koperasi", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?>,
+                            y: <?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "koperasi", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() + $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "ukm", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?>,
                             name: "<?= $data->nama ?>"
                         },
                     <?php } ?>
@@ -258,8 +325,7 @@
                     legendText: "Kunjungan Ke Koperasi",
                     showInLegend: true,
                     dataPoints: [
-                        <?php foreach ($row->result() as $key => $data) {; ?> 
-                            {
+                        <?php foreach ($row->result() as $key => $data) {; ?> {
                                 y: <?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "koperasi", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?>,
                                 label: "<?= $data->nama ?>"
                             },
@@ -273,8 +339,7 @@
                     axisYType: "secondary",
                     showInLegend: true,
                     dataPoints: [
-                        <?php foreach ($row->result() as $key => $data) {; ?> 
-                            {
+                        <?php foreach ($row->result() as $key => $data) {; ?> {
                                 y: <?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "ukm", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?>,
                                 label: "<?= $data->nama ?>"
                             },
@@ -288,8 +353,7 @@
                     axisYType: "secondary",
                     showInLegend: true,
                     dataPoints: [
-                        <?php foreach ($row->result() as $key => $data) {; ?> 
-                            {
+                        <?php foreach ($row->result() as $key => $data) {; ?> {
                                 y: <?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "lainnya", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?>,
                                 label: "<?= $data->nama ?>"
                             },

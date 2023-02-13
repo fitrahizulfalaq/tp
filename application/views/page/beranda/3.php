@@ -28,7 +28,7 @@
                             <!-- small card -->
                             <div class="card product-card">
                                 <div class="inner text-center">
-                                    <a href="http://localhost/tp/laporan/statistik?wilayah_kerja=12&tahun=2023&bulan=01">
+                                    <a href="<?= base_url("laporan/statistik") ?>">
                                     
                                         <img src="<?= base_url("") ?>/assets/img/icon/star-folder.png" alt="" width="100%">
                                     </a>
