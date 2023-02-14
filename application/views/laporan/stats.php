@@ -42,7 +42,7 @@
                                 <?php } ?>
                             </select>
                             <button type="submit" class="btn btn-success">Filter <i class="fa fa-eye"></i></button>
-                            <a href="<?= base_url("dashboard") ?>" class="btn btn-info float-right">Kembali <i class="fa fa-fw fa-angle-double-left" aria-hidden="true"></i></a>
+                            <a href="<?= base_url("laporan/statistik") ?>" class="btn btn-info float-right">Kembali <i class="fa fa-fw fa-angle-double-left" aria-hidden="true"></i></a>
                         </div>
                     </form>
                 </div>

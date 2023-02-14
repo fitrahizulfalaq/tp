@@ -180,19 +180,37 @@ class Laporan extends CI_Controller
 		$data['title'] = "STATISTIK";
 		!isset($_GET['tahun']) ? $tahun = date("Y") : $tahun = $_GET['tahun'];
         !isset($_GET['bulan']) ? $bulan = date("m") : $bulan = $_GET['bulan'];
-        !isset($_GET['wilayah_kerja']) ? $wilayah_kerja = "40" : $wilayah_kerja = $_GET['wilayah_kerja'];
-		
-		$data['tahun'] = $tahun;
-		$data['bulan'] = $bulan;
-		$data['wilayah_kerja'] = $wilayah_kerja;
-		$data['k_kota'] = $this->fungsi->pilihan_selected("tb_lembaga",$wilayah_kerja)->row("kota");
-		
-		$this->db->where("tipe_user","1");
-		$data['row'] = $this->user_m->getAllBy("wilayah_kerja", $data['wilayah_kerja']);
+        !isset($_GET['wilayah_kerja']) ? $wilayah_kerja = null : $wilayah_kerja = $_GET['wilayah_kerja'];
 
-		$this->load->model("statistik_m");
-		$data['leaderboard'] = $this->statistik_m->leaderboardDaerah($data['wilayah_kerja']);
+		if ($wilayah_kerja == null) {
+			$data['tahun'] = $tahun;
+			$data['bulan'] = $bulan;
+			$this->load->model("user_m");
+			$data['k_tp_ukm'] = $this->user_m->getAllBy("bidang","ukm");
+			$data['k_tp_koperasi'] = $this->user_m->getAllBy("bidang","koperasi");
+			
+			$this->db->where("tipe","koperasi");
+			$data['k_kunjungan_koperasi'] = $this->kunjungan_m->getByMonth($tahun,$bulan);
+			$this->db->where("tipe","ukm");
+			$data['k_kunjungan_ukm'] = $this->kunjungan_m->getByMonth($tahun,$bulan);
+			$this->db->where("tipe","lainnya");
+			$data['k_kunjungan_lainnya'] = $this->kunjungan_m->getByMonth($tahun,$bulan);
 
-		$this->templateadmin->load('template/dashboard', 'laporan/stats', $data);
+			$this->templateadmin->load('template/dashboard', 'laporan/stats_umum', $data);
+		} else {
+			$data['tahun'] = $tahun;
+			$data['bulan'] = $bulan;
+			$data['wilayah_kerja'] = $wilayah_kerja;
+			$data['k_kota'] = $this->fungsi->pilihan_selected("tb_lembaga",$wilayah_kerja)->row("kota");
+			
+			$this->db->where("tipe_user","1");
+			$data['row'] = $this->user_m->getAllBy("wilayah_kerja", $data['wilayah_kerja']);
+	
+			$this->load->model("statistik_m");
+			$data['leaderboard'] = $this->statistik_m->leaderboardDaerah($data['wilayah_kerja']);
+	
+			$this->templateadmin->load('template/dashboard', 'laporan/stats', $data);
+		}
+		
 	}
 }

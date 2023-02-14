@@ -34,7 +34,7 @@
                                     </a>
                                 </div>
                                 <p align="center">
-                                    <a href="<?= site_url('laporan') ?>">
+                                    <a href="<?= base_url("laporan/statistik") ?>">
                                         STATISTIK LAPORAN
                                     </a>
                                 </p>

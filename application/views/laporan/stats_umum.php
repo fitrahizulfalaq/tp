@@ -4,8 +4,7 @@
         <div class="tab-content">
             <div class="card">
                 <div class="card-body">
-                    <form action="" enctype="multipart/form-data" method="post" accept-charset="utf-8">
-                        
+                <form action="<?= base_url() ?>/laporan/statistik/" enctype="multipart/form-data" method="get" accept-charset="utf-8">
                         <div class="input-group mb-3">
                             <select name="bulan" class="btn btn-outline-primary " required>
                                 <option value="">Pilih Bulan</option>
@@ -33,10 +32,10 @@
                             <a href="<?= base_url("dashboard") ?>" class="btn btn-info float-right">Kembali <i class="fa fa-fw fa-angle-double-left" aria-hidden="true"></i></a>
                         </div>
                     </form>
+                    <a class="btn btn-block btn-outline-success" href="<?= base_url()?>/laporan/statistik?wilayah_kerja=40&tahun=<?= $tahun ?>&bulan=<?= $bulan ?>">Lihat Statistik Per Daerah</a>
                 </div>
             </div>
 
-            <button><?= $tahun ?> / <?= $bulan ?></button>
 
             <hr>
 
@@ -91,11 +90,11 @@
                 toolTipContent: "{name}: <strong>{y}</strong>",
                 indexLabel: "{name} - {y}",
                 dataPoints: [{
-                        y: 26,
+                        y: <?= $k_tp_ukm->num_rows() ?>,
                         name: "UKM"
                     },
                     {
-                        y: 20,
+                        y: <?= $k_tp_koperasi->num_rows()   ?>,
                         name: "KOPERASI"
                     }
                 ]
@@ -108,7 +107,7 @@
             animationEnabled: true,
             theme: "light2",
             title: {
-                text: "Jumlah Kunjungan"
+                text: "Total Kunjungan <?= $bulan ?> / <?= $tahun?> sejumlah <?= $k_kunjungan_ukm->num_rows() + $k_kunjungan_koperasi->num_rows() + $k_kunjungan_koperasi->num_rows()  ?>"
             },
             legend: {
                 cursor: "pointer",
@@ -119,15 +118,15 @@
                 toolTipContent: "{name}: <strong>{y}</strong>",
                 indexLabel: "{name} - {y}",
                 dataPoints: [{
-                        y: 26,
+                        y: <?= $k_kunjungan_ukm->num_rows()   ?>,
                         name: "UKM"
                     },
                     {
-                        y: 20,
+                        y: <?= $k_kunjungan_koperasi->num_rows()   ?>,
                         name: "KOPERASI"
                     },
                     {
-                        y: 21,
+                        y: <?= $k_kunjungan_koperasi->num_rows()   ?>,
                         name: "LAINNYA"
                     }
                 ]
