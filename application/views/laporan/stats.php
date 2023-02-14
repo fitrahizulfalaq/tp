@@ -94,7 +94,7 @@
                                                         <p><?= $no++ ?></p>
                                                     </td>
                                                     <td>
-                                                        <p><?= $this->fungsi->nama($data->id) ?></p>
+                                                        <p><?= $this->fungsi->nama($data->id) ?> (<?= $data->bidang?>)</p>
                                                     </td>
                                                     <td>
                                                         <p><?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "koperasi", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows()?></p>
@@ -187,7 +187,7 @@
                                                                 <p><?= $no++ ?></p>
                                                             </td>
                                                             <td>
-                                                                <p><?= $this->fungsi->nama($data->id) ?></p>
+                                                                <p><?= $this->fungsi->nama($data->id) ?> (<?= $data->bidang?>)</p>
                                                             </td>
                                                             <td>
                                                                 <p><?= $this->fungsi->totalJarak($data->id) ?></p>
@@ -220,7 +220,7 @@
                             foreach ($row->result() as $key => $data) { ?>
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#tabKe<?= $no++ ?>" role="tab">
-                                        <?= $data->nama ?>
+                                        <?= $data->nama ?> (<?= $data->bidang?>)
                                     </a>
                                 </li>
                             <?php } ?>
