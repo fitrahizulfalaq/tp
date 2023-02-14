@@ -94,7 +94,7 @@
                         name: "UKM"
                     },
                     {
-                        y: <?= $k_tp_koperasi->num_rows()   ?>,
+                        y: <?= $k_tp_koperasi->num_rows() - 1   ?>,
                         name: "KOPERASI"
                     }
                 ]
