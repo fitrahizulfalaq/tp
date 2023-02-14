@@ -5,6 +5,7 @@
             <div class="col-12">
                 <div class="col-12">
                     <h3>LAPORAN TENAGA PENDAMPING</h3>
+                    <h2><?= $wilayah_kerja ?> (<?= $bulan ?>/<?= $tahun ?>)</h2>
                     <?php $this->view("message") ?>
                     <div class="card">
                         <div class="card-body">
@@ -59,7 +60,11 @@
                                                 <th width="5%">No</th>
                                                 <th width="30%">Nama Tenaga Pendamping</th>
                                                 <th width="10%">Asal</th>
+                                                <th width="10%">Bidang</th>
                                                 <th width="10%">Estimasi Jarak</th>
+                                                <th width="10%">Kunjungan Koperasi</th>
+                                                <th width="10%">Kunjungan UKM</th>
+                                                <th width="10%">Kunjungan Lainnya</th>
                                                 <th width="10%">Total Kunjungan</th>
                                                 <!-- <th width="15%">Rencana Kerja</th> -->
                                                 <th width="20%">Laporan Bulan Ini</th>
@@ -83,10 +88,22 @@
                                                         <?= $this->fungsi->pilihan_selected("tb_lembaga", $data->wilayah_kerja)->row("kota") ?>
                                                     </td>
                                                     <td>
+                                                        <?= $data->bidang ?>
+                                                    </td>
+                                                    <td>
                                                         <?= $this->fungsi->totalJarak($data->id) ?>
                                                     </td>
                                                     <td>
-                                                        <?= $this->fungsi->totalKunjunganBulanIni($data->id) ?>
+                                                        <p><?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "koperasi", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?></p>
+                                                    </td>
+                                                    <td>
+                                                        <p><?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "ukm", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?></p>
+                                                    </td>
+                                                    <td>
+                                                        <p><?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "lainnya", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?></p>
+                                                    </td>
+                                                    <td>
+                                                        <p><?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "koperasi", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() + $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "ukm", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() + $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "lainnya", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?></p>
                                                     </td>
                                                     <!-- <td>
                                                         <?php if ($this->fungsi->loadDataLike1("tb_target", "created", $tahun . "-" . $bulan, $data->id)->num_rows() != null) { ?>

@@ -101,14 +101,18 @@ class Laporan extends CI_Controller
 		$data['title'] = "Data Laporan TP";
 		if (isset($_POST['kota'])) {
 			$this->db->where("tipe_user", "1");
-			$data['row'] = $this->user_m->getAllBy("wilayah_kerja", $_POST['kota']);
+			$data['row'] = $this->user_m->getAllBy("wilayah_kerja", $_POST['kota']);			
+			$data['wilayah_kerja'] = $this->fungsi->pilihan_selected("tb_lembaga",$_POST['kota'])->row("kota");
 		} else {
 			$this->db->where("status", "1");
+			$data['wilayah_kerja'] = "Semua Daerah";
 			$data['row'] = $this->user_m->getAllBy("tipe_user", "1");
 		}
 
 		!isset($_POST['tahun']) ? $data['tahun'] = date("Y") : $data['tahun'] = $_POST['tahun'];
 		!isset($_POST['bulan']) ? $data['bulan'] = date("m") : $data['bulan'] = $_POST['bulan'];
+
+		
 
 		$data['header_script'] = "header/datatables-default";
 		$data['footer_script'] = "footer/datatables-default";
