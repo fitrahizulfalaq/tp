@@ -259,6 +259,7 @@
                                                             <th width="30%">NAMA</th>
                                                             <th width="30%">KEPERLUAN</th>
                                                             <th width="30%">REALISASI</th>
+                                                            <th width="10%">#</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -268,10 +269,13 @@
                                                                     <a href="https://maps.google.com/maps?q=<?= $items->lat ?>,<?= $items->lng ?>" target="blank"><img src="<?= base_url() ?>/assets/files/maps/<?= $items->loc_img ?>" alt="" class="imaged w200">
                                                                 </td>
                                                                 <td>
-                                                                    <?= $items->nama ?> / <a href="https://wa.me/+62<?= $items->hp ?>" target="blank"><?= $items->hp ?></a>
+                                                                    <?= $items->nama ?> (<?= $items->brand ?>) / <a href="https://wa.me/+62<?= $items->hp ?>" target="blank"><?= $items->hp ?></a>
                                                                 </td>
                                                                 <td><?= $items->tujuan ?></td>
                                                                 <td><?= $items->rekomendasi ?><br><?= $items->realisasi ?></td>
+                                                                <td>
+                                                                    <a href="<?= site_url('laporan/detailTP/' . $data->id) ?>" class="btn btn-primary btn-sm"><ion-icon name="eye-outline"></ion-icon></a>
+                                                                </td>
                                                             </tr>
                                                         <?php } ?>
                                                     </tbody>

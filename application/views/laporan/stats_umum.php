@@ -32,7 +32,7 @@
                             <a href="<?= base_url("dashboard") ?>" class="btn btn-info float-right">Kembali <i class="fa fa-fw fa-angle-double-left" aria-hidden="true"></i></a>
                         </div>
                     </form>
-                    <a class="btn btn-block btn-outline-success" href="<?= base_url()?>/laporan/statistik?wilayah_kerja=40&tahun=<?= $tahun ?>&bulan=<?= $bulan ?>">Lihat Statistik Per Daerah</a>
+                    <a class="btn btn-block btn-warning" href="<?= base_url()?>/laporan/statistik?wilayah_kerja=40&tahun=<?= $tahun ?>&bulan=<?= $bulan ?>">Lihat Statistik Per Daerah</a>
                 </div>
             </div>
 

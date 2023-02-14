@@ -41,6 +41,7 @@ class Dashboard extends CI_Controller
 			}
 			$data['markers'] = $datamarker;
 		}
+		
 		$data['device'] = $this->validation_m->cekDevice($this->agent->agent_string(), $this->agent->platform(), $this->agent->browser());
 		$data['kunjungan'] = $dataMonth;
 
