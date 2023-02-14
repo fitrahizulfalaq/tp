@@ -23,7 +23,7 @@ class Dashboard extends CI_Controller
 		}
 
 		$bidang = $this->user_m->get($this->session->id)->row("bidang");
-		if (!isset($bidang)) {
+		if (!isset($bidang) and $this->session->tipe_user == "1") {
 			redirect("pengaturan/setBidang");
 		}
 
