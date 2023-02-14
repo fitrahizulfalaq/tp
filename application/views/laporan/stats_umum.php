@@ -107,7 +107,7 @@
             animationEnabled: true,
             theme: "light2",
             title: {
-                text: "Total Kunjungan <?= $bulan ?> / <?= $tahun?> sejumlah <?= $k_kunjungan_ukm->num_rows() + $k_kunjungan_koperasi->num_rows() + $k_kunjungan_koperasi->num_rows()  ?>"
+                text: "Total Kunjungan <?= $bulan ?> / <?= $tahun?> sejumlah <?= $k_kunjungan_ukm->num_rows() + $k_kunjungan_koperasi->num_rows() + $k_kunjungan_lainnya->num_rows()  ?>"
             },
             legend: {
                 cursor: "pointer",
@@ -126,7 +126,7 @@
                         name: "KOPERASI"
                     },
                     {
-                        y: <?= $k_kunjungan_koperasi->num_rows()   ?>,
+                        y: <?= $k_kunjungan_lainnya->num_rows()   ?>,
                         name: "LAINNYA"
                     }
                 ]
