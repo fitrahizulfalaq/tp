@@ -11,13 +11,6 @@
                             <form action="" enctype="multipart/form-data" method="post" accept-charset="utf-8">
                                 <input type="hidden" name="id" value="<?= $this->session->id ?>">
                                 <div class="input-group mb-3">
-                                    <!-- <select name="tahun" class="btn btn-outline-primary " required>
-                                        <option value="">Pilih Tahun</option>
-                                        <?php $thn_skr = date('Y');
-                                        for ($x = $thn_skr; $x >= 2022; $x--) { ?>
-                                            <option value="<?php echo $x ?>"><?php echo $x ?></option>
-                                        <?php } ?>
-                                    </select> -->
                                     <select name="kota" class="btn btn-outline-primary " required>
                                         <option value="">Pilih Kabupaten / Kota</option>
                                         <?php
@@ -25,6 +18,28 @@
                                         foreach ($this->fungsi->pilihan("tb_lembaga")->result() as $key => $pilihan) {;
                                         ?>
                                             <option value="<?= $pilihan->id ?>"><?= $pilihan->kota ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <select name="bulan" class="btn btn-outline-primary " required>
+                                        <option value="">Pilih Bulan</option>
+                                        <option value="01">Januari</option>
+                                        <option value="02">Februari</option>
+                                        <option value="03">Maret</option>
+                                        <option value="04">April</option>
+                                        <option value="05">Mei</option>
+                                        <option value="06">Juni</option>
+                                        <option value="07">Juli</option>
+                                        <option value="08">Agustus</option>
+                                        <option value="09">September</option>
+                                        <option value="10">Oktober</option>
+                                        <option value="11">November</option>
+                                        <option value="12">Desember</option>
+                                    </select>
+                                    <select name="tahun" class="btn btn-outline-primary " required>
+                                        <option value="">Pilih Tahun</option>
+                                        <?php $thn_skr = date('Y');
+                                        for ($x = $thn_skr; $x >= 2022; $x--) { ?>
+                                            <option value="<?php echo $x ?>"><?php echo $x ?></option>
                                         <?php } ?>
                                     </select>
                                     <button type="submit" class="btn btn-success">Filter <i class="fa fa-eye"></i></button>
@@ -46,7 +61,7 @@
                                                 <th width="10%">Asal</th>
                                                 <th width="10%">Estimasi Jarak</th>
                                                 <th width="10%">Total Kunjungan</th>
-                                                <th width="15%">Rencana Kerja</th>
+                                                <!-- <th width="15%">Rencana Kerja</th> -->
                                                 <th width="20%">Laporan Bulan Ini</th>
                                                 <th width="20%">Aksi</th>
                                             </tr>
@@ -73,19 +88,19 @@
                                                     <td>
                                                         <?= $this->fungsi->totalKunjunganBulanIni($data->id) ?>
                                                     </td>
-                                                    <td>
-                                                        <?php if ($this->fungsi->loadDataLike1("tb_target", "created", date("Y") . "-" . date("m"), $data->id)->num_rows() != null) { ?>
+                                                    <!-- <td>
+                                                        <?php if ($this->fungsi->loadDataLike1("tb_target", "created", $tahun . "-" . $bulan, $data->id)->num_rows() != null) { ?>
                                                             <a href="<?= base_url("target/perintah?aksi=download&tahun=2023&token=" . base64_encode($data->id)) ?>" class="btn btn-info btn-sm" target="_blank"><i class="fa fa-download"></i> Download RK</a>
                                                         <?php } else { ?>
                                                             <span class='badge badge-danger'>Belum Upload</span>
                                                         <?php } ?>
-                                                    </td>
+                                                    </td> -->
                                                     <td>
-                                                        <?php if ($this->fungsi->loadDataLike1("tb_laporan", "created", date("Y") . "-" . date("m"), $data->id)->num_rows() != null) { ?>
-                                                            <a href="<?= base_url("laporan/perintah?aksi=download&tahun=" . date("Y") . "&bulan=" . date("m") . "&jenis=surat_tugas&token=" . base64_encode($data->id)) ?>" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> Surat Tugas</a>
-                                                            <a href="<?= base_url("laporan/perintah?aksi=download&tahun=" . date("Y") . "&bulan=" . date("m") . "&jenis=sppd&token=" . base64_encode($data->id)) ?>" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> SPPD</a>
-                                                            <a href="<?= base_url("laporan/perintah?aksi=download&tahun=" . date("Y") . "&bulan=" . date("m") . "&jenis=surat_kunjungan&token=" . base64_encode($data->id)) ?>" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> Kunjungan</a>
-                                                            <a href="<?= base_url("laporan/perintah?aksi=download&tahun=" . date("Y") . "&bulan=" . date("m") . "&jenis=laporan_kunjungan&token=" . base64_encode($data->id)) ?>" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> Laporan Kunjungan</a>
+                                                        <?php if ($this->fungsi->loadDataLike1("tb_laporan", "created", $tahun . "-" . $bulan, $data->id)->num_rows() != null) { ?>
+                                                            <a href="<?= base_url("laporan/perintah?aksi=download&tahun=" . $tahun . "&bulan=" . $bulan . "&jenis=surat_tugas&token=" . base64_encode($data->id)) ?>" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> Surat Tugas</a>
+                                                            <a href="<?= base_url("laporan/perintah?aksi=download&tahun=" . $tahun . "&bulan=" . $bulan . "&jenis=sppd&token=" . base64_encode($data->id)) ?>" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> SPPD</a>
+                                                            <a href="<?= base_url("laporan/perintah?aksi=download&tahun=" . $tahun . "&bulan=" . $bulan . "&jenis=surat_kunjungan&token=" . base64_encode($data->id)) ?>" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> Kunjungan</a>
+                                                            <a href="<?= base_url("laporan/perintah?aksi=download&tahun=" . $tahun . "&bulan=" . $bulan . "&jenis=laporan_kunjungan&token=" . base64_encode($data->id)) ?>" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> Laporan Kunjungan</a>
                                                         <?php } else { ?>
                                                             <span class='badge badge-danger'>Belum Upload</span>
                                                         <?php } ?>

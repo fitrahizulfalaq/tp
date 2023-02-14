@@ -94,19 +94,19 @@
                                                         <p><?= $no++ ?></p>
                                                     </td>
                                                     <td>
-                                                        <p><?= $this->fungsi->nama($data->id) ?> (<?= $data->bidang?>)</p>
+                                                        <p><?= $this->fungsi->nama($data->id) ?> (<?= $data->bidang ?>)</p>
                                                     </td>
                                                     <td>
-                                                        <p><?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "koperasi", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows()?></p>
+                                                        <p><?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "koperasi", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?></p>
                                                     </td>
                                                     <td>
-                                                        <p><?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "ukm", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows()?></p>
+                                                        <p><?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "ukm", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?></p>
                                                     </td>
                                                     <td>
-                                                        <p><?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "lainnya", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows()?></p>
+                                                        <p><?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "lainnya", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?></p>
                                                     </td>
                                                     <td>
-                                                        <p><?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "koperasi", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() + $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "ukm", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() + $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "lainnya", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows()?></p>
+                                                        <p><?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "koperasi", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() + $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "ukm", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() + $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "lainnya", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?></p>
                                                     </td>
                                                 </tr>
                                             <?php } ?>
@@ -187,7 +187,7 @@
                                                                 <p><?= $no++ ?></p>
                                                             </td>
                                                             <td>
-                                                                <p><?= $this->fungsi->nama($data->id) ?> (<?= $data->bidang?>)</p>
+                                                                <p><?= $this->fungsi->nama($data->id) ?> (<?= $data->bidang ?>)</p>
                                                             </td>
                                                             <td>
                                                                 <p><?= $this->fungsi->totalJarak($data->id) ?></p>
@@ -220,7 +220,7 @@
                             foreach ($row->result() as $key => $data) { ?>
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#tabKe<?= $no++ ?>" role="tab">
-                                        <?= $data->nama ?> (<?= $data->bidang?>)
+                                        <?= $data->nama ?> (<?= $data->bidang ?>)
                                     </a>
                                 </li>
                             <?php } ?>
@@ -240,6 +240,18 @@
                                     <div class="section full mt-1">
                                         <div class="table-responsive">
                                             <div style="overflow-x:auto;">
+                                                <div>
+                                                    Laporan :
+                                                    <?php if ($this->fungsi->loadDataLike1("tb_laporan", "created", $tahun . "-" . $bulan, $data->id)->num_rows() != null) { ?>
+                                                        <a href="<?= base_url("laporan/perintah?aksi=download&tahun=" . $tahun . "&bulan=" . $bulan . "&jenis=surat_tugas&token=" . base64_encode($data->id)) ?>" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> Surat Tugas</a>
+                                                        <a href="<?= base_url("laporan/perintah?aksi=download&tahun=" . $tahun . "&bulan=" . $bulan . "&jenis=sppd&token=" . base64_encode($data->id)) ?>" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> SPPD</a>
+                                                        <a href="<?= base_url("laporan/perintah?aksi=download&tahun=" . $tahun . "&bulan=" . $bulan . "&jenis=surat_kunjungan&token=" . base64_encode($data->id)) ?>" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> Kunjungan</a>
+                                                        <a href="<?= base_url("laporan/perintah?aksi=download&tahun=" . $tahun . "&bulan=" . $bulan . "&jenis=laporan_kunjungan&token=" . base64_encode($data->id)) ?>" class="btn btn-warning btn-sm"><i class="fa fa-download"></i> Laporan Kunjungan</a>
+                                                    <?php } else { ?>
+                                                        <span class='badge badge-danger'>Belum Upload</span>
+                                                    <?php } ?>
+                                                </div>
+                                                <br>
                                                 <table id="full" class="table-striped table-bordered table-hover table-full-width dataTable">
                                                     <thead>
                                                         <tr>
