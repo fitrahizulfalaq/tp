@@ -173,5 +173,13 @@ class User_m extends CI_Model
 		$this->db->update('tb_user', $params);
 	}
 
+	function getPoin($user_id)
+	{
+		$this->ci->db->select_sum('poin');		
+		$this->ci->db->where("user_id",$user_id);		
+		$query = $this->ci->db->get('tb_leaderboard')->row('poin');
+		return $query;
+	}
+
 
 }

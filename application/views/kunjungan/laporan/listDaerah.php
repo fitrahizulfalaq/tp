@@ -69,6 +69,7 @@
                                                 <th width="10%">Total Kunjungan</th>
                                                 <th width="10%">Total Izin</th>
                                                 <th width="10%">Total Terlambat</th>
+                                                <th width="10%">Total Poin</th>
                                                 <!-- <th width="15%">Rencana Kerja</th> -->
                                                 <th width="20%">Laporan Bulan Ini</th>
                                                 <th width="20%">Aksi</th>
@@ -113,6 +114,9 @@
                                                     </td>
                                                     <td>
                                                         <p><?= $this->fungsi->loadDataLike2("tb_late", "user_id", $data->id, "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?></p>
+                                                    </td>
+                                                    <td>
+                                                        <?= $this->fungsi->getPoin($data->id, $tahun, $bulan)->row("poin") ?>
                                                     </td>
                                                     <!-- <td>
                                                         <?php if ($this->fungsi->loadDataLike1("tb_target", "created", $tahun . "-" . $bulan, $data->id)->num_rows() != null) { ?>

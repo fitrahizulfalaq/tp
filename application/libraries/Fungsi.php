@@ -103,6 +103,15 @@ class Fungsi {
 		$query = $this->ci->db->get($tabel);
 		return $query;
 	}
+
+	function getPoin($user_id,$tahun = null,$bulan = null)
+	{
+		$this->ci->db->select_sum('poin');
+		$this->ci->db->where("user_id",$user_id);
+		$this->ci->db->like("created",$tahun."-".$bulan);
+		$query = $this->ci->db->get('tb_leaderboard');
+		return $query;
+	}
 	
 	function saveAdminLog($keterangan)
 	{

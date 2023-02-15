@@ -112,8 +112,6 @@ class Laporan extends CI_Controller
 		!isset($_POST['tahun']) ? $data['tahun'] = date("Y") : $data['tahun'] = $_POST['tahun'];
 		!isset($_POST['bulan']) ? $data['bulan'] = date("m") : $data['bulan'] = $_POST['bulan'];
 
-		
-
 		$data['header_script'] = "header/datatables-default";
 		$data['footer_script'] = "footer/datatables-default";
 		$this->templateadmin->load('template/dashboard', 'kunjungan/laporan/listDaerah', $data);
