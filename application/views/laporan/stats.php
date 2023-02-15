@@ -250,6 +250,10 @@
                                                     <?php } else { ?>
                                                         <span class='badge badge-danger'>Belum Upload</span>
                                                     <?php } ?>
+                                                    <br>
+                                                    Izin : <?= $this->fungsi->loadDataLike2("tb_izin", "user_id", $data->id, "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?>
+                                                    <br>
+                                                    Terlambat : <?= $this->fungsi->loadDataLike2("tb_late", "user_id", $data->id, "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?>
                                                 </div>
                                                 <br>
                                                 <table id="full" class="table-striped table-bordered table-hover table-full-width dataTable">

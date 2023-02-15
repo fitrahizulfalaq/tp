@@ -44,7 +44,8 @@
                                         <?php } ?>
                                     </select>
                                     <button type="submit" class="btn btn-success">Filter <i class="fa fa-eye"></i></button>
-                                    <a href="<?= base_url("laporan/belumLogin") ?>" class="btn btn-info" target="_blank">Lihat yang belum login <i class="fa fa-eye"></i></a>
+                                    <a href="<?= base_url("") ?>" class="btn btn-info float-right">Kembali <i class="fa fa-fw fa-angle-double-left" aria-hidden="true"></i></a>
+                                    <a href="<?= base_url("laporan/belumLogin") ?>" class="btn btn-outline-info" target="_blank">Lihat yang belum login <i class="fa fa-eye"></i></a>
                                 </div>
                             </form>
                         </div>
@@ -66,6 +67,8 @@
                                                 <th width="10%">Kunjungan UKM</th>
                                                 <th width="10%">Kunjungan Lainnya</th>
                                                 <th width="10%">Total Kunjungan</th>
+                                                <th width="10%">Total Izin</th>
+                                                <th width="10%">Total Terlambat</th>
                                                 <!-- <th width="15%">Rencana Kerja</th> -->
                                                 <th width="20%">Laporan Bulan Ini</th>
                                                 <th width="20%">Aksi</th>
@@ -104,6 +107,12 @@
                                                     </td>
                                                     <td>
                                                         <p><?= $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "koperasi", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() + $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "ukm", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() + $this->fungsi->loadDataLike2("tb_kunjungan", "tipe", "lainnya", "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?></p>
+                                                    </td>
+                                                    <td>
+                                                        <p><?= $this->fungsi->loadDataLike2("tb_izin", "user_id", $data->id, "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?></p>
+                                                    </td>
+                                                    <td>
+                                                        <p><?= $this->fungsi->loadDataLike2("tb_late", "user_id", $data->id, "created", date($tahun) . "-" . date($bulan), $data->id)->num_rows() ?></p>
                                                     </td>
                                                     <!-- <td>
                                                         <?php if ($this->fungsi->loadDataLike1("tb_target", "created", $tahun . "-" . $bulan, $data->id)->num_rows() != null) { ?>
