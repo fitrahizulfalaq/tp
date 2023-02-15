@@ -12,7 +12,7 @@
                             <form action="" enctype="multipart/form-data" method="post" accept-charset="utf-8">
                                 <input type="hidden" name="id" value="<?= $this->session->id ?>">
                                 <div class="input-group mb-3">
-                                    <select name="kota" class="btn btn-outline-primary " required>
+                                    <select name="kota" class="btn btn-outline-primary ">
                                         <option value="">Pilih Kabupaten / Kota</option>
                                         <?php
                                         $this->db->order_by('id', 'ASC');
