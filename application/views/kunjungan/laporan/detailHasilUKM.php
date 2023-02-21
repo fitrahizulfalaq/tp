@@ -68,7 +68,7 @@
                 <hr>
                 <div class="input-wrapper">
                     <label class="label">Pendidikan<span id="alert-resume" class="error">*</span></label>
-                    <input type="number" name="text" class="form-control" readonly minlength="10" maxlength="16" value="<?= $row->pendidikan ?>">
+                    <input type="text" name="text" class="form-control" readonly minlength="10" maxlength="16" value="<?= $row->pendidikan ?>">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
@@ -116,7 +116,7 @@
                 <hr>
                 <div class="input-wrapper">
                     <label class="label">Kota / Kab.<span id="alert-resume" class="error">*</span></label>
-                    <input type="number" name="text" class="form-control" readonly minlength="10" maxlength="16" value="<?= $row->kota ?>">
+                    <input type="text" name="text" class="form-control" readonly minlength="10" maxlength="16" value="<?= $row->kota ?>">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
@@ -156,7 +156,7 @@
                 <hr>
                 <div class="input-wrapper">
                     <label class="label">Skala<span id="alert-resume" class="error">*</span></label>
-                    <input type="number" name="text" class="form-control" readonly minlength="10" maxlength="16" value="<?= $row->skala ?>">
+                    <input type="text" name="skala" class="form-control" readonly minlength="10" maxlength="16" value="<?= $row->skala ?>">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
