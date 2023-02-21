@@ -4,7 +4,7 @@
         <div class="tab-content">
             <div class="card">
                 <div class="card-body">
-                <form action="<?= base_url() ?>/laporan/statistik/" enctype="multipart/form-data" method="get" accept-charset="utf-8">
+                    <form action="<?= base_url() ?>/laporan/statistik/" enctype="multipart/form-data" method="get" accept-charset="utf-8">
                         <div class="input-group mb-3">
                             <select name="bulan" class="btn btn-outline-primary " required>
                                 <option value="">Pilih Bulan</option>
@@ -32,15 +32,15 @@
                             <a href="<?= base_url("dashboard") ?>" class="btn btn-info float-right">Kembali <i class="fa fa-fw fa-angle-double-left" aria-hidden="true"></i></a>
                         </div>
                     </form>
-                    <a class="btn btn-block btn-warning" href="<?= base_url()?>/laporan/statistik?wilayah_kerja=40&tahun=<?= $tahun ?>&bulan=<?= $bulan ?>">Lihat Statistik Per Daerah</a>
+                    <a class="btn btn-block btn-warning" href="<?= base_url() ?>/laporan/statistik?wilayah_kerja=40&tahun=<?= $tahun ?>&bulan=<?= $bulan ?>">Lihat Statistik Per Daerah</a>
                 </div>
             </div>
 
 
             <hr>
 
-             <!-- feed -->
-             <div class="tab-pane fade show active" id="feed" role="tabpanel">
+            <!-- feed -->
+            <div class="tab-pane fade show active" id="feed" role="tabpanel">
                 <div class="mt-2 pr-2 pl-2">
                     <div class="row">
                         <div class="col-12 mb-2">
@@ -63,7 +63,20 @@
                 </div>
             </div>
 
-                    
+            <hr>
+
+            <!-- feed -->
+            <div class="tab-pane fade show active" id="feed" role="tabpanel">
+                <div class="mt-2 pr-2 pl-2">
+                    <div class="row">
+                        <div class="col-12 mb-2">
+                            <div id="chartContainer3" style="height: 300px; max-width: 920px; margin: 0px auto;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 </div>
@@ -107,7 +120,7 @@
             animationEnabled: true,
             theme: "light2",
             title: {
-                text: "Total Kunjungan <?= $bulan ?> / <?= $tahun?> sejumlah <?= $k_kunjungan_ukm->num_rows() + $k_kunjungan_koperasi->num_rows() + $k_kunjungan_lainnya->num_rows()  ?>"
+                text: "Total Kunjungan <?= $bulan ?> / <?= $tahun ?> sejumlah <?= $k_kunjungan_ukm->num_rows() + $k_kunjungan_koperasi->num_rows() + $k_kunjungan_lainnya->num_rows()  ?>"
             },
             legend: {
                 cursor: "pointer",
@@ -134,6 +147,31 @@
         });
         chart.render();
 
-        
+        var chart = new CanvasJS.Chart("chartContainer3", {
+            animationEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            title: {
+                text: "Berdasarkan Rata2 Poin TP Per Daerah <?= $bulan ?> / <?= $tahun ?>"
+            },
+            axisY: {
+                title: "Jumlah"
+            },
+            data: [{
+                    type: "column",
+                    name: "Kunjungan Perdaerah",
+                    // legendText: "Kunjungan Ke Koperasi",
+                    showInLegend: true,
+                    dataPoints: [
+                        <?php foreach ($daerah->result() as $key => $data) {; ?> {
+                                y: <?= $this->fungsi->getPoinCustom("wilayah_kerja",$data->id,date($tahun),date($bulan))->row("poin") / $this->fungsi->pilihan_advanced("tb_user","wilayah_kerja",$data->id)->num_rows() ?>,
+                                label: "<?= $data->kota ?>"
+                            },
+                        <?php } ?>
+                    ]
+                }
+                
+            ]
+        });
+        chart.render();
     }
 </script>

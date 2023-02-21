@@ -271,9 +271,12 @@
                                                             <tr>
                                                                 <td>
                                                                     <a href="https://maps.google.com/maps?q=<?= $items->lat ?>,<?= $items->lng ?>" target="blank"><img src="<?= base_url() ?>/assets/files/maps/<?= $items->loc_img ?>" alt="" class="imaged w200">
+                                                                    <span class="badge badge-info">Indikasi Dikunjungi Sebanyak : <?= $this->fungsi->visitTimes($data->id,$items->lat,$items->lng,$tahun,$bulan)->num_rows()?>x </span><span class="badge badge-warning">Kordinat <?= substr($items->lat,0,6) ?>,<?= substr($items->lng,0,7) ?></span>
+                                                                    </a>
                                                                 </td>
                                                                 <td>
-                                                                    <?= $items->nama ?> (<?= $items->brand ?>) / <a href="https://wa.me/+62<?= $items->hp ?>" target="blank"><?= $items->hp ?></a>
+                                                                    <?= $items->nama ?> (<?= $items->brand ?>) / <a href="https://wa.me/+62<?= $items->hp ?>" target="blank"><?= $items->hp ?></a>.<br>
+                                                                    <small>Kunjungan Ke <?= $items->tipe?> pada <?= $items->created?></small>
                                                                 </td>
                                                                 <td><?= $items->tujuan ?></td>
                                                                 <td><?= $items->rekomendasi ?><br><?= $items->realisasi ?></td>
@@ -334,7 +337,7 @@
             animationEnabled: true,
             theme: "light2", // "light1", "light2", "dark1", "dark2"
             title: {
-                text: "Berdasarkan Jumlah Kunjungan ke Kantor"
+                text: "Berdasarkan Jumlah Kunjungan"
             },
             axisY: {
                 title: "Jumlah"

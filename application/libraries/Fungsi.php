@@ -112,6 +112,15 @@ class Fungsi {
 		$query = $this->ci->db->get('tb_leaderboard');
 		return $query;
 	}
+
+	function getPoinCustom($kolom = null,$value = null,$tahun = null,$bulan = null)
+	{
+		$this->ci->db->select_sum('poin');
+		$this->ci->db->where($kolom,$value);
+		$this->ci->db->like("created",$tahun."-".$bulan);
+		$query = $this->ci->db->get('tb_leaderboard');
+		return $query;
+	}
 	
 	function saveAdminLog($keterangan)
 	{
@@ -157,7 +166,52 @@ class Fungsi {
 		$data = $this->ci->kunjungan_m->getByMonth(date("Y"), date("m"), $id);        
 		return $data->num_rows();
 	}
+
+	function modusKunjungan($id,$tahun,$bulan)
+	{
+		$this->ci->load->model("kunjungan_m");
+		// Data Rekam Trayek Harian (Untuk Keperluan Maps Titik per Lokasi)
+		$dataMonth = $this->ci->kunjungan_m->getByMonth($tahun, $bulan, $id);
+		if ($dataMonth != null) {
+			$datamarker = "";
+			foreach ($dataMonth->result() as $key => $x) {
+				$datamarker = $datamarker . substr($x->lat,0,6).",".substr($x->lng,0,7).":";
+			}
+		}
+		
+		$data = explode(":",$datamarker);
+		// return $datamarker;
+
+		if(is_array($data)){ 
+ 
+            $arrFrequency = [];
+            foreach( $data as $v ) {
+                if (!isset($arrFrequency[$v])) {
+                    $arrFrequency[$v] = 0;
+                }
+                $arrFrequency[$v]++;
+            }
+ 
+            if( count($data) == count($arrFrequency) ){
+                return []; 
+            }
+ 
+            $arrMode = array_keys($arrFrequency, max($arrFrequency));
+ 
+            return $arrMode; 
+        }   
+	}
+
+	function visitTimes($user_id,$lat,$lng,$tahun = null, $bulan = null)
+	{
+		$this->ci->db->from('tb_kunjungan');
+		$this->ci->db->where("user_id",$user_id);
+		$this->ci->db->like("lat",substr($lat,0,6));
+		$this->ci->db->like("lng",substr($lng,0,7));
+        $this->ci->db->order_by('created', "desc");
+        if ($tahun != null and $bulan != null) { $this->ci->db->like('created', $tahun . "-" . $bulan); }
+        $query = $this->ci->db->get();
+        return $query;
+	}
 	
 }
-
-?>

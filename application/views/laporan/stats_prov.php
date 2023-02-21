@@ -8,6 +8,10 @@
             <div class="col-12 mb-2">
                 <div id="grafikTotalKunjungan2" style="height: 300px; max-width: 920px; margin: 0px auto;"></div>
             </div>
+            <hr>
+            <div class="col-12 mb-2">
+                <div id="grafikTotalKunjungan2" style="height: 300px; max-width: 920px; margin: 0px auto;"></div>
+            </div>
         </div>
     </div>
 </div>

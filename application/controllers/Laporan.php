@@ -204,6 +204,8 @@ class Laporan extends CI_Controller
 			$this->db->where("tipe", "lainnya");
 			$data['k_kunjungan_lainnya'] = $this->kunjungan_m->getByMonth($tahun, $bulan);
 
+			$data['daerah'] = $this->fungsi->pilihan("tb_lembaga");
+			
 			$this->templateadmin->load('template/dashboard', 'laporan/stats_umum', $data);
 		} else {
 			$data['tahun'] = $tahun;
