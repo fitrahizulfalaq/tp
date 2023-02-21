@@ -271,7 +271,7 @@
                                                             <tr>
                                                                 <td>
                                                                     <a href="https://maps.google.com/maps?q=<?= $items->lat ?>,<?= $items->lng ?>" target="blank"><img src="<?= base_url() ?>/assets/files/maps/<?= $items->loc_img ?>" alt="" class="imaged w200">
-                                                                    <span class="badge badge-info">Indikasi Dikunjungi Sebanyak : <?= $this->fungsi->visitTimes($data->id,$items->lat,$items->lng,$tahun,$bulan)->num_rows()?>x </span><span class="badge badge-warning">Kordinat <?= substr($items->lat,0,6) ?>,<?= substr($items->lng,0,7) ?></span>
+                                                                    <span class="badge <?= $this->fungsi->visitTimes($data->id,$items->lat,$items->lng,$tahun,$bulan)->num_rows() > 1 ? "badge-danger" : "badge-info"?>">Indikasi Dikunjungi Sebanyak : <?= $this->fungsi->visitTimes($data->id,$items->lat,$items->lng,$tahun,$bulan)->num_rows()?>x </span><span class="badge badge-secondary">Kordinat <?= substr($items->lat,0,6) ?>,<?= substr($items->lng,0,7) ?></span>
                                                                     </a>
                                                                 </td>
                                                                 <td>
