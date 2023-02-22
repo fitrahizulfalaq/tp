@@ -27,6 +27,11 @@ class Dashboard extends CI_Controller
 			redirect("pengaturan/setBidang");
 		}
 
+		// $setProfil = $this->user_m->get($this->session->id);
+		// if ($setProfil->row("domisili") == null and $this->session->tipe_user == "1") {
+		// 	redirect("profil/edit/".$this->session->id);
+		// } 
+
 		// Menampilkan data Leaderboard
 		$this->load->model("kunjungan_m");
 		$data['leaderboard'] = $this->kunjungan_m->leaderboard($this->session->wilayah_kerja);

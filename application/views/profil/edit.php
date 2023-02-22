@@ -3,6 +3,7 @@
     <div class="section mt-2">
         <div class="section">
             <h1 class="mb-0">Edit Profil <br> <?= $this->session->nama ?></h1>
+            <p>Silahkan lengkapi profil anda terlebih dahulu</p>
         </div>
         <hr>
         <div class="section mt-2 mb-5">
@@ -19,8 +20,8 @@
                 </div>
                 <hr>
                 <div class="input-wrapper">
-                    <label class="label">NIK <span id="alert-resume" class="error">*</span></label>
-                    <input type="text" id="word" name="nik" class="form-control" placeholder="BIK" value="<?= $row->nik ?>" required>
+                    <label class="label">NIK <span id="alert-resume" class="error">(boleh dilengkapi selanjutnya)</span></label>
+                    <input type="text" id="word" name="nik" class="form-control" placeholder="BIK" value="<?= $row->nik ?>">
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
@@ -101,7 +102,7 @@
                     </select>
                 </div>
                 <hr>
-                <div class="input-wrapper">
+                <!-- <div class="input-wrapper">
                     <label class="label">No. Telepon (WhatsApp) <span id="alert-resume" class="error">*Kosongi jika tidak ingin merubah</span></label>
                     <input type="text" name="hp" class="form-control" placeholder="Ex: 081231390340" minlength="10">
                     <i class="clear-input">
@@ -118,7 +119,7 @@
                     </i>
                     <?php echo form_error('email')?> 
                 </div>
-                <hr>
+                <hr> -->
                 <div class="input-wrapper">
                     <label class="label">Tahun Bergabung <span id="alert-resume" class="error">*</span></label>
                     <input type="text" name="tahun_bergabung" class="form-control" placeholder="Ex: 2023" required minlength="4" maxlength="4" value="<?= $row->tahun_bergabung ?>">
