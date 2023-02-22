@@ -150,6 +150,7 @@
         var chart = new CanvasJS.Chart("chartContainer3", {
             animationEnabled: true,
             theme: "light2", // "light1", "light2", "dark1", "dark2"
+            zoomEnabled: true, 
             title: {
                 text: "Berdasarkan Rata2 Poin TP Per Daerah <?= $bulan ?> / <?= $tahun ?>"
             },
