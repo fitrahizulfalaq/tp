@@ -22,15 +22,17 @@ class Dashboard extends CI_Controller
 			redirect("pengaturan/setPassword");
 		}
 
+		// Aktifkan harus pilih bidang dulu
 		$bidang = $this->user_m->get($this->session->id)->row("bidang");
 		if (!isset($bidang) and $this->session->tipe_user == "1") {
 			redirect("pengaturan/setBidang");
 		}
 
-		// $setProfil = $this->user_m->get($this->session->id);
-		// if ($setProfil->row("domisili") == null and $this->session->tipe_user == "1") {
-		// 	redirect("profil/edit/".$this->session->id);
-		// } 
+		// Aktifkan harus setting profil terlebih dahulu
+		$setProfil = $this->user_m->get($this->session->id);
+		if ($setProfil->row("domisili") == null and $this->session->tipe_user == "1") {
+			redirect("profil/edit/".$this->session->id);
+		} 
 
 		// Menampilkan data Leaderboard
 		$this->load->model("kunjungan_m");
