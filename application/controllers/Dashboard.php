@@ -50,7 +50,9 @@ class Dashboard extends CI_Controller
 		$data['k_ukm'] = $this->kunjungan_m->getAllByType("ukm", date("Y") . "-" . date("m"), $this->session->id);
 		$data['k_koperasi'] = $this->kunjungan_m->getAllByType("koperasi", date("Y") . "-" . date("m"), $this->session->id);
 		$data['k_terlambat'] = $this->kunjungan_m->getLateByMonth(date("Y"), date("m"), $this->session->id);
+		$data['k_terlambat_total'] = $this->kunjungan_m->getAllByTable("tb_late", "user_id", $this->session->id);
 		$data['k_izin'] = $this->kunjungan_m->getIzinByMonth(date("Y"), date("m"), $this->session->id);
+		$data['k_izin_total'] = $this->kunjungan_m->getAllByTable("tb_izin", "user_id", $this->session->id);
 
 		// Data Postingan Instagram Terbaru
 		$this->db->order_by("created", "DESC");
