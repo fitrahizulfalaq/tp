@@ -262,7 +262,7 @@
                                                             <th width="20%">MAPS</th>
                                                             <th width="30%">NAMA</th>
                                                             <th width="30%">KEPERLUAN</th>
-                                                            <th width="30%">REALISASI</th>
+                                                            <th width="30%">REKOMENDASI/REALISASI</th>
                                                             <th width="10%">#</th>
                                                         </tr>
                                                     </thead>
