@@ -256,7 +256,7 @@
                         <div class="in">
                             <div>
                                 <h3>Terlambat/Tidak Absen : <?= $k_terlambat->num_rows() ?></h3>
-                                <small>(Total sejumlah <?= $k_terlambat_total->num_rows() ?> tahun ini)</small>                                
+                                <small>(Total sejumlah <?= $k_terlambat_total->num_rows() ?> tahun ini)</small>
                             </div>
                         </div>
                     </a>
@@ -266,7 +266,7 @@
                         <div class="in">
                             <div>
                                 <h3>Izin : <?= $k_izin->num_rows() ?></h3>
-                                <small>(Total sejumlah <?= $k_izin_total->num_rows() ?> tahun ini)</small>                                
+                                <small>(Total sejumlah <?= $k_izin_total->num_rows() ?> tahun ini)</small>
                             </div>
                         </div>
                     </a>
