@@ -21,7 +21,6 @@ class Notify extends CI_Controller
 
     function saveLate()
     {
-        die();
         // redirect();
         $this->fungsi->saveAdminLog("Simpan Telat");
 
@@ -57,7 +56,6 @@ class Notify extends CI_Controller
 
     function waLate()
     {
-        die();
         // redirect();
         $this->fungsi->saveAdminLog("Chat Telat");
 
@@ -91,7 +89,6 @@ class Notify extends CI_Controller
 
     function waFitrah()
     {
-        die();
         $this->fungsi->saveAdminLog("WA Fitrah");
 
         $token = $_GET['token'];
