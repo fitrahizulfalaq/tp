@@ -22,6 +22,7 @@ class Notify extends CI_Controller
     function saveLate()
     {
         // redirect();
+        die();
         $this->fungsi->saveAdminLog("Simpan Telat");
 
         if (date("H") < $this->fungsi->setting("jamTelat")->row("value")) {
@@ -57,6 +58,7 @@ class Notify extends CI_Controller
     function waLate()
     {
         // redirect();
+        die();
         $this->fungsi->saveAdminLog("Chat Telat");
 
         if (date("H") < $this->fungsi->setting("jamWa")->row("value")) {
@@ -89,6 +91,7 @@ class Notify extends CI_Controller
 
     function waFitrah()
     {
+        die();
         $this->fungsi->saveAdminLog("WA Fitrah");
 
         $token = $_GET['token'];
