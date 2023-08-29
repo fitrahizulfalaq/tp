@@ -56,7 +56,7 @@
                             <div class="card-body">
                                 <h5 class="card-title"><ion-icon name="warning-outline"></ion-icon> Laporan Belum Divalidasi</h5>
                                 <p class="card-text">
-                                    Tenaga Pendamping atas nama <?= $row->row("nama") ?> wajib melaporkan hasil kujungannya kepada Koordinator. Koordinator bisa melakukan pengecekan log laporan tersebut. Setiap tenaga pendamping minimal mengupload 15 check-in dalam 1 bulan. Setelah benar, silahkan APPROVE. NB: Proses approve hanya bisa dilakukan 1x dan tidak bisa ulang kembali. Seluruh aktivitas tercatat oleh sistem.
+                                    Tenaga Pendamping atas nama <?= $tp->row("nama") ?> wajib melaporkan hasil kujungannya kepada Koordinator. Koordinator bisa melakukan pengecekan log laporan tersebut. Setiap tenaga pendamping minimal mengupload 15 check-in dalam 1 bulan. Setelah benar, silahkan APPROVE. NB: Proses approve hanya bisa dilakukan 1x dan tidak bisa ulang kembali. Seluruh aktivitas tercatat oleh sistem.
                                 </p>    
                                 <?php if ($row->num_rows() >= 10 and $this->session->tipe_user == "2" and $tahun == date("Y") and $bulan == date("m")) { ?>
                                     <a href="<?= site_url('laporan/accLaporanTP/' . base64_encode($tp->row("id"))) ?>" class="btn btn-success btn-block btn-sm">APPROVE LAPORAN</a>
