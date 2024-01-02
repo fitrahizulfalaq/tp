@@ -42,7 +42,8 @@ class WA
 
 		//API dari Whacenter
 		// $device_id = 'f75a80b9d2b38921c6134f029d3e8c71'; // Token dari Whacenter fitrah
-		$device_id = 'ab5dbcd15fb0582589596ec252892fc0'; // Token dari Whacenter
+		// $device_id = 'ab5dbcd15fb0582589596ec252892fc0'; // Token dari Whacenter
+		$device_id = '486d5ea1ebb91a8989054bcca41ddeff'; // Token dari Whacenter
 		$no_hp = $hp; // No.HP yang dikirim (No.HP Penerima)
 		$pesan = $pesan; // Pesan yang dikirim
 
