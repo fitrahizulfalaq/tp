@@ -113,6 +113,15 @@ class Fungsi {
 		return $query;
 	}
 
+	function getPoinTahun($user_id,$tahun = null)
+	{
+		$this->ci->db->select_sum('poin');
+		$this->ci->db->where("user_id",$user_id);
+		$this->ci->db->like("created",$tahun);
+		$query = $this->ci->db->get('tb_leaderboard');
+		return $query;
+	}
+
 	function getPoinCustom($kolom = null,$value = null,$tahun = null,$bulan = null)
 	{
 		$this->ci->db->select_sum('poin');
