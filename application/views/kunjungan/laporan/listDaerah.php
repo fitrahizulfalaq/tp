@@ -7,6 +7,9 @@
                     <h3>LAPORAN TENAGA PENDAMPING</h3>
                     <h2><?= $wilayah_kerja ?> (<?= $bulan ?>/<?= $tahun ?>)</h2>
                     <?php $this->view("message") ?>
+                    <a href="<?=site_url('laporan/listDaerahTahun')?>">
+                    <button type="button" class="btn btn-primary btn-block">Filter Berdasarkan Tahun</button>
+                    </a>
                     <div class="card">
                         <div class="card-body">
                             <form action="" enctype="multipart/form-data" method="post" accept-charset="utf-8">
