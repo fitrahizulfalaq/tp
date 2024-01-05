@@ -140,21 +140,24 @@
                                                         <th width="10%">Total Poin</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody>                                                  
+
                                                     <?php $no = "1";
-                                                    foreach ($leaderboard->result() as $key => $data) { ?>
+                                                    foreach ($row->result() as $key => $data) { ?>
                                                         <tr>
                                                             <td scope="row">
                                                                 <p><?= $no++ ?></p>
                                                             </td>
                                                             <td>
-                                                                <p><?= $this->fungsi->nama($data->user_id) ?></p>
+                                                                <p><?= $this->fungsi->nama($data->id) ?></p>
                                                             </td>
                                                             <td>
-                                                                <p><?= $data->total_score ?></p>
+                                                            <?= $this->fungsi->getPoin($data->id, $tahun, $bulan)->row("poin") ?>
                                                             </td>
                                                         </tr>
                                                     <?php } ?>
+
+                                                    
                                                 </tbody>
                                             </table>
 
