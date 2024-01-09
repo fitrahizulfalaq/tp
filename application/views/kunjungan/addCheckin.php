@@ -38,7 +38,7 @@
                     <label class="label">Jenis Kelamin <span id="alert-resume" class="error">*</span></label>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons" required>
                         <label class="btn btn-outline-primary">
-                            <input type="radio" name="kelamin" id="option2" value="Laki-Laki"> Laki-Laki
+                            <input type="radio" name="kelamin" id="option2" value="Laki-Laki" required> Laki-Laki
                         </label>
                         <label class="btn btn-outline-primary">
                             <input type="radio" name="kelamin" id="option3" value="Perempuan"> Perempuan
@@ -60,6 +60,18 @@
                     <i class="clear-input">
                         <ion-icon name="close-circle"></ion-icon>
                     </i>
+                </div>
+                <hr>
+                <div class="input-wrapper">
+                    <label class="label">Apakah Kunjungan ini masuk dalam Translok (SPPD)?  <span id="alert-resume" class="error">*</span></label>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons" required>
+                        <label class="btn btn-outline-primary">
+                            <input type="radio" name="translok" id="option4" value="YA" required> YA
+                        </label>
+                        <label class="btn btn-outline-primary">
+                            <input type="radio" name="translok" id="option5" value="TIDAK"> TIDAK
+                        </label>
+                    </div>
                 </div>
             </div>
 

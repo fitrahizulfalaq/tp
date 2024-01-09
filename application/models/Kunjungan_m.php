@@ -23,6 +23,24 @@ class Kunjungan_m extends CI_Model
         return $query;
     }
 
+    function getidentifikasi($kolom = null, $var = null, $user_id = null)
+    {
+        // $this->db->from('tb_target');
+        
+        // $query = $this->db->get();
+        // return $query;
+
+        $query= $this->db->select('t1.nama, t2.masalah, t3.kota')
+                ->from('tb_user as t1')
+                ->join('tb_kunjungan as t2','t1.id = t2.user_id')
+                ->join('tb_lembaga as t3','t1.wilayah_kerja = t3.id')   
+                ->where($kolom,$var)
+                ->where('t2.user_id',$user_id)             
+                ->get();
+        return $query;
+
+    }
+
     function getAllByType($type = null,$date = null, $id = null)
     {
         $this->db->from('tb_kunjungan');
@@ -181,6 +199,7 @@ class Kunjungan_m extends CI_Model
         $params['kelamin'] =  $post['kelamin'];
         $params['hp'] =  $post['hp'];
         $params['tujuan'] =  $post['tujuan'];
+        $params['translok'] =  $post['translok'];
         $params['lat'] =  $post['lat'];
         $params['lng'] =  $post['lng'];
         $params['created'] =  date("Y-m-d H:i:s");
