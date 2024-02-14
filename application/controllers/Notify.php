@@ -21,7 +21,7 @@ class Notify extends CI_Controller
 
     function saveLate()
     {
-        // die();
+        die();
         $this->fungsi->saveAdminLog("Simpan Telat");
 
         if (date("H") < $this->fungsi->setting("jamTelat")->row("value")) {
@@ -56,7 +56,7 @@ class Notify extends CI_Controller
 
     function waLate()
     {
-        // die();
+        die();
         $this->fungsi->saveAdminLog("Chat Telat");
 
         if (date("H") < $this->fungsi->setting("jamWa")->row("value")) {
